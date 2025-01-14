@@ -6,11 +6,11 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:01:07 by aelison           #+#    #+#             */
-/*   Updated: 2024/12/31 11:05:14 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/14 14:32:42 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/mini_rt.h"
+#include "../header/errors.h"
 
 void	ft_error_init(int argc, char **argv)
 {
