@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:55:29 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/15 09:04:17 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/15 09:36:16 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,33 @@ static int	parse_object(char *str)
 	return (result);
 }
 
+static int	create_object(char *tmp, int line, int *res)
+{
+	static int	obj_create;
+	int			val;
+
+	val = parse_object(tmp);
+	if (val == 2)
+		obj_create++;
+	else if (val == EXIT_FAILURE)
+	{
+		ft_printf("error: file content: line: %d\n", line);
+		*res = -1;
+	}
+	if (*res == -1)
+		return (-1);
+	return (obj_create);
+}
+
 static int	file_content(int fd)
 {
 	int		i;
-	int		result;
+	int		obj;
+	int		error;
 	char	*tmp;
 
 	tmp = "\0";
-	result = EXIT_SUCCESS;
+	obj = 0;
 	i = 0;
 	while (tmp)
 	{
@@ -57,15 +76,11 @@ static int	file_content(int fd)
 		{
 			i++;
 			ft_replace_str(tmp, "\t\a\b\v\f\r", ' ');
-			if (parse_object(tmp) == EXIT_FAILURE)
-			{
-				ft_printf("error: file content: line: %d\n", i);
-				result = EXIT_FAILURE;
-			}
+			obj = create_object(tmp, i, &error);
 			free(tmp);
 		}
 	}
-	return (result);
+	return (obj);
 }
 
 int	check_file(char *str)
@@ -82,6 +97,8 @@ int	check_file(char *str)
 		return (EXIT_FAILURE);
 	}
 	result = file_content(fd);
+	if (result == 0)
+		ft_printf("error: parse: failed to create obj\n");
 	close(fd);
 	return (result);
 }

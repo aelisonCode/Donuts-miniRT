@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:27:09 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/15 09:03:27 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/15 09:26:06 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	for_sphere(char **all)
 	}
 	if (i != 4)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (2);
 }
 
 int	for_plane(char **all)
@@ -43,7 +43,7 @@ int	for_plane(char **all)
 	}
 	if (i != 4)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (2);
 }
 
 int	for_cylender(char **all)
@@ -60,5 +60,5 @@ int	for_cylender(char **all)
 	}
 	if (i != 6)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	return (2);
 }

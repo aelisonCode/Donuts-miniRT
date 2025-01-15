@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 13:11:51 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/15 08:23:50 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/15 09:36:30 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (ft_error_init(argc, argv) == EXIT_FAILURE
-		|| check_file(argv[1]) == EXIT_FAILURE)
+		|| check_file(argv[1]) < 1)
 		return (EXIT_FAILURE);
 	ft_init_mlx(&data, argv[1]);
 	mlx_key_hook(data.mlx_window, ft_exec_input, &data);
