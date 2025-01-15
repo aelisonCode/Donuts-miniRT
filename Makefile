@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/14 07:44:01 by aelison          ###   ########.fr        #
+#    Updated: 2025/01/14 16:51:12 by mravelon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,13 @@ PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 
 SRC = src/ft_program.c \
 	  errors/ft_error.c \
-	  mlx/ft_init_mlx.c
+	  errors/check_file.c \
+	  errors/check_obj.c \
+	  mlx/ft_init_mlx.c \
+	  utils/ft_replace_str.c \
+	  utils/ft_filltab.c \
+	  utils/ft_free.c \
+	  libft/get_next_line/get/get_next_line.c \
 
 OBJ_DIR = obj
 
@@ -60,7 +66,7 @@ n:
 
 $(NAME): $(OBJ) $(LIB) $(PRINT)
 	@echo "Creating miniRT exec..."
-	@$(CC) $(CFLAGS) ${OBJ} ${LIB} ${PRINT} $(MINILBX) $(LINKING) -o $(NAME)
+	@$(CC)  ${OBJ} ${LIB} ${PRINT} $(MINILBX) $(LINKING) -o $(NAME)
 	@echo "Creating Successful !"
 
 $(NAME_DB): $(OBJ) $(LIB) $(PRINT)
@@ -88,7 +94,7 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@${CC} ${CFLAGS} -o $@ -c $<
+	@${CC} -g  -o $@ -c $<
 
 clean:
 	@echo "Clean obj files..."
