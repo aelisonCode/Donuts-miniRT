@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 08:16:23 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/15 09:25:44 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/15 14:55:36 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	for_ambient_l(char **all, int *t)
 	}
 	if (i != 3)
 		return (EXIT_FAILURE);
+	if (for_ambient_param(all) == 1)
+		return (EXIT_FAILURE);
 	(*t)++;
 	return (2);
 }
@@ -48,6 +50,8 @@ int	for_camera(char **all, int *t)
 	}
 	if (i != 4)
 		return (EXIT_FAILURE);
+	if (for_camera_param(all) == 1)
+		return (EXIT_FAILURE);
 	(*t)++;
 	return (2);
 }
@@ -67,6 +71,8 @@ int	for_light(char **all, int *t)
 		i++;
 	}
 	if (i != 4)
+		return (EXIT_FAILURE);
+	if (for_light_param(all) == 1)
 		return (EXIT_FAILURE);
 	(*t)++;
 	return (2);
