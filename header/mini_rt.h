@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/14 15:29:09 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:38:02 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/ft_printf/ft_printf.h"
 # include "../minilibx-linux/mlx.h"
 # include "../header/errors.h"
+# include "math.h"
 
 typedef struct s_mlx
 {
