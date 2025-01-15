@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/15 08:39:25 by aelison          ###   ########.fr        #
+#    Updated: 2025/01/15 14:42:22 by mravelon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,9 @@ SRC = src/ft_program.c \
 	  utils/ft_free.c \
 	  libft/get_next_line/get_next_line.c \
 	  libft/get_next_line/get_next_line_utils.c \
+	  utils/for_error.c\
+	  errors/param_error.c\
+	  utils/ft_atof.c\
 
 OBJ_DIR = obj
 
