@@ -1,23 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_obj.c                                        :+:      :+:    :+:   */
+/*   check_view_obj.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 14:27:09 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/15 09:03:27 by aelison          ###   ########.fr       */
+/*   Created: 2025/01/15 08:16:23 by aelison           #+#    #+#             */
+/*   Updated: 2025/01/15 08:40:39 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/errors.h"
 
-int	for_sphere(char **all)
+int	for_ambient_l(char **all, int *t)
 {
 	int	i;
 	int	cont;
 
 	i = 1;
+	if (*t != 0)
+		return (EXIT_FAILURE);
+	while (all[i])
+	{
+		if (is_valid_format(all[i]) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	if (i != 3)
+		return (EXIT_FAILURE);
+	(*t)++;
+	return (EXIT_SUCCESS);
+}
+
+int	for_camera(char **all, int *t)
+{
+	int	i;
+	int	cont;
+
+	i = 1;
+	if (*t != 0)
+		return (EXIT_FAILURE);
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
@@ -26,15 +48,18 @@ int	for_sphere(char **all)
 	}
 	if (i != 4)
 		return (EXIT_FAILURE);
+	(*t)++;
 	return (EXIT_SUCCESS);
 }
 
-int	for_plane(char **all)
+int	for_light(char **all, int *t)
 {
 	int	i;
 	int	cont;
 
 	i = 1;
+	if (*t != 0)
+		return (EXIT_FAILURE);
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
@@ -43,22 +68,6 @@ int	for_plane(char **all)
 	}
 	if (i != 4)
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-int	for_cylender(char **all)
-{
-	int	i;
-	int	cont;
-
-	i = 1;
-	while (all[i])
-	{
-		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-		i++;
-	}
-	if (i != 6)
-		return (EXIT_FAILURE);
+	(*t)++;
 	return (EXIT_SUCCESS);
 }

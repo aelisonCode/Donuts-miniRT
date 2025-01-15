@@ -6,7 +6,7 @@
 /*   By: aelison <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 07:29:48 by aelison           #+#    #+#             */
-/*   Updated: 2024/09/17 07:11:42 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/15 08:02:36 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ char	*get_next_line(int fd)
 
 	if (remain != NULL)
 	{
+		read_str = read_all(fd);
+		remain = ft_strjoin_gnl(remain, read_str);
 		result = get_line(remain);
 		remain = get_remains(remain);
 		return (result);

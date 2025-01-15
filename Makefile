@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/14 16:51:12 by mravelon         ###   ########.fr        #
+#    Updated: 2025/01/15 08:39:25 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,11 +24,13 @@ SRC = src/ft_program.c \
 	  errors/ft_error.c \
 	  errors/check_file.c \
 	  errors/check_obj.c \
+	  errors/check_view_obj.c \
+	  errors/utils.c \
 	  mlx/ft_init_mlx.c \
-	  utils/ft_replace_str.c \
-	  utils/ft_filltab.c \
+	  utils/ft_control_string.c \
 	  utils/ft_free.c \
-	  libft/get_next_line/get/get_next_line.c \
+	  libft/get_next_line/get_next_line.c \
+	  libft/get_next_line/get_next_line_utils.c \
 
 OBJ_DIR = obj
 
@@ -38,7 +40,7 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-ARG = "miniRT_hehehe"
+ARG = "maps/test.rt"
 
 GRIND = --leak-check=full --show-leak-kinds=all --track-fds=yes
 

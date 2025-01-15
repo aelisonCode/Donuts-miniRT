@@ -14,7 +14,7 @@
 
 void	ft_free_tab(char **ptr)
 {
-	int		i;
+	int	i;
 
 	if (!ptr)
 		return ;

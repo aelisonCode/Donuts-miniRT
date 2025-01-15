@@ -6,34 +6,36 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:01:07 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/14 14:32:42 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/15 08:35:01 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/errors.h"
+#include "../header/utils.h"
 
-void	ft_error_init(int argc, char **argv)
+int	ft_error_init(int argc, char **argv)
 {
 	int	tmp;
 
 	if (argc != 2)
 	{
 		ft_putendl_fd("error: not valid argument", STDERR_FILENO);
-		exit (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	else
 	{
 		tmp = ft_strlen(argv[1]);
-		if (tmp <= 3)
+		if (tmp <= 3 || ft_count_char(argv[1], '.') != 1)
 		{
 			ft_putendl_fd("error: not valid file", STDERR_FILENO);
-			exit (EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		}
-		tmp -= 4;
+		tmp -= 3;
 		if (ft_strncmp(argv[1] + tmp, ".rt", 4) != 0)
 		{
 			ft_putendl_fd("error: not valid extension", STDERR_FILENO);
-			exit (EXIT_FAILURE);
+			return (EXIT_FAILURE);
 		}
 	}
+	return (EXIT_SUCCESS);
 }

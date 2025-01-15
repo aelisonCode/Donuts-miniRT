@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 09:07:34 by aelison           #+#    #+#             */
-/*   Updated: 2024/11/22 12:19:12 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/15 08:04:31 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 500
 # endif
 
 # include <stdio.h>
