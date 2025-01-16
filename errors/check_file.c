@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:55:29 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/15 14:57:26 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/15 17:25:36 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static int	file_content(int fd)
 	tmp = "\0";
 	obj = 0;
 	i = 0;
+	error = 0;
 	while (tmp)
 	{
 		tmp = get_next_line(fd);

@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/15 14:42:22 by mravelon         ###   ########.fr        #
+#    Updated: 2025/01/15 17:28:30 by mravelon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,14 +26,15 @@ SRC = src/ft_program.c \
 	  errors/check_obj.c \
 	  errors/check_view_obj.c \
 	  errors/utils.c \
+	  errors/param_error.c\
+	  errors/param_view_err.c\
 	  mlx/ft_init_mlx.c \
 	  utils/ft_control_string.c \
+	  utils/for_error.c\
+	  utils/ft_atof.c\
 	  utils/ft_free.c \
 	  libft/get_next_line/get_next_line.c \
 	  libft/get_next_line/get_next_line_utils.c \
-	  utils/for_error.c\
-	  errors/param_error.c\
-	  utils/ft_atof.c\
 
 OBJ_DIR = obj
 
