@@ -18,8 +18,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	if (ft_error_init(argc, argv) == EXIT_FAILURE
-		|| check_file(argv[1]) < 1)
+	if (ft_error_init(argc, argv) == EXIT_FAILURE || check_file(argv[1]) < 1)
 		return (EXIT_FAILURE);
 	ft_init_mlx(&data, argv[1]);
 	mlx_key_hook(data.mlx_window, ft_exec_input, &data);
