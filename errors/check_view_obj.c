@@ -18,19 +18,19 @@ int	for_ambient_l(char **all, int *t)
 
 	i = 1;
 	if (*t != 0)
-		return (EXIT_FAILURE);
+		return (0);
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	if (i != 3)
-		return (EXIT_FAILURE);
+		return (0);
 	if (for_ambient_param(all) == 1)
-		return (EXIT_FAILURE);
+		return (0);
 	(*t)++;
-	return (2);
+	return (1);
 }
 
 int	for_camera(char **all, int *t)
@@ -39,17 +39,17 @@ int	for_camera(char **all, int *t)
 
 	i = 1;
 	if (*t != 0)
-		return (EXIT_FAILURE);
+		return (0);
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	if (i != 4)
-		return (EXIT_FAILURE);
+		return (0);
 	if (for_camera_param(all) == 1)
-		return (EXIT_FAILURE);
+		return (0);
 	(*t)++;
 	return (2);
 }
@@ -60,17 +60,17 @@ int	for_light(char **all, int *t)
 
 	i = 1;
 	if (*t != 0)
-		return (EXIT_FAILURE);
+		return (0);
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	if (i != 4)
-		return (EXIT_FAILURE);
+		return (0);
 	if (for_light_param(all) == 1)
-		return (EXIT_FAILURE);
+		return (0);
 	(*t)++;
-	return (2);
+	return (3);
 }

@@ -12,6 +12,24 @@
 
 #include "../header/errors.h"
 #include "../header/utils.h"
+#include <unistd.h>
+
+static int	get_required_obj(int value)
+{
+	static int	required[4];
+	int			i;
+
+	if (value != 0 && value < 4)
+		required[value] = required[value] + 1;
+	i = 1;
+	while (i < 4)
+	{
+		if (required[i] != 1)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
 
 static int	parse_object(char *str)
 {
@@ -20,11 +38,11 @@ static int	parse_object(char *str)
 	static int	exist[6];
 
 	split = ft_split(str, ' ');
-	result = EXIT_FAILURE;
+	result = 0;
 	if (!split)
 		return (result);
 	if (split[0][0] == '\n')
-		result = EXIT_SUCCESS;
+		result = 7;
 	else if (ft_strncmp(split[0], "A", 2) == EXIT_SUCCESS)
 		result = for_ambient_l(split, &exist[0]);
 	else if (ft_strncmp(split[0], "C", 2) == EXIT_SUCCESS)
@@ -43,20 +61,26 @@ static int	parse_object(char *str)
 
 static int	create_object(char *tmp, int line, int *res)
 {
-	static int	obj_create;
-	int			val;
+	int	valid_ok;
+	int	val;
 
 	val = parse_object(tmp);
-	if (val == 2)
-		obj_create++;
-	else if (val == EXIT_FAILURE)
+	valid_ok = get_required_obj(val);
+	if (val == 0)
 	{
-		ft_printf("error: file content: line: %d\n", line);
-		*res = -1;
+		ft_putstr_fd("error: wrong format on line ", STDERR_FILENO);
+		ft_putnbr_fd(line, STDERR_FILENO);
+		ft_putchar_fd('\n', STDERR_FILENO);
+		*res = EXIT_FAILURE;
+		return (*res);
 	}
-	if (*res == -1)
-		return (-1);
-	return (obj_create);
+	if (valid_ok == EXIT_FAILURE)
+		*res = EXIT_FAILURE;
+	else if (valid_ok == EXIT_SUCCESS)
+		*res = EXIT_SUCCESS;
+	if (*res == EXIT_FAILURE)
+		return (*res);
+	return (EXIT_SUCCESS);
 }
 
 static int	file_content(int fd)
@@ -67,9 +91,9 @@ static int	file_content(int fd)
 	char	*tmp;
 
 	tmp = "\0";
-	obj = 0;
+	obj = EXIT_FAILURE;
 	i = 0;
-	error = 0;
+	error = EXIT_FAILURE;
 	while (tmp)
 	{
 		tmp = get_next_line(fd);
@@ -89,6 +113,7 @@ int	check_file(char *str)
 	int	result;
 	int	fd;
 
+	result = EXIT_SUCCESS;
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
@@ -96,11 +121,8 @@ int	check_file(char *str)
 		return (EXIT_FAILURE);
 	}
 	result = file_content(fd);
-	if (result == 0)
-	{
+	if (result == EXIT_FAILURE)
 		ft_putstr_fd("error: parse: failed to create obj\n", STDERR_FILENO);
-		result = EXIT_FAILURE;
-	}
 	close(fd);
 	return (result);
 }

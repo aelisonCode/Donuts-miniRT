@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_program.c                                       :+:      :+:    :+:   */
+/*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/16 13:11:51 by aelison           #+#    #+#             */
+/*   Created: 2025/01/20 13:33:31 by aelison           #+#    #+#             */
 /*   Updated: 2025/01/20 13:36:36 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
 
-int	main(int argc, char **argv)
+void	ft_launch(t_mlx *data)
 {
-	t_mlx	data;
-
-	if (argc != 2)
-		return (EXIT_FAILURE);
-	if (ft_error_init(argc, argv) == EXIT_FAILURE
-		|| check_file(argv[1]) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
-	ft_init_mlx(&data, argv[1]);
-	ft_put_pixel(&data, 500, 300, 0XFF0000);
-	ft_launch(&data);
-	return (EXIT_SUCCESS);
+	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->img_ptr, 0,
+		0);
+	mlx_key_hook(data->mlx_window, ft_exec_input, data);
+	mlx_hook(data->mlx_window, 17, 1L << 17, ft_close_window, data);
+	mlx_loop(data->mlx_ptr);
 }

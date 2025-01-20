@@ -20,14 +20,14 @@ int	for_sphere(char **all)
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	if (i != 4)
-		return (EXIT_FAILURE);
+		return (0);
 	if (for_sphere_param(all) == 1)
-		return (EXIT_FAILURE);
-	return (2);
+		return (0);
+	return (4);
 }
 
 int	for_plane(char **all)
@@ -38,14 +38,14 @@ int	for_plane(char **all)
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	if (i != 4)
-		return (EXIT_FAILURE);
+		return (0);
 	if (for_plane_param(all) == 1)
-		return (EXIT_FAILURE);
-	return (2);
+		return (0);
+	return (5);
 }
 
 int	for_cylender(char **all)
@@ -56,12 +56,12 @@ int	for_cylender(char **all)
 	while (all[i])
 	{
 		if (is_valid_format(all[i]) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (0);
 		i++;
 	}
 	if (i != 6)
-		return (EXIT_FAILURE);
+		return (0);
 	if (for_cylender_param(all) == 1)
-		return (EXIT_FAILURE);
-	return (2);
+		return (0);
+	return (6);
 }

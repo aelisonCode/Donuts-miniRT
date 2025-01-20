@@ -32,6 +32,7 @@ SRC = src/ft_program.c \
 	  mlx/close_mlx.c \
 	  mlx/event.c \
 	  mlx/utils.c \
+	  mlx/launch.c \
 	  utils/ft_control_string.c \
 	  utils/for_error.c\
 	  utils/ft_atof.c\

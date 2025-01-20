@@ -66,4 +66,5 @@ int			ft_is_in_window(int x, int y);
 void		ft_init_mlx(t_mlx *data, char *title);
 void		ft_free_mlx(t_mlx *data);
 void		ft_put_pixel(t_mlx *data, int x, int y, int color);
+void		ft_launch(t_mlx *data);
 #endif
