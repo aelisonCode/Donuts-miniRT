@@ -45,9 +45,9 @@ OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
-ARG = "maps/test.rt"
+ARG = "maps/moi.rt"
 
 GRIND = --leak-check=full --show-leak-kinds=all --track-fds=yes
 

@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/15 16:38:02 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/20 07:40:40 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 # define MINI_RT_H
 
 # include "../header/errors.h"
+# include "../header/utils.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "math.h"
+
+# define WINDOW_X 1920
+# define WINDOW_Y 1080
 
 typedef enum e_object
 {
@@ -46,21 +50,20 @@ typedef struct s_color
 
 typedef struct s_mlx
 {
-	int		w_sizex;
-	int		w_sizey;
 	void	*mlx_ptr;
 	void	*mlx_window;
 	void	*img_ptr;
 	char	*img_addr;
 	int		byte_p_pixel;
-	int		syze_line;
+	int		size_line;
 	int		endian;
 }			t_mlx;
 
-/*			MLX FUNCTIONS			*/
-void		ft_init_mlx(t_mlx *data, char *title);
+/*MLX FUNCTIONS*/
 int			ft_exec_input(int keycode, t_mlx *data);
 int			ft_close_window(t_mlx *data);
-
+int			ft_is_in_window(int x, int y);
+void		ft_init_mlx(t_mlx *data, char *title);
 void		ft_free_mlx(t_mlx *data);
+void		ft_put_pixel(t_mlx *data, int x, int y, int color);
 #endif

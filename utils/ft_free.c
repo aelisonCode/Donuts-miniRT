@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/utils.h"
+#include <stdlib.h>
 
 void	ft_free_tab(char **ptr)
 {
 	int	i;
 
-	if (!ptr)
+	if (!ptr || *ptr == NULL)
 		return ;
 	i = 0;
 	while (ptr[i])
@@ -24,5 +24,6 @@ void	ft_free_tab(char **ptr)
 		free(ptr[i]);
 		i++;
 	}
+	free(ptr);
 	ptr = NULL;
 }

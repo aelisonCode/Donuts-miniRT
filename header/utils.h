@@ -18,10 +18,12 @@
 
 void	ft_filltab(int *tab, int len, int val);
 void	ft_replace_str(char *to_change, char *set, char val);
-void	ft_free_tab(char **ptr);
 long	ft_count_char(char *target, char to_count);
 int		limit(char **str, double max, double min);
 int		check_vector_l(char *str, double max, double min, long lg);
 int		check_vector(char *str, long lg);
 double	ft_atof(char *str);
+int		ft_atoi_base(char *arg, int base);
+void	ft_free_tab(char **ptr);
+
 #endif

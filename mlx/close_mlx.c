@@ -14,7 +14,6 @@
 
 void	ft_free_mlx(t_mlx *data)
 {
-	free(data->mlx_window);
 	free(data->mlx_ptr);
 }
 

@@ -92,12 +92,15 @@ int	check_file(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_printf("error: file: can't open %s\n", str);
+		ft_putstr_fd("error: file: can't open %s\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	result = file_content(fd);
 	if (result == 0)
-		ft_printf("error: parse: failed to create obj\n");
+	{
+		ft_putstr_fd("error: parse: failed to create obj\n", STDERR_FILENO);
+		result = EXIT_FAILURE;
+	}
 	close(fd);
 	return (result);
 }

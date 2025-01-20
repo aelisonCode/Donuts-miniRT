@@ -18,9 +18,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (EXIT_FAILURE);
-	if (ft_error_init(argc, argv) == EXIT_FAILURE || check_file(argv[1]) < 1)
+	if (ft_error_init(argc, argv) == EXIT_FAILURE
+		|| check_file(argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_init_mlx(&data, argv[1]);
+	if (ft_is_in_window(500, 500) == EXIT_SUCCESS)
+		ft_put_pixel(&data, 500, 500, 0XFF0000);
+	mlx_put_image_to_window(data.mlx_ptr, data.mlx_window, data.img_ptr, 0, 0);
 	mlx_key_hook(data.mlx_window, ft_exec_input, &data);
 	mlx_hook(data.mlx_window, 17, 1L << 17, ft_close_window, &data);
 	mlx_loop(data.mlx_ptr);

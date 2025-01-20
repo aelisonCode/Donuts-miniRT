@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../header/utils.h"
+#include "../libft/ft_printf/ft_printf.h"
 
 int	limit(char **str, double max, double min)
 {
@@ -27,7 +28,7 @@ int	limit(char **str, double max, double min)
 			i++;
 		else
 		{
-			printf("error : don't respect the rang \n");
+			ft_putstr_fd("error : don't respect the rang \n", STDERR_FILENO);
 			return (1);
 		}
 	}
@@ -45,7 +46,8 @@ int	check_vector_l(char *str, double max, double min, long lg)
 		i++;
 	if (i != lg)
 	{
-		printf("error : missing some arg \n");
+		ft_putstr_fd("error : missing some arg \n", STDERR_FILENO);
+		ft_free_tab(split);
 		return (1);
 	}
 	i = 0;
@@ -63,11 +65,12 @@ int	check_vector(char *str, long lg)
 	split = ft_split(str, ',');
 	while (split[i])
 		i++;
-	ft_free_tab(split);
 	if (i != lg)
 	{
-		printf("error : missing some arg lvl 1\n");
+		ft_putstr_fd("error : missing some arg lvl 1\n", STDERR_FILENO);
+		ft_free_tab(split);
 		return (1);
 	}
+	ft_free_tab(split);
 	return (0);
 }
