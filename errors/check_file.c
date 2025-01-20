@@ -86,10 +86,8 @@ static int	file_content(int fd)
 
 int	check_file(char *str)
 {
-	int		result;
-	int		fd;
-	int		i;
-	char	*tmp;
+	int	result;
+	int	fd;
 
 	fd = open(str, O_RDONLY);
 	if (fd < 0)

@@ -15,8 +15,7 @@
 
 int	for_ambient_param(char **all)
 {
-	char	**split;
-	int		i;
+	int	i;
 
 	i = 0;
 	if (check_vector_l(all[1], 1.0, 0.0, 1) == 1)

@@ -29,6 +29,9 @@ SRC = src/ft_program.c \
 	  errors/param_error.c\
 	  errors/param_view_err.c\
 	  mlx/ft_init_mlx.c \
+	  mlx/close_mlx.c \
+	  mlx/event.c \
+	  mlx/utils.c \
 	  utils/ft_control_string.c \
 	  utils/for_error.c\
 	  utils/ft_atof.c\
@@ -40,7 +43,7 @@ OBJ_DIR = obj
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-CC = gcc
+CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -56,7 +59,7 @@ MINILBX_PATH = ./minilibx-linux/
 
 MINILBX = ${MINILBX_PATH}/libmlx_Linux.a
 
-LINKING = -L$(MINILBX_PATH) -lmlx -lXext -lX11
+LINKING = -L$(MINILBX_PATH) -lmlx -lXext -lX11 -lm
 
 all: $(OBJ_DIR) $(MINILBX) $(NAME)
 
@@ -72,12 +75,12 @@ n:
 
 $(NAME): $(OBJ) $(LIB) $(PRINT)
 	@echo "Creating miniRT exec..."
-	@$(CC)  ${OBJ} ${LIB} ${PRINT} $(MINILBX) $(LINKING) -o $(NAME)
+	@$(CC)  $(CFLAGS) ${OBJ} ${LIB} ${PRINT} $(MINILBX) $(LINKING) -o $(NAME)
 	@echo "Creating Successful !"
 
 $(NAME_DB): $(OBJ) $(LIB) $(PRINT)
 	@echo "Creating no_leaks exec..."
-	$(CC) $(DEBUG) $(OBJ) $(LIB) $(PRINT) $(MINILBX) $(LINKING) -o $(NAME_DB)
+	$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIB) $(PRINT) $(MINILBX) $(LINKING) -o $(NAME_DB)
 	@echo "Creating Successful !"
 
 $(LIB):
@@ -100,7 +103,7 @@ $(OBJ_DIR):
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@${CC} -g  -o $@ -c $<
+	@${CC} $(CFLAGS)  -o $@ -c $<
 
 clean:
 	@echo "Clean obj files..."

@@ -15,7 +15,6 @@
 int	for_sphere(char **all)
 {
 	int	i;
-	int	cont;
 
 	i = 1;
 	while (all[i])
@@ -34,7 +33,6 @@ int	for_sphere(char **all)
 int	for_plane(char **all)
 {
 	int	i;
-	int	cont;
 
 	i = 1;
 	while (all[i])
@@ -53,7 +51,6 @@ int	for_plane(char **all)
 int	for_cylender(char **all)
 {
 	int	i;
-	int	cont;
 
 	i = 1;
 	while (all[i])

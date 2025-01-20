@@ -15,7 +15,6 @@
 int	for_ambient_l(char **all, int *t)
 {
 	int	i;
-	int	cont;
 
 	i = 1;
 	if (*t != 0)
@@ -37,7 +36,6 @@ int	for_ambient_l(char **all, int *t)
 int	for_camera(char **all, int *t)
 {
 	int	i;
-	int	cont;
 
 	i = 1;
 	if (*t != 0)
@@ -59,7 +57,6 @@ int	for_camera(char **all, int *t)
 int	for_light(char **all, int *t)
 {
 	int	i;
-	int	cont;
 
 	i = 1;
 	if (*t != 0)
