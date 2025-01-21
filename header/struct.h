@@ -98,10 +98,10 @@ typedef struct s_maps
 	struct s_maps	*next;
 }					t_maps;
 
-typedef struct	s_scene
+typedef struct s_scene
 {
-	t_mlx	*mlx;
-	t_maps	*world;
-}	t_scene;
+	t_mlx			*mlx;
+	t_maps			*world;
+}					t_scene;
 
 #endif

@@ -12,7 +12,7 @@
 
 #include "../header/mini_rt.h"
 
-static void	ft_img_init(t_scene *scene, int x, int y)\
+static void	ft_img_init(t_scene *scene, int x, int y)
 {
 	t_mlx	*data;
 

@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/struct.h"
 #include <stdlib.h>
 
 void	ft_free_tab(char **ptr)
@@ -26,4 +27,18 @@ void	ft_free_tab(char **ptr)
 	}
 	free(ptr);
 	ptr = NULL;
+}
+
+void	ft_free_map(t_maps **head)
+{
+	t_maps	*tmp;
+
+	while (*head)
+	{
+		tmp = *head;
+		(*head) = (*head)->next;
+		free(tmp->struct_obj);
+		free(tmp);
+	}
+	*head = NULL;
 }

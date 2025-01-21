@@ -21,6 +21,7 @@ LIB = $(LIB_PATH)libft.a
 PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 
 SRC = src/ft_program.c \
+	  src/debug.c \
 	  errors/ft_error.c \
 	  errors/check_file.c \
 	  errors/check_obj.c \
@@ -39,6 +40,7 @@ SRC = src/ft_program.c \
 	  utils/ft_free.c \
 	  utils/ft_struct.c \
 	  parsing/required_obj.c \
+	  parsing/components.c \
 	  libft/get_next_line/get_next_line.c \
 	  libft/get_next_line/get_next_line_utils.c \
 

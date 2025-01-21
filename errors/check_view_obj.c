@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 #include "../header/errors.h"
-#include "../header/struct.h"
 #include "../header/mini_rt.h"
+#include "../header/struct.h"
 
 int	for_ambient_l(char **all, int *t)
 {
-	int	i;
+	int		i;
 	t_scene	*s;
 
 	i = 1;

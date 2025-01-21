@@ -26,21 +26,26 @@
 # define WINDOW_Y 1080
 
 /*MLX FUNCTIONS*/
-int			ft_exec_input(int keycode, t_scene *data);
-int			ft_close_window(t_scene *data);
-int			ft_is_in_window(int x, int y);
-void		ft_init_scene(t_scene *data, char *title);
+int		ft_exec_input(int keycode, t_scene *data);
+int		ft_close_window(t_scene *data);
+int		ft_is_in_window(int x, int y);
+void	ft_init_scene(t_scene *data, char *title);
 
-void		ft_free_mlx(t_scene *data);
-void		ft_free_map(t_maps **head);
+void	ft_free_mlx(t_scene *data);
+void	ft_free_map(t_maps **head);
 
-void		ft_put_pixel(t_mlx *data, int x, int y, int color);
-void		ft_launch(t_scene *data);
-void		*get_struct(void);
-t_maps		*create_map(t_obj type, void *obj);
-void		add_maps(t_maps **head, t_maps *new_elem);
-t_a			*ambient_l(char **str);
+void	ft_put_pixel(t_mlx *data, int x, int y, int color);
+void	ft_launch(t_scene *data);
+void	*get_struct(void);
+t_maps	*create_map(t_obj type, void *obj);
+void	add_maps(t_maps **head, t_maps *new_elem);
+t_a		*ambient_l(char **str);
 
+t_vect	make_vector(char *str);
+t_color	make_color(char *str);
 /*DEBUG*/
-void	ft_debug(t_maps	*head);
+void	ft_debug(t_maps *head);
+void	ft_disp_type(t_maps *curr);
+void	ft_disp_color(t_color *color);
+
 #endif
