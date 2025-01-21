@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../header/utils.h"
-#include "../libft/ft_printf/ft_printf.h"
 
 int	limit(char **str, double max, double min)
 {
