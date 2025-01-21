@@ -17,7 +17,6 @@ int	main(int argc, char **argv)
 	t_scene	*data;
 
 	data = get_struct();
-	data->world = NULL;
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (ft_error_init(argc, argv) == EXIT_FAILURE
