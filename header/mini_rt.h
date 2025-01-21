@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/20 07:40:40 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/20 15:55:04 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,10 @@
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
 # include "math.h"
+# include "struct.h"
 
 # define WINDOW_X 1920
 # define WINDOW_Y 1080
-
-typedef enum e_object
-{
-	Ambient_l,
-	Camera,
-	Light,
-	Sphere,
-	Plan,
-	Cylinder
-}			t_obj;
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-	double	z;
-}			t_vect;
-
-typedef struct s_color
-{
-	double	r;
-	double	g;
-	double	b;
-}			t_color;
-
-typedef struct s_mlx
-{
-	void	*mlx_ptr;
-	void	*mlx_window;
-	void	*img_ptr;
-	char	*img_addr;
-	int		byte_p_pixel;
-	int		size_line;
-	int		endian;
-}			t_mlx;
 
 /*MLX FUNCTIONS*/
 int			ft_exec_input(int keycode, t_mlx *data);
