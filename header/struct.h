@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/20 16:07:31 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/21 10:17:17 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,13 @@ typedef struct s_maps
 {
 	t_obj			type;
 	void			*struct_obj;
-	struct s_map	*next;
+	struct s_maps	*next;
 }					t_maps;
+
+typedef struct	s_scene
+{
+	t_mlx	*mlx;
+	t_maps	*world;
+}	t_scene;
 
 #endif
