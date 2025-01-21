@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/20 15:55:04 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/21 11:25:08 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,21 @@
 # define WINDOW_Y 1080
 
 /*MLX FUNCTIONS*/
-int			ft_exec_input(int keycode, t_mlx *data);
-int			ft_close_window(t_mlx *data);
+int			ft_exec_input(int keycode, t_scene *data);
+int			ft_close_window(t_scene *data);
 int			ft_is_in_window(int x, int y);
-void		ft_init_mlx(t_mlx *data, char *title);
-void		ft_free_mlx(t_mlx *data);
+void		ft_init_scene(t_scene *data, char *title);
+
+void		ft_free_mlx(t_scene *data);
+void		ft_free_map(t_maps **head);
+
 void		ft_put_pixel(t_mlx *data, int x, int y, int color);
-void		ft_launch(t_mlx *data);
+void		ft_launch(t_scene *data);
+void		*get_struct(void);
+t_maps		*create_map(t_obj type, void *obj);
+void		add_maps(t_maps **head, t_maps *new_elem);
+t_a			*ambient_l(char **str);
+
+/*DEBUG*/
+void	ft_debug(t_maps	*head);
 #endif
