@@ -40,7 +40,8 @@ int	for_ambient_l(char **all, int *t)
 
 int	for_camera(char **all, int *t)
 {
-	int	i;
+	int		i;
+	t_scene	*s;
 
 	i = 1;
 	if (*t != 0)
@@ -56,12 +57,15 @@ int	for_camera(char **all, int *t)
 	if (for_camera_param(all) == 1)
 		return (0);
 	(*t)++;
+	s = get_struct();
+	add_maps(&s->world, create_map(Camera, camera(all)));
 	return (2);
 }
 
 int	for_light(char **all, int *t)
 {
-	int	i;
+	int		i;
+	t_scene	*s;
 
 	i = 1;
 	if (*t != 0)
@@ -77,5 +81,7 @@ int	for_light(char **all, int *t)
 	if (for_light_param(all) == 1)
 		return (0);
 	(*t)++;
+	s = get_struct();
+	add_maps(&s->world, create_map(Light, light(all)));
 	return (3);
 }

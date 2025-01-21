@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/21 10:01:26 by mravelon         ###   ########.fr        #
+#    Updated: 2025/01/21 13:58:10 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIB = $(LIB_PATH)libft.a
 PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 
 SRC = src/ft_program.c \
+	  src/nie.c \
 	  src/debug.c \
 	  errors/ft_error.c \
 	  errors/check_file.c \
@@ -41,6 +42,7 @@ SRC = src/ft_program.c \
 	  utils/ft_struct.c \
 	  parsing/required_obj.c \
 	  parsing/components.c \
+	  parsing/physics_obj.c \
 	  libft/get_next_line/get_next_line.c \
 	  libft/get_next_line/get_next_line_utils.c \
 

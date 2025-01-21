@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:34:10 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/15 17:19:28 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:36:46 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "../libft/libft.h"
 # include "stdio.h"
+# include "struct.h"
 
 void	ft_filltab(int *tab, int len, int val);
 void	ft_replace_str(char *to_change, char *set, char val);
@@ -26,4 +27,9 @@ double	ft_atof(char *str);
 int		ft_atoi_base(char *arg, int base);
 void	ft_free_tab(char **ptr);
 
+void	ft_disp_color(t_color *color);
+void	ft_disp_vect(t_vect *vect);
+void	ft_disp_content_a(t_maps *curr);
+void	ft_disp_content_c(t_maps *curr);
+void	ft_disp_content_l(t_maps *curr);
 #endif

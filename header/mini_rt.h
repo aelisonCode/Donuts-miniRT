@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 11:25:08 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:56:59 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,14 @@ void	ft_launch(t_scene *data);
 void	*get_struct(void);
 t_maps	*create_map(t_obj type, void *obj);
 void	add_maps(t_maps **head, t_maps *new_elem);
+
+/*OBJECT*/
 t_a		*ambient_l(char **str);
+t_c		*camera(char **str);
+t_l		*light(char **str);
+t_sp	sphere(char **str);
+t_pl	plane(char **str);
+t_cy	cylender(char **str);
 
 t_vect	make_vector(char *str);
 t_color	make_color(char *str);
