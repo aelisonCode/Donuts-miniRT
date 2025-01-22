@@ -121,6 +121,25 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, int *solution)
 	return (EXIT_SUCCESS);
 }
 
+int	intersection(t_vect r, t_vect direction, t_vect sphere, double d)
+{
+	double	a;
+	double	b;
+	double	c;
+	double	discr;
+
+	direction = ft_normalize(direction);
+	a = pow(direction.x, 2) + pow(direction.y, 2);
+	b = 2 * ((r.x - sphere.x) * direction.x + (r.y - sphere.y) * direction.y);
+	c = pow((r.x - sphere.x), 2) + pow((r.y - sphere.y), 2) - pow(d / 2, 2);
+	discr = pow(b, 2) - (4 * a * c);
+	if (discr < 0)
+		return (EXIT_FAILURE);
+	if (discr >= 0)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
 void	go_sphere(t_mlx *mlx, t_sp *obj)
 {
 	t_vect	tmp;
