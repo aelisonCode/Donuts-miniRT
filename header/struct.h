@@ -30,6 +30,12 @@ typedef struct s_vector
 	double			z;
 }					t_vect;
 
+typedef struct s_ray
+{
+	t_vect			origin;
+	t_vect			direction;
+}					t_ray;
+
 typedef struct s_color
 {
 	double			r;
@@ -72,6 +78,7 @@ typedef struct s_sp
 {
 	t_vect			center;
 	double			diameter;
+	double			radius;
 	t_color			color;
 }					t_sp;
 

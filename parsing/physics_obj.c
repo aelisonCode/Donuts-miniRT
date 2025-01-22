@@ -21,6 +21,7 @@ t_sp	*sphere(char **str)
 		return (NULL);
 	sp->center = make_vector(str[1]);
 	sp->diameter = ft_atof(str[2]);
+	sp->radius = sp->diameter / 2;
 	ft_replace_str(str[3], "\n", '\0');
 	sp->color = make_color(str[3]);
 	return (sp);

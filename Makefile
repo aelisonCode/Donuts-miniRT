@@ -41,6 +41,7 @@ SRC = src/ft_program.c \
 	  utils/ft_atof.c\
 	  utils/ft_free.c \
 	  utils/ft_struct.c \
+	  utils/get_type.c \
 	  parsing/required_obj.c \
 	  parsing/components.c \
 	  parsing/physics_obj.c \
