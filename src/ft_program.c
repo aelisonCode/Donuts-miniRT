@@ -82,6 +82,25 @@ void	ray_tracing(t_mlx *mlx, t_ray *r)
 	}
 }
 
+double	get_racine(double a, double b, double disc)
+{
+	double	r_1;
+	double	r_2;
+
+	r_1 = (-b - sqrt(disc)) / (2 * a);
+	r_2 = (-b + sqrt(disc)) / (2 * a);
+	if (r_1 > 0 && r_2 > 0)
+	{
+		if (r_1 < r_2)
+			return (r_1);
+		else
+		 	return (r_2);
+	}
+	else if (r_1 > 0)
+		return (r_1);
+	return (r_2);
+}
+
 int	ft_intersec_sp(t_sp *obj, t_ray *r, int *solution)
 {
 	double	a;
@@ -98,29 +117,35 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, int *solution)
 	printf("discr: %f\n", discriminant);
 	if (discriminant < 0)
 		return (EXIT_FAILURE);
-	*solution = (- b / (2 * a)) - (sqrt(discriminant) / (2 * a));
-	if (*solution < 0)
-		*solution = (- b / (2 * a))+ (sqrt(discriminant) / (2 * a));
+	*solution = get_racine(a, b, discriminant);
 	return (EXIT_SUCCESS);
 }
 
 void	go_sphere(t_mlx *mlx, t_sp *obj)
 {
+	t_vect	tmp;
+	t_vect	intersect;
 	t_ray	r;
 	int		racine;
 	int		val;
 
 	racine = 0;
-	r.origin = init_vect(100, 100, 0);
+	r.origin = init_vect(0, 0, 50);
 	ft_put_pixel(mlx, r.origin.x, r.origin.y, 0XFFFFFF);
-	r.direction = init_vect(obj->center.x, obj->center.y, obj->center.z);
+	tmp = substraction(r.origin, obj->center);
+	r.direction = ft_normalize(tmp);
 	ft_put_pixel(mlx, obj->center.x, obj->center.y, 0X0000FF);
-	dda_algo(mlx, r.origin, r.direction);
 	val = ft_intersec_sp(obj, &r, &racine);
 	if (val == EXIT_FAILURE)
 		ft_printf("Pas d'intersection\n");
 	else
+	{
 		ft_printf("Find intersection !\n");
+		intersect.x = r.origin.x + racine * r.direction.x;
+		intersect.y = r.origin.y + racine * r.direction.y;
+		intersect.z = r.origin.z + racine * r.direction.z;
+		ft_put_pixel(mlx, intersect.x, intersect.y, 0XFF0000);
+	}
 }
 
 void	debug_scene(t_scene *scene)
