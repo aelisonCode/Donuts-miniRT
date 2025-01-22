@@ -23,6 +23,8 @@ PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 SRC = src/ft_program.c \
 	  src/nie.c \
 	  src/debug.c \
+	  vect/operations.c \
+	  vect/control.c \
 	  errors/ft_error.c \
 	  errors/check_file.c \
 	  errors/check_obj.c \
@@ -36,7 +38,6 @@ SRC = src/ft_program.c \
 	  mlx/utils.c \
 	  mlx/launch.c \
 	  utils/ft_control_string.c \
-	  utils/for_error.c\
 	  utils/ft_atof.c\
 	  utils/ft_free.c \
 	  utils/ft_struct.c \

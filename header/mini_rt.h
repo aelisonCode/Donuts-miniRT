@@ -15,12 +15,13 @@
 
 # include "../header/errors.h"
 # include "../header/utils.h"
+# include "../header/vector.h"
 # include "../libft/ft_printf/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
-# include "math.h"
 # include "struct.h"
+# include <math.h>
 
 # define WINDOW_X 1920
 # define WINDOW_Y 1080

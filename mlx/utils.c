@@ -12,14 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-void	ft_put_pixel(t_mlx *data, int x, int y, int color)
-{
-	char	*tmp;
-
-	tmp = data->img_addr + (y * data->size_line + x * (data->byte_p_pixel / 8));
-	*(unsigned int *)tmp = color;
-}
-
 int	ft_is_in_window(int x, int y)
 {
 	if (x >= 0 && x <= WINDOW_X)
@@ -28,6 +20,18 @@ int	ft_is_in_window(int x, int y)
 			return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
+}
+
+void	ft_put_pixel(t_mlx *data, int x, int y, int color)
+{
+	char	*tmp;
+
+	if (ft_is_in_window(x, y) == EXIT_SUCCESS)
+	{
+		tmp = data->img_addr + (y * data->size_line + x * (data->byte_p_pixel
+					/ 8));
+		*(unsigned int *)tmp = color;
+	}
 }
 
 int	ft_atoi_base(char *arg, int base)

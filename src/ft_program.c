@@ -12,28 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-t_vect	ft_normalize(double x, double y, double z)
-{
-	t_vect	res;
-	double	norm;
-
-	norm = sqrt(pow(x, 2) + pow(y, 2) + pow(z, 2));
-	res.x /= norm;
-	res.y /= norm;
-	res.z /= norm;
-	return (res);
-}
-
-t_vect	ft_ray_move(t_vect origine, t_vect dir)
-{
-	t_vect	res;
-
-	res.x = dir.x - origine.x;
-	res.y = dir.y - origine.y;
-	res.z = dir.z - origine.z;
-	return (res);
-}
-
 void	test(t_maps *head, t_mlx *mlx)
 {
 	t_vect	origine;
@@ -43,23 +21,56 @@ void	test(t_maps *head, t_mlx *mlx)
 	int		i;
 
 	head++;
-	origine.x = 100;
-	origine.y = 50;
-	origine.z = 0;
-	dir.x = 500;
-	dir.y = 500;
-	dir.z = 0;
+	origine = init_vect(100, 50, 0);
+	dir = init_vect(500, 500, 0);
+	move = init_vect(0, 0, 0);
 	ft_put_pixel(mlx, round(origine.x), round(origine.y), 0XFFFFFF);
 	ft_put_pixel(mlx, round(dir.x), round(dir.y), 0X00FF00);
-	norm = ft_normalize(move.x, move.y, move.z);
+	norm = ft_normalize(move);
 	i = 0;
 	while (move.x != dir.x)
 	{
 		ft_printf("enter %d\n", i);
-		move = ft_ray_move(norm, dir);
-		norm = ft_normalize(move.x, move.y, move.z);
+		move = substraction(norm, dir);
+		norm = ft_normalize(move);
 		ft_put_pixel(mlx, round(norm.x), round(norm.y), 0XFF0000);
 		i++;
+	}
+}
+
+void	ft_draw_sp(t_mlx *mlx)
+{
+	t_vect	originne;
+	t_vect	draw;
+	t_vect	pixel;
+	double	radius;
+	double	step_x;
+	double	step_y;
+	double	diameter;
+	double	ecart;
+
+	diameter = 200;
+	radius = diameter / 2;
+	ecart = diameter * 2;
+	originne.x = WINDOW_X / 2;
+	originne.y = WINDOW_Y / 2;
+	originne.z = 0;
+	draw.x = 0;
+	draw.y = 0;
+	draw.z = 0;
+	step_x = M_PI / ecart;
+	step_y = 2 * M_PI / ecart;
+	while (draw.x <= M_PI)
+	{
+		draw.y = 0;
+		while (draw.y <= 2 * M_PI)
+		{
+			pixel.x = originne.x + radius * sin(draw.x) * cos(draw.y);
+			pixel.y = originne.y + radius * sin(draw.x) * sin(draw.y);
+			ft_put_pixel(mlx, (pixel.x), (pixel.y), 0XFF0000);
+			draw.y += step_y;
+		}
+		draw.x += step_x;
 	}
 }
 
@@ -75,8 +86,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	ft_debug(data->world);
 	ft_init_scene(data, argv[1]);
-	test(data->world, data->mlx);
-	// ft_put_pixel(data->mlx, WINDOW_X / 2, WINDOW_Y / 2, 0XFF0000);
+	ft_draw_sp(data->mlx);
+	// test(data->world, data->mlx);
 	ft_launch(data);
 	return (EXIT_SUCCESS);
 }
