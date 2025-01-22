@@ -58,22 +58,8 @@ void	ft_disp_content_cy(t_maps *curr)
 
 void	ft_disp_type(t_maps *curr)
 {
-	if (curr->type == Ambient_l)
-	{
-		ft_printf("type %d: Ambient_l\n", Ambient_l);
-		ft_disp_content_a(curr);
-	}
-	else if (curr->type == Camera)
-	{
-		ft_printf("type %d: Camera\n", Camera);
-		ft_disp_content_c(curr);
-	}
-	else if (curr->type == Light)
-	{
-		ft_printf("type %d: Light\n", Light);
-		ft_disp_content_l(curr);
-	}
-	else if (curr->type == Sphere)
+	ft_printf("\n============== New object ================\n");
+	if (curr->type == Sphere)
 	{
 		ft_printf("type %d: Sphere\n", Sphere);
 		ft_disp_content_sp(curr);

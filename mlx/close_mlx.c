@@ -19,6 +19,9 @@ void	ft_free_mlx(t_scene *data)
 	tmp = data->mlx;
 	free(tmp->mlx_ptr);
 	free(tmp);
+	free(data->amlight);
+	free(data->cam);
+	free(data->light);
 }
 
 int	ft_close_window(t_scene *scene)

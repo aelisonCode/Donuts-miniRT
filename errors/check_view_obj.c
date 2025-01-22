@@ -33,8 +33,8 @@ int	for_ambient_l(char **all, int *t)
 	if (for_ambient_param(all) == 1)
 		return (0);
 	s = get_struct();
+	s->amlight = ambient_l(all);
 	(*t)++;
-	add_maps(&s->world, create_map(Ambient_l, ambient_l(all)));
 	return (1);
 }
 
@@ -58,7 +58,7 @@ int	for_camera(char **all, int *t)
 		return (0);
 	(*t)++;
 	s = get_struct();
-	add_maps(&s->world, create_map(Camera, camera(all)));
+	s->cam = camera(all);
 	return (2);
 }
 
@@ -82,6 +82,6 @@ int	for_light(char **all, int *t)
 		return (0);
 	(*t)++;
 	s = get_struct();
-	add_maps(&s->world, create_map(Light, light(all)));
+	s->light = light(all);
 	return (3);
 }

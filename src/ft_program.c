@@ -12,32 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-void	test(t_maps *head, t_mlx *mlx)
-{
-	t_vect	origine;
-	t_vect	dir;
-	t_vect	norm;
-	t_vect	move;
-	int		i;
-
-	head++;
-	origine = init_vect(100, 50, 0);
-	dir = init_vect(500, 500, 0);
-	move = init_vect(0, 0, 0);
-	ft_put_pixel(mlx, round(origine.x), round(origine.y), 0XFFFFFF);
-	ft_put_pixel(mlx, round(dir.x), round(dir.y), 0X00FF00);
-	norm = ft_normalize(move);
-	i = 0;
-	while (move.x != dir.x)
-	{
-		ft_printf("enter %d\n", i);
-		move = substraction(norm, dir);
-		norm = ft_normalize(move);
-		ft_put_pixel(mlx, round(norm.x), round(norm.y), 0XFF0000);
-		i++;
-	}
-}
-
 void	ft_draw_sp(t_mlx *mlx)
 {
 	t_vect	originne;
@@ -74,18 +48,30 @@ void	ft_draw_sp(t_mlx *mlx)
 	}
 }
 
+void	debug_scene(t_scene	*scene)
+{
+	printf("=========== Ambient light ===============\n");
+	ft_disp_content_a(scene->amlight);
+	printf("=========== Camera ===============\n");
+	ft_disp_content_c(scene->cam);
+	printf("=========== Light ===============\n");
+	ft_disp_content_l(scene->light);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene	*data;
 
 	data = get_struct();
+	data->world = NULL;
 	if (argc != 2)
 		return (EXIT_FAILURE);
 	if (ft_error_init(argc, argv) == EXIT_FAILURE
 		|| check_file(argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	ft_debug(data->world);
 	ft_init_scene(data, argv[1]);
+	debug_scene(data);
+	ft_debug(data->world);
 	ft_draw_sp(data->mlx);
 	// test(data->world, data->mlx);
 	ft_launch(data);

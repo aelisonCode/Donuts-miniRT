@@ -101,6 +101,9 @@ typedef struct s_maps
 typedef struct s_scene
 {
 	t_mlx			*mlx;
+	t_a				*amlight;
+	t_c				*cam;
+	t_l				*light;
 	t_maps			*world;
 }					t_scene;
 

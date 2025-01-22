@@ -26,22 +26,16 @@ void	ft_disp_vect(t_vect *vect)
 	printf(" Z: %f\n", vect->z);
 }
 
-void	ft_disp_content_a(t_maps *curr)
+void	ft_disp_content_a(t_a *a)
 {
-	t_a	*a;
-
-	a = curr->struct_obj;
 	printf("ratio: %f\n", a->ratio);
 	printf("color:\n");
 	ft_disp_color(&a->color);
 	printf("\n");
 }
 
-void	ft_disp_content_c(t_maps *curr)
+void	ft_disp_content_c(t_c *a)
 {
-	t_c	*a;
-
-	a = curr->struct_obj;
 	printf("fov: %d\n", a->fov);
 	printf("view_point:\n");
 	ft_disp_vect(&a->view_point);
@@ -50,11 +44,8 @@ void	ft_disp_content_c(t_maps *curr)
 	printf("\n");
 }
 
-void	ft_disp_content_l(t_maps *curr)
+void	ft_disp_content_l(t_l *a)
 {
-	t_l	*a;
-
-	a = curr->struct_obj;
 	printf("bright: %f\n", a->bright);
 	printf("pos:\n");
 	ft_disp_vect(&a->pos);

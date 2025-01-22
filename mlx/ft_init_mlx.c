@@ -42,7 +42,6 @@ void	ft_init_scene(t_scene *data, char *title)
 {
 	t_mlx	*tmp;
 
-	data->world = NULL;
 	tmp = malloc(sizeof(t_mlx));
 	if (!tmp)
 		return ;

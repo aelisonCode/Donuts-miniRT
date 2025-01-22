@@ -45,9 +45,9 @@ void	add_maps(t_maps **head, t_maps *new_elem);
 t_a		*ambient_l(char **str);
 t_c		*camera(char **str);
 t_l		*light(char **str);
-t_sp	sphere(char **str);
-t_pl	plane(char **str);
-t_cy	cylender(char **str);
+t_sp	*sphere(char **str);
+t_pl	*plane(char **str);
+t_cy	*cylender(char **str);
 
 t_vect	make_vector(char *str);
 t_color	make_color(char *str);

@@ -29,7 +29,7 @@ void	ft_free_tab(char **ptr);
 
 void	ft_disp_color(t_color *color);
 void	ft_disp_vect(t_vect *vect);
-void	ft_disp_content_a(t_maps *curr);
-void	ft_disp_content_c(t_maps *curr);
-void	ft_disp_content_l(t_maps *curr);
+void	ft_disp_content_a(t_a *curr);
+void	ft_disp_content_c(t_c *curr);
+void	ft_disp_content_l(t_l *curr);
 #endif
