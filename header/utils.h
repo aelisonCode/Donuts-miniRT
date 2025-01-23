@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:34:10 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/22 13:05:16 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:24:20 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_disp_vect(t_vect *vect);
 void	ft_disp_content_a(t_a *curr);
 void	ft_disp_content_c(t_c *curr);
 void	ft_disp_content_l(t_l *curr);
-
 
 void	*get_type(t_maps *obj, t_obj type);
 #endif

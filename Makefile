@@ -23,6 +23,7 @@ PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 SRC = src/ft_program.c \
 	  src/nie.c \
 	  src/debug.c \
+	  obj_control/sphere/sphere.c \
 	  vect/operations.c \
 	  vect/control.c \
 	  errors/ft_error.c \

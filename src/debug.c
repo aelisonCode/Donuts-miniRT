@@ -78,7 +78,6 @@ void	ft_disp_type(t_maps *curr)
 
 void	ft_debug(t_maps *head)
 {
-	ft_printf("========== start debug =========\n");
 	while (head)
 	{
 		ft_disp_type(head);

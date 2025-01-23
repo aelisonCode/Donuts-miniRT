@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 13:11:51 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 13:41:35 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:23:27 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,6 @@ void	dda_algo(t_mlx *mlx, t_vect start, t_vect goal)
 	}
 }
 
-void	draw_sphere(t_mlx *mlx, t_sp *obj)
-{
-	double	r_carre;
-	double	tmp;
-	t_vect	ctre;
-	int		step_x;
-	int		step_y;
-
-	ctre = obj->center;
-	r_carre = pow(obj->radius, 2);
-	step_x = ctre.x - obj->radius;
-	while (step_x <= ctre.x + obj->radius)
-	{
-		step_y = ctre.y - obj->radius;
-		while (step_y <= ctre.y + obj->radius)
-		{
-			tmp = r_carre - (step_x - ctre.x) * (step_x - ctre.x) - (step_y
-					- ctre.y) * (step_y - ctre.y);
-			if (tmp >= 0)
-				ft_put_pixel(mlx, step_x, step_y, 0X00FF00);
-			step_y++;
-		}
-		step_x++;
-	}
-}
 /*first test : failed*/
 void	ray_tracing(t_mlx *mlx, t_ray *r)
 {
@@ -82,91 +57,6 @@ void	ray_tracing(t_mlx *mlx, t_ray *r)
 	}
 }
 
-double	get_racine(double a, double b, double disc)
-{
-	double	r_1;
-	double	r_2;
-
-	r_1 = (-b - sqrt(disc)) / (2 * a);
-	r_2 = (-b + sqrt(disc)) / (2 * a);
-	if (r_1 > 0 && r_2 > 0)
-	{
-		if (r_1 < r_2)
-			return (r_1);
-		else
-		 	return (r_2);
-	}
-	else if (r_1 > 0)
-		return (r_1);
-	return (r_2);
-}
-
-int	ft_intersec_sp(t_sp *obj, t_ray *r, int *solution)
-{
-	double	a;
-	double	b;
-	double	c;
-	t_vect	dist;
-	double	discriminant;
-
-	dist = substraction(r->origin, obj->center);
-	a = scalaire(r->direction, r->direction);
-	b = 2 * scalaire(r->direction, dist);
-	c = scalaire(dist, dist) - pow(obj->radius, 2);
-	discriminant = pow(b, 2) - (4 * a * c);
-	printf("discr: %f\n", discriminant);
-	if (discriminant < 0)
-		return (EXIT_FAILURE);
-	*solution = get_racine(a, b, discriminant);
-	return (EXIT_SUCCESS);
-}
-
-int	intersection(t_vect r, t_vect direction, t_vect sphere, double d)
-{
-	double	a;
-	double	b;
-	double	c;
-	double	discr;
-
-	direction = ft_normalize(direction);
-	a = pow(direction.x, 2) + pow(direction.y, 2);
-	b = 2 * ((r.x - sphere.x) * direction.x + (r.y - sphere.y) * direction.y);
-	c = pow((r.x - sphere.x), 2) + pow((r.y - sphere.y), 2) - pow(d / 2, 2);
-	discr = pow(b, 2) - (4 * a * c);
-	if (discr < 0)
-		return (EXIT_FAILURE);
-	if (discr >= 0)
-		return (EXIT_SUCCESS);
-	return (EXIT_FAILURE);
-}
-
-void	go_sphere(t_mlx *mlx, t_sp *obj)
-{
-	t_vect	tmp;
-	t_vect	intersect;
-	t_ray	r;
-	int		racine;
-	int		val;
-
-	racine = 0;
-	r.origin = init_vect(0, 0, 50);
-	ft_put_pixel(mlx, r.origin.x, r.origin.y, 0XFFFFFF);
-	tmp = substraction(r.origin, obj->center);
-	r.direction = ft_normalize(tmp);
-	ft_put_pixel(mlx, obj->center.x, obj->center.y, 0X0000FF);
-	val = ft_intersec_sp(obj, &r, &racine);
-	if (val == EXIT_FAILURE)
-		ft_printf("Pas d'intersection\n");
-	else
-	{
-		ft_printf("Find intersection !\n");
-		intersect.x = r.origin.x + racine * r.direction.x;
-		intersect.y = r.origin.y + racine * r.direction.y;
-		intersect.z = r.origin.z + racine * r.direction.z;
-		ft_put_pixel(mlx, intersect.x, intersect.y, 0XFF0000);
-	}
-}
-
 void	debug_scene(t_scene *scene)
 {
 	printf("=========== Ambient light ===============\n");
@@ -175,6 +65,19 @@ void	debug_scene(t_scene *scene)
 	ft_disp_content_c(scene->cam);
 	printf("=========== Light ===============\n");
 	ft_disp_content_l(scene->light);
+}
+
+void	ndc(t_vect pos)
+{
+	t_vect	ndc;
+	t_vect	i_screen;
+	double	ratio;
+
+	ndc.x = (pos.x + 0.5) / WINDOW_X;
+	ndc.y = (pos.y + 0.5) / WINDOW_Y;
+	i_screen.x = 2 * ndc.x - 1;
+	i_screen.y = 2 * ndc.y - 1;
+	ratio = WINDOW_X / WINDOW_Y;
 }
 
 int	main(int argc, char **argv)
@@ -198,7 +101,6 @@ int	main(int argc, char **argv)
 		draw_sphere(data->mlx, obj);
 		go_sphere(data->mlx, obj);
 	}
-	// ray_tracing(data->mlx, origin);
 	ft_launch(data);
 	return (EXIT_SUCCESS);
 }

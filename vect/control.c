@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 09:13:01 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/22 09:13:11 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:24:03 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,25 @@ double	vect_lenght(t_vect to_check)
 
 	res = sqrt(pow(to_check.x, 2) + pow(to_check.y, 2) + pow(to_check.z, 2));
 	return (res);
+}
+
+double	get_racine(double a, double b, double disc)
+{
+	double	r_1;
+	double	r_2;
+
+	r_1 = (-b - sqrt(disc)) / (2 * a);
+	r_2 = (-b + sqrt(disc)) / (2 * a);
+	if (r_1 > 0 && r_2 > 0)
+	{
+		if (r_1 < r_2)
+			return (r_1);
+		else
+			return (r_2);
+	}
+	else if (r_1 > 0)
+		return (r_1);
+	else if (r_2 > 0)
+		return (r_2);
+	return (-1);
 }

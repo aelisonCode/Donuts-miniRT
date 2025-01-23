@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 13:56:59 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/23 09:24:34 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,15 @@ t_sp	*sphere(char **str);
 t_pl	*plane(char **str);
 t_cy	*cylender(char **str);
 
+void	draw_sphere(t_mlx *mlx, t_sp *obj);
+int		ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
+void	go_sphere(t_mlx *mlx, t_sp *obj);
+
+/*VECTOR*/
 t_vect	make_vector(char *str);
 t_color	make_color(char *str);
+double	get_racine(double a, double b, double disc);
+
 /*DEBUG*/
 void	ft_debug(t_maps *head);
 void	ft_disp_type(t_maps *curr);
