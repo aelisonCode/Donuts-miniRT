@@ -19,6 +19,7 @@
 double	scalaire(t_vect origin, t_vect target);
 t_vect	sum(t_vect origin, t_vect target);
 t_vect	substraction(t_vect origin, t_vect target);
+t_vect	dot(t_vect origin, t_vect target);
 t_vect	ft_normalize(t_vect to_norm);
 
 t_vect	init_vect(double x, double y, double z);

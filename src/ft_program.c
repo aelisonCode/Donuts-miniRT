@@ -67,19 +67,6 @@ void	debug_scene(t_scene *scene)
 	ft_disp_content_l(scene->light);
 }
 
-void	ndc(t_vect pos)
-{
-	t_vect	ndc;
-	t_vect	i_screen;
-	double	ratio;
-
-	ndc.x = (pos.x + 0.5) / WINDOW_X;
-	ndc.y = (pos.y + 0.5) / WINDOW_Y;
-	i_screen.x = 2 * ndc.x - 1;
-	i_screen.y = 2 * ndc.y - 1;
-	ratio = WINDOW_X / WINDOW_Y;
-}
-
 int	main(int argc, char **argv)
 {
 	t_scene	*data;

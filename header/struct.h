@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/21 10:17:17 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:27:47 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ typedef struct s_c
 {
 	t_vect			view_point;
 	t_vect			direction;
-	int				fov;
+	double			ratio;
+	double			fov;
 }					t_c;
 
 typedef struct s_l
@@ -97,6 +98,15 @@ typedef struct s_cy
 	double			height;
 	t_color			color;
 }					t_cy;
+
+typedef struct	s_projection
+{
+	t_vect	top_left;
+	t_vect	width_dir;
+	t_vect	height_dit;
+	double	width;
+	double	height;
+}	t_projection;
 
 typedef struct s_maps
 {

@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:34:22 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 14:36:56 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/23 14:26:43 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_disp_content_a(t_a *a)
 
 void	ft_disp_content_c(t_c *a)
 {
-	printf("fov: %d\n", a->fov);
+	printf("fov: %f\n", a->fov);
 	printf("view_point:\n");
 	ft_disp_vect(&a->view_point);
 	printf("direction:\n");

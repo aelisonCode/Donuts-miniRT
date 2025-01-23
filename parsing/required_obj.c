@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 06:44:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 11:23:36 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:52:02 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ t_c	*camera(char **str)
 	c = malloc(sizeof(t_c));
 	if (!c)
 		return (NULL);
+	c->ratio = round(WINDOW_X) / WINDOW_Y;
 	c->view_point = make_vector(str[1]);
 	c->direction = make_vector(str[2]);
 	ft_replace_str(str[3], "\n", '\0');

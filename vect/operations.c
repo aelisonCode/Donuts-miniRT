@@ -6,12 +6,13 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 08:38:53 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/22 08:53:10 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/23 15:19:03 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/vector.h"
-#include "../header/mini_rt.h"
+#include "../libft/libft.h"
+#include <unistd.h>
 
 t_vect	ft_normalize(t_vect to_norm)
 {
@@ -22,15 +23,14 @@ t_vect	ft_normalize(t_vect to_norm)
 	if (lenght == 0)
 	{
 		ft_putendl_fd("error: vect lenght 0", STDERR_FILENO);
-		ft_close_window(get_struct());
+		return (init_vect(0, 0, 0));
 	}
-	res.x /= lenght;
-	res.y /= lenght;
-	res.z /= lenght;
+	res.x = to_norm.x / lenght;
+	res.y = to_norm.y / lenght;
+	res.z = to_norm.z / lenght;
 	return (res);
 }
 
-/*Give the vector direction from origin to target*/
 t_vect	substraction(t_vect origin, t_vect target)
 {
 	t_vect	res;
@@ -51,10 +51,16 @@ t_vect	sum(t_vect origin, t_vect target)
 	return (res);
 }
 
-/*compare intersect/direction of the two vector*/
-/*if res == 0, the two vect are perpendiculaire*/
-/*if res > 0, the two vect are the same direction*/
-/*if res < 0, the two vect are opposite direction*/
+t_vect	dot(t_vect origin, t_vect target)
+{
+	t_vect	res;
+
+	res.x = origin.y * target.z - origin.z * target.y;
+	res.y = origin.z * target.x - origin.x * target.z;
+	res.z = origin.x * target.y - origin.y * target.x;
+	return (res);
+}
+
 double	scalaire(t_vect origin, t_vect target)
 {
 	double	res;
