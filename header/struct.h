@@ -99,14 +99,14 @@ typedef struct s_cy
 	t_color			color;
 }					t_cy;
 
-typedef struct	s_projection
+typedef struct s_projection
 {
-	t_vect	top_left;
-	t_vect	width_dir;
-	t_vect	height_dit;
-	double	width;
-	double	height;
-}	t_projection;
+	t_vect			top_left;
+	t_vect			width_dir;
+	t_vect			height_dit;
+	double			width;
+	double			height;
+}					t_projection;
 
 typedef struct s_maps
 {
