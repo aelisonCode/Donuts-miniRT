@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
-#include <stdio.h>
 
 void	ft_disp_content_sp(t_maps *curr)
 {

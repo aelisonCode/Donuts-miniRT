@@ -22,6 +22,7 @@
 # include "../minilibx-linux/mlx.h"
 # include "struct.h"
 # include <math.h>
+# include <stdio.h>
 
 # define WINDOW_X 1920
 # define WINDOW_Y 1080

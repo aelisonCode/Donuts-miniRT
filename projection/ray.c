@@ -62,17 +62,21 @@ void	send_ray(t_mlx *mlx, t_projection p, t_c *cam, t_sp *obj)
 {
 	double	x;
 	double	y;
+	int		color;
 	t_ray	r;
 
 	y = 0;
-	while (y < p.height)
+	while (y < WINDOW_Y)
 	{
 		x = 0;
-		while (x < p.width)
+		while (x < WINDOW_X)
 		{
-			// ft_put_pixel(mlx, x, y, 0XFF0000);
 			r = create_ray(cam, p, x, y);
-			test_sp(obj, mlx, r);
+			if (ft_intersec_sp(obj, &r, NULL) == EXIT_SUCCESS)
+				color = 0X00FF00;
+			else
+				color = 0X000000;
+			ft_put_pixel(mlx, x, y, color);
 			x++;
 		}
 		y++;

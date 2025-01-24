@@ -51,12 +51,14 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 	b = 2 * scalaire(r->direction, dist);
 	c = scalaire(dist, dist) - pow(obj->radius, 2);
 	discriminant = pow(b, 2) - (4 * a * c);
-	printf("discri = %f\n", discriminant);
 	if (discriminant < 0)
 		return (EXIT_FAILURE);
-	*solution = get_racine(a, b, discriminant);
-	if (*solution < 0)
-		return (EXIT_FAILURE);
+	if (solution != NULL)
+	{
+		*solution = get_racine(a, b, discriminant);
+		if (*solution < 0)
+			return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 

@@ -17,7 +17,6 @@
 #  define BUFFER_SIZE 500
 # endif
 
-# include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
 

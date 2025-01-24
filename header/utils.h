@@ -14,7 +14,6 @@
 # define UTILS_H
 
 # include "../libft/libft.h"
-# include "stdio.h"
 # include "struct.h"
 
 void	ft_filltab(int *tab, int len, int val);
