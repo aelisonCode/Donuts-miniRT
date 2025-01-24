@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
+#include <stdio.h>
 
 void	dda_algo(t_mlx *mlx, t_vect start, t_vect goal)
 {
@@ -67,10 +68,29 @@ void	debug_scene(t_scene *scene)
 	ft_disp_content_l(scene->light);
 }
 
+void	debug_projection(t_projection p)
+{
+	printf("height = %f\n", p.height);
+	printf("width = %f\n", p.width);
+
+	printf("top_left x = %f\n", p.top_left.x);
+	printf("top_left y = %f\n", p.top_left.y);
+	printf("top_left z = %f\n", p.top_left.z);
+
+	printf("height dir x = %f\n", p.height_dir.x);
+	printf("height dir y = %f\n", p.height_dir.y);
+	printf("height dir z = %f\n", p.height_dir.z);
+
+	printf("width dir x = %f\n", p.width_dir.x);
+	printf("width dir y = %f\n", p.width_dir.y);
+	printf("width dir z = %f\n", p.width_dir.z);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene	*data;
 	t_sp	*obj;
+	t_projection p;
 
 	data = get_struct();
 	data->world = NULL;
@@ -80,13 +100,17 @@ int	main(int argc, char **argv)
 		|| check_file(argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_init_scene(data, argv[1]);
-	debug_scene(data);
-	ft_debug(data->world);
+	p = init_pjct(data->cam, 1.0);
+	printf("ratio = %f\n", data->cam->ratio);
+	debug_projection(p);
+	// debug_scene(data);
+	// ft_debug(data->world);
 	obj = (t_sp *)get_type(data->world, Sphere);
 	if (obj != NULL)
 	{
-		draw_sphere(data->mlx, obj);
-		go_sphere(data->mlx, obj);
+		// draw_sphere(data->mlx, obj);
+		// go_sphere(data->mlx, obj);
+		send_ray(data->mlx, p, data->cam, obj);
 	}
 	ft_launch(data);
 	return (EXIT_SUCCESS);

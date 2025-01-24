@@ -103,7 +103,7 @@ typedef struct s_projection
 {
 	t_vect			top_left;
 	t_vect			width_dir;
-	t_vect			height_dit;
+	t_vect			height_dir;
 	double			width;
 	double			height;
 }					t_projection;

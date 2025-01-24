@@ -30,6 +30,30 @@ double	vect_lenght(t_vect to_check)
 	return (res);
 }
 
+t_vect	vect_dot_val(t_vect target, double val)
+{
+	t_vect	res;
+
+	res.x = target.x * val;
+	res.y = target.y * val;
+	res.z = target.z * val;
+	return (res);
+}
+
+double	get_angle(t_vect a, t_vect b)
+{
+	double	numerator;
+	double	denominator;
+	double	res;
+
+	numerator = scalaire(a, b);
+	denominator = vect_lenght(a) * vect_lenght(b);
+	if (denominator == 0)
+		return (1);
+	res = acos(numerator / denominator);
+	return (res);
+}
+
 double	get_racine(double a, double b, double disc)
 {
 	double	r_1;

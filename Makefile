@@ -46,6 +46,8 @@ SRC = src/ft_program.c \
 	  parsing/required_obj.c \
 	  parsing/components.c \
 	  parsing/physics_obj.c \
+	  projection/ray.c \
+	  projection/init_projection.c \
 	  libft/get_next_line/get_next_line.c \
 	  libft/get_next_line/get_next_line_utils.c \
 

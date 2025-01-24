@@ -51,7 +51,7 @@ t_vect	sum(t_vect origin, t_vect target)
 	return (res);
 }
 
-t_vect	dot(t_vect origin, t_vect target)
+t_vect	cross(t_vect origin, t_vect target)
 {
 	t_vect	res;
 
