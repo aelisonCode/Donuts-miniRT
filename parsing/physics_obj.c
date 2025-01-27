@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:43:16 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 13:56:08 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 11:26:18 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_cy	*cylender(char **str)
 	cy->center = make_vector(str[1]);
 	cy->direction = make_vector(str[2]);
 	cy->diameter = ft_atof(str[3]);
+	cy->radius = cy->diameter / 2;
 	cy->height = ft_atof(str[4]);
 	ft_replace_str(str[5], "\n", '\0');
 	cy->color = make_color(str[5]);

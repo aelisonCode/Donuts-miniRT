@@ -44,6 +44,8 @@ void			add_maps(t_maps **head, t_maps *new_elem);
 void			ft_translation(t_vect *point, int move);
 void			ft_scale(double *value, int move);
 
+void			ft_sp_event(t_scene *data, int keycode);
+
 /*OBJECT*/
 t_a				*ambient_l(char **str);
 t_c				*camera(char **str);

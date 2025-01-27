@@ -12,6 +12,30 @@
 
 #include "../../header/mini_rt.h"
 
+void	ft_sp_event(t_scene *data, int keycode)
+{
+	t_sp	*obj;
+
+	obj = get_type(data->world, Sphere);
+	if (!obj)
+		return ;
+	if (keycode == UP)
+		ft_translation(&obj->center, UP);
+	if (keycode == DOWN)
+		ft_translation(&obj->center, DOWN);
+	if (keycode == LEFT)
+		ft_translation(&obj->center, LEFT);
+	if (keycode == RIGHT)
+		ft_translation(&obj->center, RIGHT);
+	if (keycode == SCALE_UP)
+		ft_scale(&obj->diameter, SCALE_UP);
+	if (keycode == SCALE_DOWN)
+		ft_scale(&obj->diameter, SCALE_DOWN);
+	mlx_clear_window(data->mlx->mlx_ptr, data->mlx->mlx_window);
+	send_ray(data->mlx, data->p, data->cam, obj);
+	ft_launch(data);
+}
+
 int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 {
 	double	a;
@@ -31,7 +55,7 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 	{
 		*solution = get_racine(a, b, discriminant);
 		if (*solution < 0)
-			return (EXIT_FAILURE);
+			return (EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);
 }

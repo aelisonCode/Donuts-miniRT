@@ -33,31 +33,6 @@ int	on_button_pressed(int button, int x, int y, void *param)
 	return (EXIT_FAILURE);
 }
 
-void	ft_sp_event(t_scene *data, int keycode)
-{
-	t_sp	*obj;
-
-	obj = get_type(data->world, Sphere);
-	if (!obj)
-		return ;
-	if (keycode == UP)
-		ft_translation(&obj->center, UP);
-	if (keycode == DOWN)
-		ft_translation(&obj->center, DOWN);
-	if (keycode == LEFT)
-		ft_translation(&obj->center, LEFT);
-	if (keycode == RIGHT)
-		ft_translation(&obj->center, RIGHT);
-	if (keycode == SCALE_UP)
-		ft_scale(&obj->diameter, SCALE_UP);
-	if (keycode == SCALE_DOWN)
-		ft_scale(&obj->diameter, SCALE_DOWN);
-	mlx_clear_window(data->mlx->mlx_ptr, data->mlx->mlx_window);
-	send_ray(data->mlx, data->p, data->cam, obj);
-	ft_launch(data);
-}
-
-/*	Si appuie sur echappe quitte le programme	*/
 int	ft_exec_input(int keycode, t_scene *data)
 {
 	int	result;

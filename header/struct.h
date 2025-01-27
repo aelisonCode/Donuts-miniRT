@@ -6,20 +6,15 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/27 10:12:28 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 11:24:49 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# ifndef WINDOW_X
-#  define WINDOW_X 1000
-# endif
-
-# ifndef WINDOW_Y
-#  define WINDOW_Y 500
-# endif
+# define WINDOW_X 1000
+# define WINDOW_Y 500
 
 # define LEFT_BUTTON 1
 # define RIGHT_BUTTON 3
@@ -122,6 +117,7 @@ typedef struct s_cy
 	double			diameter;
 	double			height;
 	t_color			color;
+	double			radius;
 }					t_cy;
 
 typedef struct s_projection
