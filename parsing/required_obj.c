@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 06:44:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/23 14:52:02 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:57:39 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_a	*ambient_l(char **str)
 		return (NULL);
 	a->ratio = ft_atof(str[1]);
 	ft_replace_str(str[2], "\n", '\0');
-	a->color = make_color(str[2]);
+	a->color = ft_atoi_base(str[2], 16);
 	return (a);
 }
 
@@ -50,7 +50,7 @@ t_l	*light(char **str)
 	l->pos = make_vector(str[1]);
 	l->bright = ft_atof(str[2]);
 	ft_replace_str(str[3], "\n", '\0');
-	l->color = make_color(str[3]);
+	l->color = ft_atoi_base(str[3], 16);
 	return (l);
 }
 

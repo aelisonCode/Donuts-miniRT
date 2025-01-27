@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 12:59:07 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 14:36:53 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:53:47 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_disp_content_sp(t_maps *curr)
 	ft_disp_vect(&a->center);
 	printf("diameter: %f\n", a->diameter);
 	printf("color:\n");
-	ft_disp_color(&a->color);
 	printf("\n");
 }
 
@@ -35,7 +34,6 @@ void	ft_disp_content_pl(t_maps *curr)
 	printf("direction:\n");
 	ft_disp_vect(&a->direction);
 	printf("color:\n");
-	ft_disp_color(&a->color);
 	printf("\n");
 }
 
@@ -51,7 +49,6 @@ void	ft_disp_content_cy(t_maps *curr)
 	printf("diameter: %f\n", a->diameter);
 	printf("height: %f\n", a->height);
 	printf("color:\n");
-	ft_disp_color(&a->color);
 	printf("\n");
 }
 

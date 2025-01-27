@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 09:58:09 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 14:01:09 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ t_pl			*plane(char **str);
 t_cy			*cylender(char **str);
 
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
+int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
+
+int				add_ambient_col(int color, double ambient);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);
@@ -69,5 +72,5 @@ void			ft_disp_type(t_maps *curr);
 void			ft_disp_color(t_color *color);
 
 t_projection	*init_pjct(t_c *cam, double dist);
-void			send_ray(t_mlx *mlx, t_projection *p, t_c *cam, t_sp *obj);
+void			send_ray(t_mlx *mlx, t_projection *p, t_c *cam, void *obj);
 #endif

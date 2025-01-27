@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/27 09:50:17 by aelison          ###   ########.fr        #
+#    Updated: 2025/01/27 14:01:42 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,10 @@ SRC = src/ft_program.c \
 	  src/debug.c \
 	  obj_control/obj_moves.c \
 	  obj_control/sphere/sphere.c \
+	  obj_control/cylender/cylender.c \
 	  vect/operations.c \
 	  vect/control.c \
+	  color/color.c \
 	  errors/ft_error.c \
 	  errors/check_file.c \
 	  errors/check_obj.c \

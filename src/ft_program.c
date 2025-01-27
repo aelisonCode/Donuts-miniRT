@@ -66,8 +66,8 @@ void	debug_projection(t_projection p)
 
 int	main(int argc, char **argv)
 {
-	t_scene			*data;
-	t_sp			*obj;
+	t_scene	*data;
+	t_maps	*tmp;
 
 	data = get_struct();
 	data->world = NULL;
@@ -77,10 +77,11 @@ int	main(int argc, char **argv)
 		|| check_file(argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_init_scene(data, 1.0, argv[1]);
-	obj = (t_sp *)get_type(data->world, Sphere);
-	if (obj != NULL)
+	tmp = data->world;
+	while (tmp)
 	{
-		send_ray(data->mlx, data->p, data->cam, obj);
+		send_ray(data->mlx, data->p, data->cam, tmp->struct_obj);
+		tmp = tmp->next;
 	}
 	ft_launch(data);
 	return (EXIT_SUCCESS);

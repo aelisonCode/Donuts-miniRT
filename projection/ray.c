@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 07:46:44 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/24 07:46:56 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 14:03:12 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,12 @@ t_ray	create_ray(t_c *cam, t_projection *p, int x, int y)
 	return (res);
 }
 
-void	send_ray(t_mlx *mlx, t_projection *p, t_c *cam, t_sp *obj)
+void	send_ray(t_mlx *mlx, t_projection *p, t_c *cam, void *obj)
 {
 	double	x;
 	double	y;
 	int		color;
+	t_sp	*tmp;
 	t_ray	r;
 
 	y = 0;
@@ -53,8 +54,9 @@ void	send_ray(t_mlx *mlx, t_projection *p, t_c *cam, t_sp *obj)
 		while (x < WINDOW_X)
 		{
 			r = create_ray(cam, p, x, y);
+			tmp = (t_sp *)obj;
 			if (ft_intersec_sp(obj, &r, NULL) == EXIT_SUCCESS)
-				color = 0X00FF00;
+				color = tmp->color;
 			else
 				color = 0X000000;
 			ft_put_pixel(mlx, x, y, color);

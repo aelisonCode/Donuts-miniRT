@@ -12,7 +12,7 @@
 
 #include "../../header/mini_rt.h"
 
-int	ft_intersect_cy(t_cy *obj, t_ray *r, double *solution)
+int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 {
 	double	a;
 	double	b;

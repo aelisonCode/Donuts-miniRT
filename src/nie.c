@@ -6,18 +6,11 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:34:22 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/23 14:26:43 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:53:25 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
-
-void	ft_disp_color(t_color *color)
-{
-	printf(" R: %f\n", color->r);
-	printf(" G: %f\n", color->g);
-	printf(" B: %f\n", color->b);
-}
 
 void	ft_disp_vect(t_vect *vect)
 {
@@ -30,7 +23,6 @@ void	ft_disp_content_a(t_a *a)
 {
 	printf("ratio: %f\n", a->ratio);
 	printf("color:\n");
-	ft_disp_color(&a->color);
 	printf("\n");
 }
 
@@ -50,6 +42,5 @@ void	ft_disp_content_l(t_l *a)
 	printf("pos:\n");
 	ft_disp_vect(&a->pos);
 	printf("color:\n");
-	ft_disp_color(&a->color);
 	printf("\n");
 }

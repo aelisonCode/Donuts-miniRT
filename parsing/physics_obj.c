@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:43:16 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 11:26:18 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 13:56:09 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_sp	*sphere(char **str)
 	sp->diameter = ft_atof(str[2]);
 	sp->radius = sp->diameter / 2;
 	ft_replace_str(str[3], "\n", '\0');
-	sp->color = make_color(str[3]);
+	sp->color = ft_atoi_base(str[3], 16);
 	return (sp);
 }
 
@@ -37,7 +37,7 @@ t_pl	*plane(char **str)
 	pl->point = make_vector(str[1]);
 	pl->direction = make_vector(str[2]);
 	ft_replace_str(str[3], "\n", '\0');
-	pl->color = make_color(str[3]);
+	pl->color = ft_atoi_base(str[3], 16);
 	return (pl);
 }
 
@@ -54,6 +54,6 @@ t_cy	*cylender(char **str)
 	cy->radius = cy->diameter / 2;
 	cy->height = ft_atof(str[4]);
 	ft_replace_str(str[5], "\n", '\0');
-	cy->color = make_color(str[5]);
+	cy->color = ft_atoi_base(str[5], 16);
 	return (cy);
 }
