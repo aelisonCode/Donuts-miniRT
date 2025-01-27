@@ -20,7 +20,7 @@ t_vect	ft_normalize(t_vect to_norm)
 	lenght = vect_lenght(to_norm);
 	if (lenght == 0)
 	{
-		ft_putendl_fd("error: vect lenght 0", STDERR_FILENO);
+		ft_putendl_fd("Error: vect lenght 0", STDERR_FILENO);
 		ft_close_window(get_struct());
 	}
 	res.x = to_norm.x / lenght;

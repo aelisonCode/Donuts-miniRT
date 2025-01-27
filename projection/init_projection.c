@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/vector.h"
+#include "../header/mini_rt.h"
 
 t_vect	dir_hzontal(t_vect cam_dir)
 {
@@ -47,20 +47,23 @@ t_vect	get_originleft_plan(t_vect view_point, t_vect c_dir, t_projection p,
 	return (res);
 }
 
-t_projection	init_pjct(t_c *cam, double dist)
+t_projection	*init_pjct(t_c *cam, double dist)
 {
-	t_projection	res;
+	t_projection	*res;
 	t_vect			view_dir;
 	t_vect			d_vtcal;
 	t_vect			d_hzontal;
 
-	res.height = 2 * dist * tan(cam->fov / 2 * M_PI / 180);
-	res.width = res.height * cam->ratio;
+	res = malloc(sizeof(t_projection));
+	if (!res)
+		return (NULL);
+	res->height = 2 * dist * tan(cam->fov / 2 * M_PI / 180);
+	res->width = res->height * cam->ratio;
 	view_dir = ft_normalize(cam->direction);
 	d_hzontal = ft_normalize(dir_hzontal(view_dir));
 	d_vtcal = ft_normalize(dir_vtcal(view_dir, d_hzontal));
-	res.width_dir = vect_dot_val(d_hzontal, -1);
-	res.height_dir = vect_dot_val(d_vtcal, -1);
-	res.top_left = get_originleft_plan(cam->view_point, view_dir, res, dist);
+	res->width_dir = vect_dot_val(d_hzontal, -1);
+	res->height_dir = vect_dot_val(d_vtcal, -1);
+	res->top_left = get_originleft_plan(cam->view_point, view_dir, *res, dist);
 	return (res);
 }

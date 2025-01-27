@@ -6,12 +6,37 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/23 14:27:47 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:12:28 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
+
+# ifndef WINDOW_X
+#  define WINDOW_X 1000
+# endif
+
+# ifndef WINDOW_Y
+#  define WINDOW_Y 500
+# endif
+
+# define LEFT_BUTTON 1
+# define RIGHT_BUTTON 3
+# define MID_BUTTON 2
+
+# define K_ESCAPE 65307
+# define CAMERA 99
+# define LIGHT 108
+# define AMBIENT 97
+
+# define LEFT 65361
+# define RIGHT 65363
+# define UP 65362
+# define DOWN 65364
+
+# define SCALE_UP 65451
+# define SCALE_DOWN 65453
 
 typedef enum e_object
 {
@@ -122,6 +147,7 @@ typedef struct s_scene
 	t_c				*cam;
 	t_l				*light;
 	t_maps			*world;
+	t_projection	*p;
 }					t_scene;
 
 #endif

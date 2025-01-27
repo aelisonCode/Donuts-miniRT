@@ -14,14 +14,12 @@
 
 void	ft_free_mlx(t_scene *data)
 {
-	t_mlx	*tmp;
-
-	tmp = data->mlx;
-	free(tmp->mlx_ptr);
-	free(tmp);
+	free(data->mlx->mlx_ptr);
+	free(data->mlx);
 	free(data->amlight);
 	free(data->cam);
 	free(data->light);
+	free(data->p);
 }
 
 int	ft_close_window(t_scene *scene)

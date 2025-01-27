@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 08:12:19 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/15 08:13:05 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 10:28:54 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	valid_format_aux(char *str, int *i)
 		(*i)++;
 	if (str[*i] == '.' || str[*i] == ',')
 	{
+		if (str[*i] == ',' && (str[(*i) + 1] == '+' || str[(*i) + 1] == '-'))
+			return (EXIT_SUCCESS);
 		if (ft_isdigit(str[(*i) + 1]) == 0)
 			return (EXIT_FAILURE);
 	}

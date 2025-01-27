@@ -20,6 +20,7 @@ void	ft_launch(t_scene *scene)
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->img_ptr, 0,
 		0);
 	mlx_key_hook(data->mlx_window, ft_exec_input, scene);
+	mlx_mouse_hook(data->mlx_window, on_button_pressed, scene);
 	mlx_hook(data->mlx_window, 17, 1L << 17, ft_close_window, scene);
 	mlx_loop(data->mlx_ptr);
 }

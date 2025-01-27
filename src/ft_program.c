@@ -68,7 +68,6 @@ int	main(int argc, char **argv)
 {
 	t_scene			*data;
 	t_sp			*obj;
-	t_projection	p;
 
 	data = get_struct();
 	data->world = NULL;
@@ -77,12 +76,11 @@ int	main(int argc, char **argv)
 	if (ft_error_init(argc, argv) == EXIT_FAILURE
 		|| check_file(argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	ft_init_scene(data, argv[1]);
-	p = init_pjct(data->cam, 1.0);
+	ft_init_scene(data, 1.0, argv[1]);
 	obj = (t_sp *)get_type(data->world, Sphere);
 	if (obj != NULL)
 	{
-		send_ray(data->mlx, p, data->cam, obj);
+		send_ray(data->mlx, data->p, data->cam, obj);
 	}
 	ft_launch(data);
 	return (EXIT_SUCCESS);
