@@ -39,31 +39,6 @@ void	dda_algo(t_mlx *mlx, t_vect start, t_vect goal)
 	}
 }
 
-void	debug_scene(t_scene *scene)
-{
-	printf("=========== Ambient light ===============\n");
-	ft_disp_content_a(scene->amlight);
-	printf("=========== Camera ===============\n");
-	ft_disp_content_c(scene->cam);
-	printf("=========== Light ===============\n");
-	ft_disp_content_l(scene->light);
-}
-
-void	debug_projection(t_projection p)
-{
-	printf("height = %f\n", p.height);
-	printf("width = %f\n", p.width);
-	printf("top_left x = %f\n", p.top_left.x);
-	printf("top_left y = %f\n", p.top_left.y);
-	printf("top_left z = %f\n", p.top_left.z);
-	printf("height dir x = %f\n", p.height_dir.x);
-	printf("height dir y = %f\n", p.height_dir.y);
-	printf("height dir z = %f\n", p.height_dir.z);
-	printf("width dir x = %f\n", p.width_dir.x);
-	printf("width dir y = %f\n", p.width_dir.y);
-	printf("width dir z = %f\n", p.width_dir.z);
-}
-
 int	main(int argc, char **argv)
 {
 	t_scene	*data;
