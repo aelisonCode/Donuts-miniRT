@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 	tmp = data->world;
 	while (tmp)
 	{
-		send_ray(data, tmp->struct_obj);
+		send_ray(data, tmp);
 		tmp = tmp->next;
 	}
 	ft_launch(data);

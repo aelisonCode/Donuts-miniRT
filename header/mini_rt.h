@@ -79,5 +79,5 @@ void			ft_disp_type(t_maps *curr);
 void			ft_disp_color(t_color *color);
 
 t_projection	*init_pjct(t_c *cam, double dist);
-void			send_ray(t_scene *scene, void *obj);
+void			send_ray(t_scene *scene, t_maps *obj);
 #endif

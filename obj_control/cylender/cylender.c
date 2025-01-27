@@ -35,6 +35,13 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 		*solution = get_racine(a, b, discr);
 		if (*solution < 0)
 			return (EXIT_FAILURE);
+		t_vect	intersect;
+		double	projection;
+
+		intersect = sum(r->origin, vect_dot_val(r->direction, *solution));
+		projection = scalaire(substraction(intersect, obj->center), obj->direction);
+		if (projection < 0 || projection > obj->height)
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

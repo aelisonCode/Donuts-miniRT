@@ -39,12 +39,29 @@ t_ray	create_ray(t_c *cam, t_projection *p, int x, int y)
 	return (res);
 }
 
-void	send_ray(t_scene *scene, void *obj)
+void	exec(t_scene *scene, t_maps *ptr, int x, int y)
 {
-	int		color;
+	int	color;
+	t_ray	r;
+
+	color = 0X000000;
+	r = create_ray(scene->cam, scene->p, x, y);
+	if (ptr->type == Sphere)
+	{
+		color = exec_sp(scene, ptr->struct_obj, &r);
+		ft_put_pixel(scene->mlx, x, y, color);
+	}
+	if (ptr->type == Cylinder)
+	{
+		color = exec_cy(scene, ptr->struct_obj, &r);
+		ft_put_pixel(scene->mlx, x, y, color);
+	}
+}
+
+void	send_ray(t_scene *scene, t_maps *obj)
+{
 	double	x;
 	double	y;
-	t_ray	r;
 
 	y = 0;
 	while (y < WINDOW_Y)
@@ -52,9 +69,7 @@ void	send_ray(t_scene *scene, void *obj)
 		x = 0;
 		while (x < WINDOW_X)
 		{
-			r = create_ray(scene->cam, scene->p, x, y);
-			color = exec_cy(scene, obj, &r);
-			ft_put_pixel(scene->mlx, x, y, color);
+			exec(scene, obj, x, y);
 			x++;
 		}
 		y++;
