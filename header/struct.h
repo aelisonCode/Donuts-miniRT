@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/27 13:52:49 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 14:21:59 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ typedef struct s_mlx
 typedef struct s_a
 {
 	double			ratio;
-	int				color;
+	t_color			color;
 }					t_a;
 
 typedef struct s_c
@@ -93,7 +93,7 @@ typedef struct s_l
 {
 	t_vect			pos;
 	double			bright;
-	int				color;
+	t_color			color;
 }					t_l;
 
 typedef struct s_sp
@@ -101,14 +101,14 @@ typedef struct s_sp
 	t_vect			center;
 	double			diameter;
 	double			radius;
-	int				color;
+	t_color			color;
 }					t_sp;
 
 typedef struct s_pl
 {
 	t_vect			point;
 	t_vect			direction;
-	int				color;
+	t_color			color;
 }					t_pl;
 
 typedef struct s_cy
@@ -117,7 +117,7 @@ typedef struct s_cy
 	t_vect			direction;
 	double			diameter;
 	double			height;
-	int				color;
+	t_color			color;
 	double			radius;
 }					t_cy;
 

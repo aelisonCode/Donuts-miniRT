@@ -32,7 +32,7 @@ void	ft_sp_event(t_scene *data, int keycode)
 	if (keycode == SCALE_DOWN)
 		ft_scale(&obj->diameter, SCALE_DOWN);
 	mlx_clear_window(data->mlx->mlx_ptr, data->mlx->mlx_window);
-	send_ray(data->mlx, data->p, data->cam, obj);
+	send_ray(data, obj);
 	ft_launch(data);
 }
 
@@ -58,4 +58,14 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 			return (EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	exec_sp(t_scene *s, t_sp *obj, t_ray *r)
+{
+	int	res;
+
+	res = 0X000000;
+	if (ft_intersec_sp(obj, r, NULL) == EXIT_SUCCESS)
+		res = add_ambient_col(obj->color.color, s->amlight->ratio);
+	return (res);
 }

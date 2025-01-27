@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 	tmp = data->world;
 	while (tmp)
 	{
-		send_ray(data->mlx, data->p, data->cam, tmp->struct_obj);
+		send_ray(data, tmp->struct_obj);
 		tmp = tmp->next;
 	}
 	ft_launch(data);

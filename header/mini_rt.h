@@ -54,10 +54,15 @@ t_sp			*sphere(char **str);
 t_pl			*plane(char **str);
 t_cy			*cylender(char **str);
 
+/*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
+int				exec_sp(t_scene *s, t_sp *obj, t_ray *r);
+
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
 
+/*COLOR*/
 int				add_ambient_col(int color, double ambient);
+int				create_color(int red, int green, int blue);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);
@@ -72,5 +77,5 @@ void			ft_disp_type(t_maps *curr);
 void			ft_disp_color(t_color *color);
 
 t_projection	*init_pjct(t_c *cam, double dist);
-void			send_ray(t_mlx *mlx, t_projection *p, t_c *cam, void *obj);
+void			send_ray(t_scene *scene, void *obj);
 #endif

@@ -30,6 +30,11 @@ t_color	make_color(char *str)
 	t_color	p;
 	char	**split;
 
+	p.r = 0;
+	p.g = 0;
+	p.b = 0;
+	if (!str)
+		return (p);
 	split = ft_split(str, ',');
 	p.r = ft_atof(split[0]);
 	p.g = ft_atof(split[1]);

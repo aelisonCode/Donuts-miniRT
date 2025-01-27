@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 int	get_red(int color)
 {
 	return ((color >> 16) & 0XFF);
@@ -23,7 +22,7 @@ int	get_green(int color)
 
 int	get_blue(int color)
 {
-	return ((color) & 0XFF);
+	return (color & 0XFF);
 }
 
 int	create_color(int red, int green, int blue)

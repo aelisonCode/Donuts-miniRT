@@ -21,7 +21,8 @@ t_a	*ambient_l(char **str)
 		return (NULL);
 	a->ratio = ft_atof(str[1]);
 	ft_replace_str(str[2], "\n", '\0');
-	a->color = ft_atoi_base(str[2], 16);
+	a->color = make_color(str[3]);
+	a->color.color = create_color(a->color.r, a->color.g, a->color.b);
 	return (a);
 }
 
@@ -50,7 +51,8 @@ t_l	*light(char **str)
 	l->pos = make_vector(str[1]);
 	l->bright = ft_atof(str[2]);
 	ft_replace_str(str[3], "\n", '\0');
-	l->color = ft_atoi_base(str[3], 16);
+	l->color = make_color(str[3]);
+	l->color.color = create_color(l->color.r, l->color.g, l->color.b);
 	return (l);
 }
 
