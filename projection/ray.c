@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 07:46:44 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 14:03:12 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 16:00:57 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	send_ray(t_scene *scene, void *obj)
 		while (x < WINDOW_X)
 		{
 			r = create_ray(scene->cam, scene->p, x, y);
-			color = exec_sp(scene, obj, &r);
+			color = exec_cy(scene, obj, &r);
 			ft_put_pixel(scene->mlx, x, y, color);
 			x++;
 		}

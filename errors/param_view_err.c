@@ -29,7 +29,7 @@ int	for_camera_param(char **all)
 {
 	if (check_vector(all[1], 3) == 1)
 		return (1);
-	if (check_vector_l(all[2], 1, 0.0, 3) == 1)
+	if (check_vector_l(all[2], 1, -1, 3) == 1)
 		return (1);
 	if (check_vector_l(all[3], 180, 0, 1))
 		return (1);

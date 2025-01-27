@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 11:28:05 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:50:11 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+int	exec_cy(t_scene *s, t_cy *obj, t_ray *r)
+{
+	int		res;
+	double	solution;
+
+	s++;
+	res = 0X000000;
+	if (ft_intersec_cy(obj, r, &solution) == EXIT_SUCCESS)
+		res = 0X00FF00;
+	return (res);
 }

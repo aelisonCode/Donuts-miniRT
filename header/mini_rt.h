@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 14:01:09 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/27 15:44:42 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,9 @@ t_cy			*cylender(char **str);
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
 int				exec_sp(t_scene *s, t_sp *obj, t_ray *r);
 
+/*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
+int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
 
 /*COLOR*/
 int				add_ambient_col(int color, double ambient);
