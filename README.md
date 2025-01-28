@@ -1,9 +1,9 @@
 TO_DO:
-- Comprendre fonctionnemen d'un fichier .rt
-- gestion erreur de ce fichier :
-  - verifier si fichier existe
-  - fichier terminant par .rt
-  - verifier que le contenu du fichier soit correcte (non vide,  contenu bien formater)
+	- add plane, cylinder, other ???
+	- add fond (for shadow)
+	- do shadow
+	- select object and control it to : translate, rotate,.....
+
 
 MAKEFILE:
   - compile le tout et les inclus pour etre utilise
