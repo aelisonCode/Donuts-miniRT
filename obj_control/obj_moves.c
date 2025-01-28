@@ -17,9 +17,9 @@ void	ft_translation(t_vect *point, int move)
 	if (!point)
 		return ;
 	if (move == UP)
-		point->y--;
-	else if (move == DOWN)
 		point->y++;
+	else if (move == DOWN)
+		point->y--;
 	else if (move == LEFT)
 		point->x--;
 	else if (move == RIGHT)

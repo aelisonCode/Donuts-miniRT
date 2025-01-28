@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 13:34:28 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 14:01:17 by aelison          ###   ########.fr       */
+/*   Created: 2025/01/28 13:35:54 by aelison           #+#    #+#             */
+/*   Updated: 2025/01/28 13:36:00 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_red(int color)
-{
-	return ((color >> 16) & 0XFF);
-}
+#ifndef COLOR_H
+# define COLOR_H
 
-int	get_green(int color)
-{
-	return ((color >> 8) & 0XFF);
-}
+# include "../header/struct.h"
 
-int	get_blue(int color)
-{
-	return (color & 0XFF);
-}
-
-int	create_color(int red, int green, int blue)
-{
-	return (red << 16 | green << 8 | blue);
-}
+int	get_red(int color);
+int	get_green(int color);
+int	get_blue(int color);
+int	create_color(int red, int green, int blue);
+int	gen_color(int color, t_a *ambient_struct, double lambert, double reflect);
+int	create_color(int red, int green, int blue);
+#endif

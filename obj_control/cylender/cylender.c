@@ -6,11 +6,23 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 15:50:11 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/28 14:14:28 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
+
+static int	ft_cy_limit(int sol, t_ray *r, t_cy *obj)
+{
+	t_vect	intersect;
+	double	projection;
+
+	intersect = sum(r->origin, vect_dot_val(r->direction, sol));
+	projection = scalaire(substraction(intersect, obj->center), obj->direction);
+	if (projection < 0 || projection > obj->height)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
 int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 {
@@ -33,14 +45,7 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 	if (solution != NULL)
 	{
 		*solution = get_racine(a, b, discr);
-		if (*solution < 0)
-			return (EXIT_FAILURE);
-		t_vect	intersect;
-		double	projection;
-
-		intersect = sum(r->origin, vect_dot_val(r->direction, *solution));
-		projection = scalaire(substraction(intersect, obj->center), obj->direction);
-		if (projection < 0 || projection > obj->height)
+		if (*solution < 0 || ft_cy_limit(*solution, r, obj) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
@@ -49,11 +54,17 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 int	exec_cy(t_scene *s, t_cy *obj, t_ray *r)
 {
 	int		res;
+	double	lambert;
 	double	solution;
+	t_vect	point;
 
-	s++;
 	res = 0X000000;
 	if (ft_intersec_cy(obj, r, &solution) == EXIT_SUCCESS)
-		res = 0X00FF00;
+	{
+		point = sum(r->origin, vect_dot_val(r->direction, solution));
+		lambert = lambertienne_reflection(COEFF_REFCT, s->light, &obj->center,
+				point);
+		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
+	}
 	return (res);
 }

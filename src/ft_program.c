@@ -12,6 +12,7 @@
 
 #include "../header/mini_rt.h"
 
+/*TO DELETE !!!!*/
 void	dda_algo(t_mlx *mlx, t_vect start, t_vect goal)
 {
 	t_vect	diff;
@@ -55,7 +56,7 @@ int	main(int argc, char **argv)
 	tmp = data->world;
 	while (tmp)
 	{
-		send_ray(data, tmp);
+		loop_screen(data, tmp);
 		tmp = tmp->next;
 	}
 	ft_launch(data);

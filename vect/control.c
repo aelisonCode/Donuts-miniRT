@@ -59,8 +59,8 @@ double	get_racine(double a, double b, double disc)
 	double	r_1;
 	double	r_2;
 
-	r_1 = (-1) * (- b - sqrt(disc)) / (2 * a);
-	r_2 = (-1) * (- b + sqrt(disc)) / (2 * a);
+	r_1 = (-b - sqrt(disc)) / (2 * a);
+	r_2 = (-b + sqrt(disc)) / (2 * a);
 	if (r_1 > 0 && r_2 > 0)
 	{
 		if (r_1 < r_2)

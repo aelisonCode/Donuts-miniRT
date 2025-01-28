@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 07:21:54 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 10:12:35 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/28 13:56:53 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	on_button_pressed(int button, int x, int y, void *param)
 	{
 		if (button == LEFT_BUTTON)
 		{
-			r = create_ray(s->cam, s->p, x, y);
+			r = create_ray(&s->cam->view_point, s->p, x, y);
 			if (ft_intersec_sp(obj, &r, NULL) == EXIT_SUCCESS)
 				ft_put_pixel(s->mlx, x, y, 0XFF000000);
 		}

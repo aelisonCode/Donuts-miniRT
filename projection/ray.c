@@ -5,13 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 07:46:44 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 16:00:57 by aelison          ###   ########.fr       */
+/*   Created: 2025/01/28 13:50:33 by aelison           #+#    #+#             */
+/*   Updated: 2025/01/28 14:13:35 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
 
+/*return a vector on plan projection for the x and y coordinate*/
+/*What's the position of x and y on plan projection ?*/
 t_vect	compute_point(t_projection *p, int x, int y)
 {
 	t_vect	res;
@@ -28,37 +30,56 @@ t_vect	compute_point(t_projection *p, int x, int y)
 	return (res);
 }
 
-t_ray	create_ray(t_c *cam, t_projection *p, int x, int y)
+/*create ray between param to the point*/
+/*EX: Camera to point o plan projection*/
+t_ray	create_ray(t_vect *origin, t_projection *p, int x, int y)
 {
 	t_ray	res;
 	t_vect	point;
 
 	point = compute_point(p, x, y);
-	res.origin = cam->view_point;
-	res.direction = ft_normalize(substraction(point, cam->view_point));
+	res.origin = init_vect(origin->x, origin->y, origin->z);
+	res.direction = ft_normalize(substraction(point, *origin));
+	return (res);
+}
+
+double	lambertienne_reflection(double coeff_reflection, t_l *light,
+		t_vect *center, t_vect point)
+{
+	t_vect	v_normal;
+	t_vect	v_light;
+	double	scal;
+	double	res;
+
+	v_normal = ft_normalize(substraction(point, *center));
+	v_light = ft_normalize(substraction(light->pos, point));
+	scal = scalaire(v_normal, v_light);
+	if (scal < 0)
+		scal = 0;
+	res = coeff_reflection * scal * light->bright;
 	return (res);
 }
 
 void	exec(t_scene *scene, t_maps *ptr, int x, int y)
 {
-	int	color;
+	int		color;
 	t_ray	r;
+	t_ray	cam;
 
 	color = 0X000000;
-	r = create_ray(scene->cam, scene->p, x, y);
+	cam.origin = init_vect(scene->cam->view_point.x, scene->cam->view_point.y,
+			scene->cam->view_point.z);
+	cam.direction = init_vect(scene->cam->direction.x, scene->cam->direction.y,
+			scene->cam->direction.z);
+	r = create_ray(&cam.origin, scene->p, x, y);
 	if (ptr->type == Sphere)
-	{
 		color = exec_sp(scene, ptr->struct_obj, &r);
-		ft_put_pixel(scene->mlx, x, y, color);
-	}
-	if (ptr->type == Cylinder)
-	{
+	else if (ptr->type == Cylinder)
 		color = exec_cy(scene, ptr->struct_obj, &r);
-		ft_put_pixel(scene->mlx, x, y, color);
-	}
+	ft_put_pixel(scene->mlx, x, y, color);
 }
 
-void	send_ray(t_scene *scene, t_maps *obj)
+void	loop_screen(t_scene *scene, t_maps *obj)
 {
 	double	x;
 	double	y;

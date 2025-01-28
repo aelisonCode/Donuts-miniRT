@@ -6,13 +6,14 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 15:44:42 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/28 14:09:17 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINI_RT_H
 # define MINI_RT_H
 
+# include "../header/color.h"
 # include "../header/errors.h"
 # include "../header/utils.h"
 # include "../header/vector.h"
@@ -43,7 +44,6 @@ void			add_maps(t_maps **head, t_maps *new_elem);
 
 void			ft_translation(t_vect *point, int move);
 void			ft_scale(double *value, int move);
-
 void			ft_sp_event(t_scene *data, int keycode);
 
 /*OBJECT*/
@@ -62,16 +62,13 @@ int				exec_sp(t_scene *s, t_sp *obj, t_ray *r);
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
 int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
 
-/*COLOR*/
-int				add_ambient_col(int color, double ambient);
-int				create_color(int red, int green, int blue);
-
 /*VECTOR*/
 t_vect			make_vector(char *str);
 t_color			make_color(char *str);
 double			get_racine(double a, double b, double disc);
-
-t_ray			create_ray(t_c *cam, t_projection *p, int x, int y);
+double			lambertienne_reflection(double coeff_reflection, t_l *light,
+					t_vect *center, t_vect point);
+t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
 
 /*DEBUG*/
 void			ft_debug(t_maps *head);
@@ -79,5 +76,5 @@ void			ft_disp_type(t_maps *curr);
 void			ft_disp_color(t_color *color);
 
 t_projection	*init_pjct(t_c *cam, double dist);
-void			send_ray(t_scene *scene, t_maps *obj);
+void			loop_screen(t_scene *scene, t_maps *obj);
 #endif

@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/mini_rt.h"
+#include "../header/struct.h"
+#include "../header/vector.h"
 
 t_vect	ft_normalize(t_vect to_norm)
 {
@@ -18,11 +19,9 @@ t_vect	ft_normalize(t_vect to_norm)
 	double	lenght;
 
 	lenght = vect_lenght(to_norm);
+	res = init_vect(0, 0, 0);
 	if (lenght == 0)
-	{
-		ft_putendl_fd("Error: vect lenght 0", STDERR_FILENO);
-		ft_close_window(get_struct());
-	}
+		return (res);
 	res.x = to_norm.x / lenght;
 	res.y = to_norm.y / lenght;
 	res.z = to_norm.z / lenght;

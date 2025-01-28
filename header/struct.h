@@ -33,6 +33,9 @@
 # define SCALE_UP 65451
 # define SCALE_DOWN 65453
 
+# define COEFF_REFCT 1.0
+# define REFRACTION_AM 0.5
+
 typedef enum e_object
 {
 	Ambient_l,
