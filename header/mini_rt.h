@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/28 14:09:17 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:46:26 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,15 @@ t_cy			*cylender(char **str);
 
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
-int				exec_sp(t_scene *s, t_sp *obj, t_ray *r);
+int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, int x, int y);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
 int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
+
+/*PLANE*/
+int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
+int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);
