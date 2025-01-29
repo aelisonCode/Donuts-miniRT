@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 09:46:26 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:42:10 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int				exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
-int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, t_vect wind);
+int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y, t_sp *sp);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);

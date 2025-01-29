@@ -6,11 +6,12 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:25:45 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 09:50:54 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:24:28 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
+#include <complex.h>
 
 double	calcul(double cross, double x_one, double x_two)
 {
@@ -63,20 +64,35 @@ double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,
 	return (res);
 }
 
-int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, t_vect wind)
+int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y, t_sp *sp)
 {
 	int		res;
 	double	solution;
 	double	lambert;
 	t_vect	point;
+	t_vect	new_r;
+	double 	other_sol;
+	t_vect	other_point;
+	t_ray	tmp;
 
 	res = FALSE;
 	if (ft_intersec_pl(obj, r, &solution) == EXIT_SUCCESS)
 	{
 		point = sum(r->origin, vect_dot_val(r->direction, solution));
+		new_r = substraction(s->light->pos, point);
+		other_sol = vect_lenght(new_r);
+		new_r = ft_normalize(new_r);
+		tmp.origin = point;
+		tmp.direction = new_r;
 		lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, obj, point);
 		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
-		ft_put_pixel(s->mlx, wind.x, wind.y, res);
+		if (ft_intersec_sp(sp, &tmp, &solution) == EXIT_SUCCESS)
+		{
+			other_point = sum(tmp.origin, vect_dot_val(tmp.direction, solution));
+			if (other_sol > vect_lenght(substraction(other_point, s->light->pos)))
+				res = gen_color(obj->color.color, s->amlight, 0, REFRACTION_AM);
+		}
+		ft_put_pixel(s->mlx, x, y, res);
 	}
 	return (res);
 }
