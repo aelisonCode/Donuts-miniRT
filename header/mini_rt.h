@@ -60,7 +60,7 @@ t_cy			*cylender(char **str);
 
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
-int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, int x, int y);
+int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, t_vect wind);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
@@ -68,7 +68,7 @@ int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
-int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y);
+int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, t_vect wind);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);

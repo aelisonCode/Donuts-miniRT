@@ -12,17 +12,17 @@
 
 #include "../../header/mini_rt.h"
 
-double calcul(double cross, double x_one, double x_two)
+double	calcul(double cross, double x_one, double x_two)
 {
-	double res;
+	double	res;
 
 	res = cross * (x_one - x_two);
 	return (res);
 }
 
-t_vect cross_double(t_vect x, double y)
+t_vect	cross_double(t_vect x, double y)
 {
-	t_vect res;
+	t_vect	res;
 
 	res.x = x.x * y;
 	res.y = x.y * y;
@@ -30,10 +30,10 @@ t_vect cross_double(t_vect x, double y)
 	return (res);
 }
 
-int ft_intersec_pl(t_pl *obj, t_ray *ray, double *res)
+int	ft_intersec_pl(t_pl *obj, t_ray *ray, double *res)
 {
-	double denominator;
-	t_vect x;
+	double	denominator;
+	t_vect	x;
 
 	denominator = scalaire(ray->direction, ft_normalize(obj->direction));
 	if (fabs(denominator) < 1e-4)
@@ -63,20 +63,20 @@ double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,
 	return (res);
 }
 
-int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y)
+int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, t_vect wind)
 {
 	int		res;
 	double	solution;
 	double	lambert;
 	t_vect	point;
 
-	res = 0X000000;
+	res = FALSE;
 	if (ft_intersec_pl(obj, r, &solution) == EXIT_SUCCESS)
 	{
 		point = sum(r->origin, vect_dot_val(r->direction, solution));
 		lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, obj, point);
 		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
-		ft_put_pixel(s->mlx, x, y, res);
+		ft_put_pixel(s->mlx, wind.x, wind.y, res);
 	}
 	return (res);
 }

@@ -58,7 +58,7 @@ int	exec_cy(t_scene *s, t_cy *obj, t_ray *r)
 	double	solution;
 	t_vect	point;
 
-	res = 0X000000;
+	res = FALSE;
 	if (ft_intersec_cy(obj, r, &solution) == EXIT_SUCCESS)
 	{
 		point = sum(r->origin, vect_dot_val(r->direction, solution));
