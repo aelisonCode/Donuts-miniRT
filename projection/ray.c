@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:50:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 09:50:42 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:44:06 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ double	lambertienne_reflection(double coeff_reflection, t_l *light,
 	t_vect	v_light;
 	double	scal;
 	double	res;
+	int x;
 
+	x = 0;
 	v_normal = ft_normalize(substraction(point, *center));
 	v_light = ft_normalize(substraction(light->pos, point));
 	scal = scalaire(v_normal, v_light);
@@ -75,7 +77,7 @@ void	exec(t_scene *scene, t_maps *ptr, int x, int y)
 	if (ptr->type == Sphere)
 		color = exec_sp(scene, ptr->struct_obj, &r, x, y);
 	if (ptr->type == Plan)
-		color = exec_pl(scene, ptr->struct_obj, &r, x, y);
+		color = exec_pl(scene, ptr->struct_obj, &r, x, y, get_type(scene->world, Sphere));
 }
 
 void	loop_screen(t_scene *scene, t_maps *obj)
