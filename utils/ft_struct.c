@@ -85,7 +85,7 @@ void	control_primary(t_scene *scene, t_obj type, int keycode)
 	{
 		if (control_light(scene->light, keycode) == FALSE)
 			return ;
-		mlx_clear_window(scene->mlx->mlx_ptr, scene->mlx->mlx_window);
+		gen_new_image(scene);
 		ft_launch(scene);
 	}
 }

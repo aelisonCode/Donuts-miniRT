@@ -62,15 +62,15 @@ double	lambertienne_reflection(double coeff_reflection, t_l *light,
 
 void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
 {
-	int		color;
 	t_ray	r;
 
-	color = 0X000000;
 	r = create_ray(&scene->cam->view_point, scene->p, wind.x, wind.y);
 	if (ptr->type == Sphere)
 		exec_sp(scene, ptr->struct_obj, &r, wind);
 	if (ptr->type == Plane)
 		exec_pl(scene, ptr->struct_obj, &r, wind);
+	if (ptr->type == Cylinder)
+		exec_cy(scene, ptr->struct_obj, &r, wind);
 }
 
 void	loop_screen(t_scene *scene, t_maps *obj)

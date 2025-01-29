@@ -12,6 +12,21 @@
 
 #include "../../header/mini_rt.h"
 
+void	gen_new_image(t_scene *scene)
+{
+	t_mlx	*data;
+
+	data = scene->mlx;
+	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_X, WINDOW_Y);
+	if (data->img_ptr == NULL)
+		ft_close_window(scene);
+	data->img_addr = mlx_get_data_addr(data->img_ptr, &data->byte_p_pixel,
+			&data->size_line, &data->endian);
+	if (data->img_addr == NULL)
+		ft_close_window(scene);
+}
+
 void	ft_sp_event(t_scene *data, int keycode)
 {
 	t_sp	*obj;
@@ -34,7 +49,7 @@ void	ft_sp_event(t_scene *data, int keycode)
 	if (keycode == SCALE_DOWN)
 		ft_scale(&obj->diameter, SCALE_DOWN, incr);
 	obj->radius = obj->diameter / 2;
-	mlx_clear_window(data->mlx->mlx_ptr, data->mlx->mlx_window);
+	gen_new_image(data);
 	ft_launch(data);
 }
 

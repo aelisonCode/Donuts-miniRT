@@ -32,6 +32,7 @@ int				ft_exec_input(int keycode, t_scene *data);
 int				ft_close_window(t_scene *data);
 int				ft_is_in_window(int x, int y);
 void			ft_init_scene(t_scene *data, double dist, char *title);
+void			gen_new_image(t_scene *scene);
 
 void			ft_free_mlx(t_scene *data);
 void			ft_free_map(t_maps **head);
@@ -50,6 +51,7 @@ void			select_primary(t_scene *scene, t_obj select);
 t_obj			is_primary_selected(t_scene *scene);
 void			control_primary(t_scene *scene, t_obj type, int keycode);
 
+void			select_obj(t_scene *scene, int x, int y);
 /*OBJECT*/
 t_a				*ambient_l(char **str);
 t_c				*camera(char **str);
@@ -64,7 +66,7 @@ int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, t_vect wind);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
-int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
+int				exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);

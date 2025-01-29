@@ -117,7 +117,8 @@ int	check_file(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error: file: can't open %s\n", STDERR_FILENO);
+		ft_putstr_fd("Error: file: can't open ", STDERR_FILENO);
+		ft_putendl_fd(str, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	result = file_content(fd);
