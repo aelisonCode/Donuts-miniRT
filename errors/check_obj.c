@@ -51,7 +51,7 @@ int	for_plane(char **all)
 	if (for_plane_param(all) == 1)
 		return (0);
 	s = get_struct();
-	add_maps(&s->world, create_map(Plan, plane(all)));
+	add_maps(&s->world, create_map(Plane, plane(all)));
 	return (5);
 }
 

@@ -35,14 +35,23 @@ int	on_button_pressed(int button, int x, int y, void *param)
 
 int	ft_exec_input(int keycode, t_scene *data)
 {
-	int	result;
+	int		result;
+	t_obj	type;
 
 	result = EXIT_FAILURE;
 	if (data)
 	{
 		if (keycode == K_ESCAPE)
 			result = ft_close_window(data);
-		ft_sp_event(data, keycode);
+		if (keycode == LIGHT)
+			select_primary(data, Light);
+		else if (keycode == CAMERA)
+			select_primary(data, Camera);
+		type = is_primary_selected(data);
+		if (type != Non_object)
+			control_primary(data, type, keycode);
+		else
+			ft_sp_event(data, keycode);
 	}
 	return (result);
 }

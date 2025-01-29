@@ -42,9 +42,13 @@ void			*get_struct(void);
 t_maps			*create_map(t_obj type, void *obj);
 void			add_maps(t_maps **head, t_maps *new_elem);
 
-void			ft_translation(t_vect *point, int move);
-void			ft_scale(double *value, int move);
+void			ft_translation(t_vect *point, int move, double incr);
+void			ft_scale(double *value, int move, double incr);
 void			ft_sp_event(t_scene *data, int keycode);
+
+void			select_primary(t_scene *scene, t_obj select);
+t_obj			is_primary_selected(t_scene *scene);
+void			control_primary(t_scene *scene, t_obj type, int keycode);
 
 /*OBJECT*/
 t_a				*ambient_l(char **str);
@@ -69,12 +73,6 @@ double			get_racine(double a, double b, double disc);
 double			lambertienne_reflection(double coeff_reflection, t_l *light,
 					t_vect *center, t_vect point);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
-
-/*DEBUG*/
-void			ft_debug(t_maps *head);
-void			ft_disp_type(t_maps *curr);
-void			ft_disp_color(t_color *color);
-
 t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene, t_maps *obj);
 #endif

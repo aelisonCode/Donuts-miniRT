@@ -15,31 +15,26 @@
 void	ft_sp_event(t_scene *data, int keycode)
 {
 	t_sp	*obj;
-	t_maps	*tmp;
+	double	incr;
 
+	incr = 1.0;
 	obj = get_type(data->world, Sphere);
 	if (!obj)
 		return ;
 	if (keycode == UP)
-		ft_translation(&obj->center, UP);
+		ft_translation(&obj->center, UP, incr);
 	if (keycode == DOWN)
-		ft_translation(&obj->center, DOWN);
+		ft_translation(&obj->center, DOWN, incr);
 	if (keycode == LEFT)
-		ft_translation(&obj->center, LEFT);
+		ft_translation(&obj->center, LEFT, incr);
 	if (keycode == RIGHT)
-		ft_translation(&obj->center, RIGHT);
+		ft_translation(&obj->center, RIGHT, incr);
 	if (keycode == SCALE_UP)
-		ft_scale(&obj->diameter, SCALE_UP);
+		ft_scale(&obj->diameter, SCALE_UP, incr);
 	if (keycode == SCALE_DOWN)
-		ft_scale(&obj->diameter, SCALE_DOWN);
+		ft_scale(&obj->diameter, SCALE_DOWN, incr);
 	obj->radius = obj->diameter / 2;
 	mlx_clear_window(data->mlx->mlx_ptr, data->mlx->mlx_window);
-	tmp = data->world;
-	while (tmp)
-	{
-		loop_screen(data, tmp);
-		tmp = tmp->next;
-	}
 	ft_launch(data);
 }
 

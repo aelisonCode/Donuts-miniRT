@@ -40,10 +40,16 @@ void	dda_algo(t_mlx *mlx, t_vect start, t_vect goal)
 	}
 }
 
+void	*get_struct(void)
+{
+	static t_scene	res;
+
+	return (&res);
+}
+
 int	main(int argc, char **argv)
 {
 	t_scene	*data;
-	t_maps	*tmp;
 
 	data = get_struct();
 	data->world = NULL;
@@ -53,12 +59,6 @@ int	main(int argc, char **argv)
 		|| check_file(argv[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_init_scene(data, 1.0, argv[1]);
-	tmp = data->world;
-	while (tmp)
-	{
-		loop_screen(data, tmp);
-		tmp = tmp->next;
-	}
 	ft_launch(data);
 	return (EXIT_SUCCESS);
 }

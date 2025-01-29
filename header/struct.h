@@ -14,7 +14,10 @@
 # define STRUCT_H
 
 # define WINDOW_X 1000
-# define WINDOW_Y 500
+# define WINDOW_Y 600
+
+# define TRUE 1
+# define FALSE 0
 
 # define LEFT_BUTTON 1
 # define RIGHT_BUTTON 3
@@ -42,8 +45,9 @@ typedef enum e_object
 	Camera,
 	Light,
 	Sphere,
-	Plan,
-	Cylinder
+	Plane,
+	Cylinder,
+	Non_object
 }					t_obj;
 
 typedef struct s_vector
@@ -90,6 +94,7 @@ typedef struct s_c
 	t_vect			direction;
 	double			ratio;
 	double			fov;
+	int				selected;
 }					t_c;
 
 typedef struct s_l
@@ -97,6 +102,7 @@ typedef struct s_l
 	t_vect			pos;
 	double			bright;
 	t_color			color;
+	int				selected;
 }					t_l;
 
 typedef struct s_sp
@@ -137,6 +143,7 @@ typedef struct s_maps
 {
 	t_obj			type;
 	void			*struct_obj;
+	int				selected;
 	struct s_maps	*next;
 }					t_maps;
 

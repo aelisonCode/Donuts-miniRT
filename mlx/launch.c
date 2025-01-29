@@ -15,8 +15,17 @@
 void	ft_launch(t_scene *scene)
 {
 	t_mlx	*data;
+	t_maps	*tmp;
 
+	if (!scene)
+		return ;
 	data = scene->mlx;
+	tmp = scene->world;
+	while (tmp)
+	{
+		loop_screen(scene, tmp);
+		tmp = tmp->next;
+	}
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->img_ptr, 0,
 		0);
 	mlx_key_hook(data->mlx_window, ft_exec_input, scene);
