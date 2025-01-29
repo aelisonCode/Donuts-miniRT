@@ -12,21 +12,6 @@
 
 #include "../../header/mini_rt.h"
 
-void	gen_new_image(t_scene *scene)
-{
-	t_mlx	*data;
-
-	data = scene->mlx;
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_X, WINDOW_Y);
-	if (data->img_ptr == NULL)
-		ft_close_window(scene);
-	data->img_addr = mlx_get_data_addr(data->img_ptr, &data->byte_p_pixel,
-			&data->size_line, &data->endian);
-	if (data->img_addr == NULL)
-		ft_close_window(scene);
-}
-
 void	ft_sp_event(t_scene *data, int keycode)
 {
 	t_sp	*obj;
@@ -75,6 +60,25 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+double	lambertienne_reflection(double coeff_reflection, t_l *light,
+		t_vect *center, t_vect point)
+{
+	t_vect	v_normal;
+	t_vect	v_light;
+	double	scal;
+	double	res;
+	int		x;
+
+	x = 0;
+	v_normal = ft_normalize(substraction(point, *center));
+	v_light = ft_normalize(substraction(light->pos, point));
+	scal = scalaire(v_normal, v_light);
+	if (scal < 0)
+		scal = 0;
+	res = coeff_reflection * scal * light->bright;
+	return (res);
 }
 
 int	exec_sp(t_scene *s, t_sp *obj, t_ray *r, t_vect wind)

@@ -23,7 +23,6 @@ int		limit(char **str, double max, double min);
 int		check_vector_l(char *str, double max, double min, long lg);
 int		check_vector(char *str, long lg);
 double	ft_atof(char *str);
-int		ft_atoi_base(char *arg, int base);
 void	ft_free_tab(char **ptr);
 
 void	ft_disp_color(t_color *color);

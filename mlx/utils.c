@@ -34,27 +34,17 @@ void	ft_put_pixel(t_mlx *data, int x, int y, int color)
 	}
 }
 
-int	ft_atoi_base(char *arg, int base)
+void	gen_new_image(t_scene *scene)
 {
-	int	i;
-	int	result;
-	int	letter;
+	t_mlx	*data;
 
-	i = 0;
-	result = 0;
-	if (arg[i] == '0' && arg[i + 1] == 'x')
-		i += 2;
-	else if (arg[i] == '0' && arg[i + 1] == 'X')
-		i += 2;
-	while (arg[i] != '\0' && arg[i] != '\n')
-	{
-		result = result * base;
-		letter = ft_tolower(arg[i]);
-		if (letter >= 'a' && letter <= 'f')
-			result = result + (letter - 'a' + 10);
-		else if (letter >= '0' && letter <= '9')
-			result = result + (letter - '0');
-		i++;
-	}
-	return (result);
+	data = scene->mlx;
+	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_X, WINDOW_Y);
+	if (data->img_ptr == NULL)
+		ft_close_window(scene);
+	data->img_addr = mlx_get_data_addr(data->img_ptr, &data->byte_p_pixel,
+			&data->size_line, &data->endian);
+	if (data->img_addr == NULL)
+		ft_close_window(scene);
 }

@@ -43,25 +43,6 @@ t_ray	create_ray(t_vect *origin, t_projection *p, int x, int y)
 	return (res);
 }
 
-double	lambertienne_reflection(double coeff_reflection, t_l *light,
-		t_vect *center, t_vect point)
-{
-	t_vect	v_normal;
-	t_vect	v_light;
-	double	scal;
-	double	res;
-	int x;
-
-	x = 0;
-	v_normal = ft_normalize(substraction(point, *center));
-	v_light = ft_normalize(substraction(light->pos, point));
-	scal = scalaire(v_normal, v_light);
-	if (scal < 0)
-		scal = 0;
-	res = coeff_reflection * scal * light->bright;
-	return (res);
-}
-
 void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
 {
 	t_ray	r;
@@ -70,7 +51,8 @@ void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
 	if (ptr->type == Sphere)
 		exec_sp(scene, ptr->struct_obj, &r, wind);
 	if (ptr->type == Plane)
-		exec_pl(scene, ptr->struct_obj, &r, wind.x, wind.y, get_type(scene->world, Sphere));
+		exec_pl(scene, ptr->struct_obj, &r, wind.x, wind.y,
+			get_type(scene->world, Sphere));
 	if (ptr->type == Cylinder)
 		exec_cy(scene, ptr->struct_obj, &r, wind);
 }

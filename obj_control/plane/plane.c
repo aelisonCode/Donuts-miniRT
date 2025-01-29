@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
-#include <complex.h>
 
 double	calcul(double cross, double x_one, double x_two)
 {
@@ -71,7 +70,7 @@ int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y, t_sp *sp)
 	double	lambert;
 	t_vect	point;
 	t_vect	new_r;
-	double 	other_sol;
+	double	other_sol;
 	t_vect	other_point;
 	t_ray	tmp;
 
@@ -88,8 +87,10 @@ int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y, t_sp *sp)
 		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
 		if (ft_intersec_sp(sp, &tmp, &solution) == EXIT_SUCCESS)
 		{
-			other_point = sum(tmp.origin, vect_dot_val(tmp.direction, solution));
-			if (other_sol > vect_lenght(substraction(other_point, s->light->pos)))
+			other_point = sum(tmp.origin, vect_dot_val(tmp.direction,
+						solution));
+			if (other_sol > vect_lenght(substraction(other_point,
+						s->light->pos)))
 				res = gen_color(obj->color.color, s->amlight, 0, REFRACTION_AM);
 		}
 		ft_put_pixel(s->mlx, x, y, res);

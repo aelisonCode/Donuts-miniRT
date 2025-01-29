@@ -70,14 +70,13 @@ int				exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
-int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y, t_sp *sp);
+int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y,
+					t_sp *sp);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);
 t_color			make_color(char *str);
 double			get_racine(double a, double b, double disc);
-double			lambertienne_reflection(double coeff_reflection, t_l *light,
-					t_vect *center, t_vect point);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
 t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene, t_maps *obj);

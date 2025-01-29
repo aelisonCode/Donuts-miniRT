@@ -14,8 +14,6 @@
 # define ERRORS_H
 
 # include <fcntl.h>
-# include "../libft/libft.h"
-# include "../libft/ft_printf/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
 
 int	ft_error_init(int argc, char **argv);
