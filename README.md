@@ -1,5 +1,6 @@
 TO_DO:
-	- add plane, cylinder, other ???
+	- add cylinder, other ???
+	- add other object and put_pixel the far one first to the nearest
 	- add fond (for shadow)
 	- do shadow
 	- select object and control it to : translate, rotate,.....
