@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:50:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/28 14:13:35 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:50:42 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,9 @@ void	exec(t_scene *scene, t_maps *ptr, int x, int y)
 			scene->cam->direction.z);
 	r = create_ray(&cam.origin, scene->p, x, y);
 	if (ptr->type == Sphere)
-		color = exec_sp(scene, ptr->struct_obj, &r);
-	else if (ptr->type == Cylinder)
-		color = exec_cy(scene, ptr->struct_obj, &r);
-	ft_put_pixel(scene->mlx, x, y, color);
+		color = exec_sp(scene, ptr->struct_obj, &r, x, y);
+	if (ptr->type == Plan)
+		color = exec_pl(scene, ptr->struct_obj, &r, x, y);
 }
 
 void	loop_screen(t_scene *scene, t_maps *obj)

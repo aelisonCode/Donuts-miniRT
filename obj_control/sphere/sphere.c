@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:16:25 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/28 14:14:14 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/29 09:47:06 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 	return (EXIT_SUCCESS);
 }
 
-int	exec_sp(t_scene *s, t_sp *obj, t_ray *r)
+int	exec_sp(t_scene *s, t_sp *obj, t_ray *r, int x, int y)
 {
 	int		res;
 	double	solution;
@@ -76,6 +76,7 @@ int	exec_sp(t_scene *s, t_sp *obj, t_ray *r)
 		lambert = lambertienne_reflection(COEFF_REFCT, s->light, &obj->center,
 				point);
 		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
+		ft_put_pixel(s->mlx, x, y, res);
 	}
 	return (res);
 }
