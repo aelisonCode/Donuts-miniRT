@@ -12,29 +12,30 @@
 
 #include "../header/struct.h"
 
-void	ft_translation(t_vect *point, int move)
+void	ft_translation(t_vect *point, int move, double incr)
 {
 	if (!point)
 		return ;
 	if (move == UP)
-		point->y++;
+		point->y += incr;
 	else if (move == DOWN)
-		point->y--;
+		point->y -= incr;
 	else if (move == LEFT)
-		point->x--;
+		point->x -= incr;
 	else if (move == RIGHT)
-		point->x++;
+		point->x += incr;
+	else if (move == SCALE_UP)
+		point->z += incr;
+	else if (move == SCALE_DOWN)
+		point->z -= incr;
 }
 
-void	ft_scale(double *value, int move)
+void	ft_scale(double *value, int move, double incr)
 {
-	double	tmp;
-
 	if (!value)
 		return ;
-	tmp = 0.5;
 	if (move == SCALE_UP)
-		*value += tmp;
-	if (move == SCALE_DOWN)
-		*value -= tmp;
+		*value += incr;
+	else if (move == SCALE_DOWN)
+		*value -= incr;
 }

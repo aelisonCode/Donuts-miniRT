@@ -32,6 +32,7 @@ int				ft_exec_input(int keycode, t_scene *data);
 int				ft_close_window(t_scene *data);
 int				ft_is_in_window(int x, int y);
 void			ft_init_scene(t_scene *data, double dist, char *title);
+void			gen_new_image(t_scene *scene);
 
 void			ft_free_mlx(t_scene *data);
 void			ft_free_map(t_maps **head);
@@ -42,10 +43,15 @@ void			*get_struct(void);
 t_maps			*create_map(t_obj type, void *obj);
 void			add_maps(t_maps **head, t_maps *new_elem);
 
-void			ft_translation(t_vect *point, int move);
-void			ft_scale(double *value, int move);
+void			ft_translation(t_vect *point, int move, double incr);
+void			ft_scale(double *value, int move, double incr);
 void			ft_sp_event(t_scene *data, int keycode);
 
+void			select_primary(t_scene *scene, t_obj select);
+t_obj			is_primary_selected(t_scene *scene);
+void			control_primary(t_scene *scene, t_obj type, int keycode);
+
+void			select_obj(t_scene *scene, int x, int y);
 /*OBJECT*/
 t_a				*ambient_l(char **str);
 t_c				*camera(char **str);
@@ -56,11 +62,11 @@ t_cy			*cylender(char **str);
 
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
-int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, int x, int y);
+int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, t_vect wind);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
-int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
+int				exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
@@ -73,12 +79,6 @@ double			get_racine(double a, double b, double disc);
 double			lambertienne_reflection(double coeff_reflection, t_l *light,
 					t_vect *center, t_vect point);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
-
-/*DEBUG*/
-void			ft_debug(t_maps *head);
-void			ft_disp_type(t_maps *curr);
-void			ft_disp_color(t_color *color);
-
 t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene, t_maps *obj);
 #endif

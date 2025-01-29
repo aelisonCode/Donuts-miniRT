@@ -62,38 +62,32 @@ double	lambertienne_reflection(double coeff_reflection, t_l *light,
 	return (res);
 }
 
-void	exec(t_scene *scene, t_maps *ptr, int x, int y)
+void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
 {
-	int		color;
 	t_ray	r;
-	t_ray	cam;
 
-	color = 0X000000;
-	cam.origin = init_vect(scene->cam->view_point.x, scene->cam->view_point.y,
-			scene->cam->view_point.z);
-	cam.direction = init_vect(scene->cam->direction.x, scene->cam->direction.y,
-			scene->cam->direction.z);
-	r = create_ray(&cam.origin, scene->p, x, y);
+	r = create_ray(&scene->cam->view_point, scene->p, wind.x, wind.y);
 	if (ptr->type == Sphere)
-		color = exec_sp(scene, ptr->struct_obj, &r, x, y);
-	if (ptr->type == Plan)
-		color = exec_pl(scene, ptr->struct_obj, &r, x, y, get_type(scene->world, Sphere));
+		exec_sp(scene, ptr->struct_obj, &r, wind);
+	if (ptr->type == Plane)
+		exec_pl(scene, ptr->struct_obj, &r, wind);
+	if (ptr->type == Cylinder)
+		exec_cy(scene, ptr->struct_obj, &r, wind);
 }
 
 void	loop_screen(t_scene *scene, t_maps *obj)
 {
-	double	x;
-	double	y;
+	t_vect	incr;
 
-	y = 0;
-	while (y < WINDOW_Y)
+	incr.y = 0;
+	while (incr.y < WINDOW_Y)
 	{
-		x = 0;
-		while (x < WINDOW_X)
+		incr.x = 0;
+		while (incr.x < WINDOW_X)
 		{
-			exec(scene, obj, x, y);
-			x++;
+			exec(scene, obj, incr);
+			incr.x++;
 		}
-		y++;
+		incr.y++;
 	}
 }

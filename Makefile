@@ -21,8 +21,6 @@ LIB = $(LIB_PATH)libft.a
 PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 
 SRC = src/ft_program.c \
-	  src/nie.c \
-	  src/debug.c \
 	  obj_control/obj_moves.c \
 	  obj_control/sphere/sphere.c \
 	  obj_control/cylender/cylender.c \

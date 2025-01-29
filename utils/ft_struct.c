@@ -10,12 +10,72 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/struct.h"
-#include <unistd.h>
+#include "../header/mini_rt.h"
 
-void	*get_struct(void)
+int	control_light(t_l *light, int keycode)
 {
-	static t_scene	res;
+	int		result;
+	double	incr;
 
-	return (&res);
+	incr = 3.0;
+	result = TRUE;
+	if (!light)
+		return (FALSE);
+	if (keycode == LEFT)
+		ft_translation(&light->pos, LEFT, incr);
+	else if (keycode == RIGHT)
+		ft_translation(&light->pos, RIGHT, incr);
+	else if (keycode == UP)
+		ft_translation(&light->pos, UP, incr);
+	else if (keycode == DOWN)
+		ft_translation(&light->pos, DOWN, incr);
+	else if (keycode == SCALE_UP && light->bright < 1.0)
+		ft_scale(&light->bright, keycode, 0.1);
+	else if (keycode == SCALE_DOWN && light->bright > 0.0)
+		ft_scale(&light->bright, keycode, 0.1);
+	else
+		result = FALSE;
+	return (result);
+}
+
+int	control_cam(t_c *cam, int keycode)
+{
+	int		result;
+	double	incr;
+
+	incr = -0.1;
+	result = TRUE;
+	if (!cam)
+		return (FALSE);
+	if (keycode == LEFT)
+		ft_translation(&cam->view_point, LEFT, incr);
+	else if (keycode == RIGHT)
+		ft_translation(&cam->view_point, RIGHT, incr);
+	else if (keycode == UP)
+		ft_translation(&cam->view_point, UP, incr);
+	else if (keycode == DOWN)
+		ft_translation(&cam->view_point, DOWN, incr);
+	else
+		result = FALSE;
+	return (result);
+}
+
+void	control_primary(t_scene *scene, t_obj type, int keycode)
+{
+	if (!scene)
+		return ;
+	if (keycode != LIGHT && type == Light)
+	{
+		if (control_light(scene->light, keycode) == FALSE)
+			return ;
+		gen_new_image(scene);
+		ft_launch(scene);
+	}
+	else if (keycode != CAMERA && type == Camera)
+	{
+		if (control_cam(scene->cam, keycode) == FALSE)
+			return ;
+		gen_new_image(scene);
+		ft_launch(scene);
+	}
 }
