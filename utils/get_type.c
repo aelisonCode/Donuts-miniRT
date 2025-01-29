@@ -25,3 +25,46 @@ void	*get_type(t_maps *obj, t_obj type)
 	}
 	return (NULL);
 }
+
+static void	retired_other(t_scene *scene, t_obj select)
+{
+	if (!scene)
+		return ;
+	if (select == Light)
+		scene->cam->selected = FALSE;
+	else if (select == Camera)
+		scene->light->selected = FALSE;
+}
+
+void	select_primary(t_scene *scene, t_obj select)
+{
+	if (!scene)
+		return ;
+	if (select == Light)
+	{
+		if (scene->light->selected == FALSE)
+			scene->light->selected = TRUE;
+		else
+			scene->light->selected = FALSE;
+		retired_other(scene, Light);
+	}
+	else if (select == Camera)
+	{
+		if (scene->cam->selected == FALSE)
+			scene->cam->selected = TRUE;
+		else
+			scene->cam->selected = FALSE;
+		retired_other(scene, Camera);
+	}
+}
+
+t_obj	is_primary_selected(t_scene *scene)
+{
+	if (!scene)
+		return (Non_object);
+	if (scene->cam->selected == TRUE)
+		return (Camera);
+	else if (scene->light->selected == TRUE)
+		return (Light);
+	return (Non_object);
+}

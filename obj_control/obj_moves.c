@@ -24,6 +24,10 @@ void	ft_translation(t_vect *point, int move, double incr)
 		point->x -= incr;
 	else if (move == RIGHT)
 		point->x += incr;
+	else if (move == SCALE_UP)
+		point->z += incr;
+	else if (move == SCALE_DOWN)
+		point->z -= incr;
 }
 
 void	ft_scale(double *value, int move, double incr)

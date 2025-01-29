@@ -51,6 +51,22 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 	return (EXIT_SUCCESS);
 }
 
+double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
+{
+	double	res;
+	t_vect	v_light;
+	t_vect	v_normal;
+	double	scal;
+
+	v_normal = init_vect(0.5, 0.5, 0.5);
+	v_light = ft_normalize(substraction(obj->center, point));
+	scal = scalaire(v_normal, v_light);
+	if (scal < 0)
+		scal = 0;
+	res = coeff_refct * scal * light->bright;
+	return (res);
+}
+
 int	exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind)
 {
 	int		res;
@@ -62,8 +78,7 @@ int	exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind)
 	if (ft_intersec_cy(obj, r, &solution) == EXIT_SUCCESS)
 	{
 		point = sum(r->origin, vect_dot_val(r->direction, solution));
-		lambert = lambertienne_reflection(COEFF_REFCT, s->light, &obj->center,
-				point);
+		lambert = lambertienne_cy(COEFF_REFCT, s->light, obj, point);
 		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
 		ft_put_pixel(s->mlx, wind.x, wind.y, res);
 	}

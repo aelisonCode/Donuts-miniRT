@@ -45,9 +45,9 @@ void	ft_sp_event(t_scene *data, int keycode)
 	if (keycode == RIGHT)
 		ft_translation(&obj->center, RIGHT, incr);
 	if (keycode == SCALE_UP)
-		ft_scale(&obj->diameter, SCALE_UP, incr);
+		ft_translation(&obj->center, SCALE_UP, incr);
 	if (keycode == SCALE_DOWN)
-		ft_scale(&obj->diameter, SCALE_DOWN, incr);
+		ft_translation(&obj->center, SCALE_DOWN, incr);
 	obj->radius = obj->diameter / 2;
 	gen_new_image(data);
 	ft_launch(data);
