@@ -51,8 +51,7 @@ void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
 	if (ptr->type == Sphere)
 		exec_sp(scene, ptr->struct_obj, &r, wind);
 	if (ptr->type == Plane)
-		exec_pl(scene, ptr->struct_obj, &r, wind.x, wind.y,
-			get_type(scene->world, Sphere));
+		exec_pl(scene, ptr, &r, wind);
 	if (ptr->type == Cylinder)
 		exec_cy(scene, ptr->struct_obj, &r, wind);
 }

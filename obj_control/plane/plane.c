@@ -6,29 +6,11 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:25:45 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 15:24:28 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:34:09 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
-
-double	calcul(double cross, double x_one, double x_two)
-{
-	double	res;
-
-	res = cross * (x_one - x_two);
-	return (res);
-}
-
-t_vect	cross_double(t_vect x, double y)
-{
-	t_vect	res;
-
-	res.x = x.x * y;
-	res.y = x.y * y;
-	res.z = x.z * y;
-	return (res);
-}
 
 int	ft_intersec_pl(t_pl *obj, t_ray *ray, double *res)
 {
@@ -63,37 +45,34 @@ double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,
 	return (res);
 }
 
-int	exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y, t_sp *sp)
+static int	get_pl_color(t_scene *s, t_ray *r, t_maps *start, double t)
+{
+	int		res;
+	int		shadow;
+	double	lambert;
+	t_pl	*plane;
+	t_vect	point;
+
+	plane = start->struct_obj;
+	point = sum(r->origin, vect_dot_val(r->direction, t));
+	lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, plane, point);
+	res = gen_color(plane->color.color, s->amlight, lambert, REFRACTION_AM);
+	shadow = ft_add_shadow(s, start->next, &point, plane->color.color);
+	if (shadow != -1)
+		res = shadow;
+	return (res);
+}
+
+int	exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind)
 {
 	int		res;
 	double	solution;
-	double	lambert;
-	t_vect	point;
-	t_vect	new_r;
-	double	other_sol;
-	t_vect	other_point;
-	t_ray	tmp;
 
 	res = FALSE;
-	if (ft_intersec_pl(obj, r, &solution) == EXIT_SUCCESS)
+	if (ft_intersec_pl(obj->struct_obj, r, &solution) == EXIT_SUCCESS)
 	{
-		point = sum(r->origin, vect_dot_val(r->direction, solution));
-		new_r = substraction(s->light->pos, point);
-		other_sol = vect_lenght(new_r);
-		new_r = ft_normalize(new_r);
-		tmp.origin = point;
-		tmp.direction = new_r;
-		lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, obj, point);
-		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
-		if (ft_intersec_sp(sp, &tmp, &solution) == EXIT_SUCCESS)
-		{
-			other_point = sum(tmp.origin, vect_dot_val(tmp.direction,
-						solution));
-			if (other_sol > vect_lenght(substraction(other_point,
-						s->light->pos)))
-				res = gen_color(obj->color.color, s->amlight, 0, REFRACTION_AM);
-		}
-		ft_put_pixel(s->mlx, x, y, res);
+		res = get_pl_color(s, r, obj, solution);
+		ft_put_pixel(s->mlx, wind.x, wind.y, res);
 	}
 	return (res);
 }

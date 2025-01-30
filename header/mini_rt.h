@@ -70,8 +70,9 @@ int				exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
-int				exec_pl(t_scene *s, t_pl *obj, t_ray *r, int x, int y,
-					t_sp *sp);
+int				exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind);
+int				ft_add_shadow(t_scene *s, t_maps *other, t_vect *ref_pts,
+					int color_ref);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);
