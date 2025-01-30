@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:50:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:32:00 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:41:48 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	exec(t_scene *scene, t_vect wind)
 			exec_sp(scene, ptr, &r, wind);
 		if (ptr->type == Plane)
 			exec_pl(scene, ptr, &r, wind);
+		if (ptr->type == Cylinder)
+			exec_cy(scene, ptr, &r, wind);
 		ptr = ptr->next;
 	}
 }

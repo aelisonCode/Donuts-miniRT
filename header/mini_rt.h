@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:36:06 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:45:50 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution);
 int				exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 
 /*CYLENDER*/
-int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
-int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
+int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution);
+int				exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res);

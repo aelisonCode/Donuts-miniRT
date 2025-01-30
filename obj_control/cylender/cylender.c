@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/28 14:14:28 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 14:53:45 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_cy_limit(int sol, t_ray *r, t_cy *obj)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
+int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution)
 {
 	double	a;
 	double	b;
@@ -49,13 +49,19 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, double *solution)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		*solution = get_racine(a, b, discr);
-		if (*solution < 0 || ft_cy_limit(*solution, r, obj) == EXIT_FAILURE)
+		if (get_racine(a, b, discr) < 0)
 			return (EXIT_FAILURE);
+		if (ft_cy_limit(get_racine(a, b, discr), r, obj) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		*solution = compute_intersec_pts(r, get_racine(a, b, discr));
 	}
 	return (EXIT_SUCCESS);
 }
 
+/*lambertieenne cylender 
+ * is point on the side ?
+ * is point on surface ?
+*/
 double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 {
 	double	res;
@@ -63,8 +69,8 @@ double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 	t_vect	v_normal;
 	double	scal;
 
-	v_normal = init_vect(0.5, 0.5, 0.5);
-	v_light = ft_normalize(substraction(obj->center, point));
+	v_normal = ft_normalize(substraction(point, obj->center));
+	v_light = ft_normalize(substraction(light->pos, point));
 	scal = scalaire(v_normal, v_light);
 	if (scal < 0)
 		scal = 0;
@@ -72,20 +78,37 @@ double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 	return (res);
 }
 
-int	exec_cy(t_scene *s, t_cy *obj, t_ray *r)
+int		get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 {
 	int		res;
+	int		shadow;
 	double	lambert;
-	double	solution;
-	t_vect	point;
+	t_sp	*sphere;
 
-	res = FALSE;
-	if (ft_intersec_cy(obj, r, &solution) == EXIT_SUCCESS)
+	sphere = curr->struct_obj;
+	lambert = lambertienne_cy(COEFF_REFCT, s->light, curr->struct_obj, *point);
+	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
+	shadow = ft_add_shadow(s, curr->next, point, sphere->color.color);
+	if (shadow != -1)
+		res = shadow;
+	return (res);
+}
+
+
+int	exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
+{
+	int		res;
+	int		color;
+	t_vect	solution;
+
+	res = EXIT_FAILURE;
+	(void)wind;
+	if (ft_intersec_cy(curr->struct_obj, r, &solution) == EXIT_SUCCESS)
 	{
-		point = sum(r->origin, vect_dot_val(r->direction, solution));
-		lambert = lambertienne_cy(COEFF_REFCT, s->light, obj, point);
-		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
-		ft_put_pixel(s->mlx, 0, 0, res);
+		res = EXIT_SUCCESS;
+		color = get_cy_color(s, curr, &solution);
+		cmp_dist(s, &solution, color);
+		ft_put_pixel(s->mlx, wind.x, wind.y, color);
 	}
 	return (res);
 }
