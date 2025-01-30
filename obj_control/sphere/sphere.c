@@ -62,7 +62,7 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 	return (EXIT_SUCCESS);
 }
 
-double	lambertienne_reflection(double coeff_reflection, t_l *light,
+double	lambertienne_reflection_sp(double coeff_reflection, t_l *light,
 		t_vect *center, t_vect point)
 {
 	t_vect	v_normal;
@@ -81,20 +81,34 @@ double	lambertienne_reflection(double coeff_reflection, t_l *light,
 	return (res);
 }
 
-int	exec_sp(t_scene *s, t_sp *obj, t_ray *r, t_vect wind)
+static int	get_sp_color(t_scene *s, t_ray *r, t_maps *start, double t)
+{
+	int		res;
+	int		shadow;
+	double	lambert;
+	t_sp	*sphere;
+	t_vect	point;
+
+	sphere = start->struct_obj;
+	point = sum(r->origin, vect_dot_val(r->direction, t));
+	lambert = lambertienne_reflection_sp(COEFF_REFCT, s->light, &sphere->center,
+			point);
+	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
+	shadow = ft_add_shadow(s, start->next, &point, sphere->color.color);
+	if (shadow != -1)
+		res = shadow;
+	return (res);
+}
+
+int	exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 {
 	int		res;
 	double	solution;
-	double	lambert;
-	t_vect	point;
 
 	res = FALSE;
-	if (ft_intersec_sp(obj, r, &solution) == EXIT_SUCCESS)
+	if (ft_intersec_sp(curr->struct_obj, r, &solution) == EXIT_SUCCESS)
 	{
-		point = sum(r->origin, vect_dot_val(r->direction, solution));
-		lambert = lambertienne_reflection(COEFF_REFCT, s->light, &obj->center,
-				point);
-		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
+		res = get_sp_color(s, r, curr, solution);
 		ft_put_pixel(s->mlx, wind.x, wind.y, res);
 	}
 	return (res);

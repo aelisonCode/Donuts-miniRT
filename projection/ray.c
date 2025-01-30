@@ -30,8 +30,6 @@ t_vect	compute_point(t_projection *p, int x, int y)
 	return (res);
 }
 
-/*create ray between param to the point*/
-/*EX: Camera to point o plan projection*/
 t_ray	create_ray(t_vect *origin, t_projection *p, int x, int y)
 {
 	t_ray	res;
@@ -49,7 +47,7 @@ void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
 
 	r = create_ray(&scene->cam->view_point, scene->p, wind.x, wind.y);
 	if (ptr->type == Sphere)
-		exec_sp(scene, ptr->struct_obj, &r, wind);
+		exec_sp(scene, ptr, &r, wind);
 	if (ptr->type == Plane)
 		exec_pl(scene, ptr, &r, wind);
 	if (ptr->type == Cylinder)

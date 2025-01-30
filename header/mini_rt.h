@@ -62,7 +62,7 @@ t_cy			*cylender(char **str);
 
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
-int				exec_sp(t_scene *s, t_sp *obj, t_ray *r, t_vect wind);
+int				exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);

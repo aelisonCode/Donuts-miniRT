@@ -12,6 +12,11 @@
 
 #include "../../header/mini_rt.h"
 
+/*
+ * NOT WORKING
+ * NEED TO BE CHECK, RE DO ????
+*/
+
 static int	ft_cy_limit(int sol, t_ray *r, t_cy *obj)
 {
 	t_vect	intersect;
