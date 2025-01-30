@@ -19,7 +19,7 @@ int	ft_error_init(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putendl_fd("Error:\nNot valid argument", STDERR_FILENO);
+		ft_putendl_fd("Error\nNot valid argument", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	else
@@ -27,13 +27,13 @@ int	ft_error_init(int argc, char **argv)
 		tmp = ft_strlen(argv[1]);
 		if (tmp <= 3 || ft_count_char(argv[1], '.') != 1)
 		{
-			ft_putendl_fd("Error:\nNot valid file", STDERR_FILENO);
+			ft_putendl_fd("Error\nNot valid file", STDERR_FILENO);
 			return (EXIT_FAILURE);
 		}
 		tmp -= 3;
 		if (ft_strncmp(argv[1] + tmp, ".rt", 4) != 0)
 		{
-			ft_putendl_fd("Error:\nNot valid extension", STDERR_FILENO);
+			ft_putendl_fd("Error\nNot valid extension", STDERR_FILENO);
 			return (EXIT_FAILURE);
 		}
 	}

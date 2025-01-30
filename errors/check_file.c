@@ -68,7 +68,7 @@ static int	create_object(char *tmp, int line, int *res)
 	valid_ok = get_required_obj(val);
 	if (val == 0)
 	{
-		ft_putstr_fd("Error:\nWrong format on line ", STDERR_FILENO);
+		ft_putstr_fd("Error\nWrong format on line ", STDERR_FILENO);
 		ft_putnbr_fd(line, STDERR_FILENO);
 		ft_putchar_fd('\n', STDERR_FILENO);
 		*res = EXIT_FAILURE;
@@ -117,11 +117,13 @@ int	check_file(char *str)
 	fd = open(str, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd("Error:\nFile: can't open ", STDERR_FILENO);
+		ft_putstr_fd("Error\nFile: can't open ", STDERR_FILENO);
 		ft_putendl_fd(str, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	result = file_content(fd);
+	if (result == EXIT_FAILURE)
+		ft_putstr_fd("Error\nParse: failed to create obj\n", STDERR_FILENO);
 	close(fd);
 	return (result);
 }
