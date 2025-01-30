@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 14:42:10 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:36:06 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void			select_primary(t_scene *scene, t_obj select);
 t_obj			is_primary_selected(t_scene *scene);
 void			control_primary(t_scene *scene, t_obj type, int keycode);
 
-void			select_obj(t_scene *scene, int x, int y);
+/*MLX_DEBUG*/
+void			ft_menu(t_scene *s);
+
 /*OBJECT*/
 t_a				*ambient_l(char **str);
 t_c				*camera(char **str);
@@ -61,15 +63,15 @@ t_pl			*plane(char **str);
 t_cy			*cylender(char **str);
 
 /*SPHERE*/
-int				ft_intersec_sp(t_sp *obj, t_ray *r, double *solution);
+int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution);
 int				exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, double *solution);
-int				exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind);
+int				exec_cy(t_scene *s, t_cy *obj, t_ray *r);
 
 /*PLANE*/
-int				ft_intersec_pl(t_pl *obj, t_ray *ray, double *res);
+int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res);
 int				exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind);
 int				ft_add_shadow(t_scene *s, t_maps *other, t_vect *ref_pts,
 					int color_ref);
@@ -80,5 +82,10 @@ t_color			make_color(char *str);
 double			get_racine(double a, double b, double disc);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
 t_projection	*init_pjct(t_c *cam, double dist);
-void			loop_screen(t_scene *scene, t_maps *obj);
+void			loop_screen(t_scene *scene);
+
+/*OTHER*/
+int				cmp_dist(t_scene *s, t_vect *pts, int new_col);
+t_vect			compute_intersec_pts(t_ray *r, double t);
+
 #endif

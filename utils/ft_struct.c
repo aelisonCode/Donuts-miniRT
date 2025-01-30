@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 09:43:45 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/28 14:07:15 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:31:47 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ int	control_light(t_l *light, int keycode)
 		ft_translation(&light->pos, UP, incr);
 	else if (keycode == DOWN)
 		ft_translation(&light->pos, DOWN, incr);
+	else if (keycode == Z_UP)
+		ft_translation(&light->pos, Z_UP, -incr);
+	else if (keycode == Z_DOWN)
+		ft_translation(&light->pos, Z_DOWN, -incr);
 	else if (keycode == SCALE_UP && light->bright < 1.0)
 		ft_scale(&light->bright, keycode, 0.1);
 	else if (keycode == SCALE_DOWN && light->bright > 0.0)
@@ -55,6 +59,10 @@ int	control_cam(t_c *cam, int keycode)
 		ft_translation(&cam->view_point, UP, incr);
 	else if (keycode == DOWN)
 		ft_translation(&cam->view_point, DOWN, incr);
+	else if (keycode == Z_UP)
+		ft_translation(&cam->view_point, Z_UP, incr);
+	else if (keycode == Z_DOWN)
+		ft_translation(&cam->view_point, Z_DOWN, incr);
 	else
 		result = FALSE;
 	return (result);

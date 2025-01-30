@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 07:21:54 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/28 13:56:53 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 13:21:13 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_exec_input(int keycode, t_scene *data)
 		else if (keycode == CAMERA)
 			select_primary(data, Camera);
 		type = is_primary_selected(data);
+		ft_menu(data);
 		if (type != Non_object)
 			control_primary(data, type, keycode);
 		else

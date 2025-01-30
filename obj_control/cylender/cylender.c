@@ -72,7 +72,7 @@ double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 	return (res);
 }
 
-int	exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind)
+int	exec_cy(t_scene *s, t_cy *obj, t_ray *r)
 {
 	int		res;
 	double	lambert;
@@ -85,7 +85,7 @@ int	exec_cy(t_scene *s, t_cy *obj, t_ray *r, t_vect wind)
 		point = sum(r->origin, vect_dot_val(r->direction, solution));
 		lambert = lambertienne_cy(COEFF_REFCT, s->light, obj, point);
 		res = gen_color(obj->color.color, s->amlight, lambert, REFRACTION_AM);
-		ft_put_pixel(s->mlx, wind.x, wind.y, res);
+		ft_put_pixel(s->mlx, 0, 0, res);
 	}
 	return (res);
 }

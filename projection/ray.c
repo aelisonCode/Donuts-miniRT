@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:50:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 15:32:30 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:32:00 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,24 @@ t_ray	create_ray(t_vect *origin, t_projection *p, int x, int y)
 	return (res);
 }
 
-void	exec(t_scene *scene, t_maps *ptr, t_vect wind)
+void	exec(t_scene *scene, t_vect wind)
 {
+	t_maps	*ptr;
 	t_ray	r;
 
+	ptr = scene->world;
 	r = create_ray(&scene->cam->view_point, scene->p, wind.x, wind.y);
-	if (ptr->type == Sphere)
-		exec_sp(scene, ptr, &r, wind);
-	if (ptr->type == Plane)
-		exec_pl(scene, ptr, &r, wind);
-	if (ptr->type == Cylinder)
-		exec_cy(scene, ptr->struct_obj, &r, wind);
+	while (ptr)
+	{
+		if (ptr->type == Sphere)
+			exec_sp(scene, ptr, &r, wind);
+		if (ptr->type == Plane)
+			exec_pl(scene, ptr, &r, wind);
+		ptr = ptr->next;
+	}
 }
 
-void	loop_screen(t_scene *scene, t_maps *obj)
+void	loop_screen(t_scene *scene)
 {
 	t_vect	incr;
 
@@ -64,7 +68,7 @@ void	loop_screen(t_scene *scene, t_maps *obj)
 		incr.x = 0;
 		while (incr.x < WINDOW_X)
 		{
-			exec(scene, obj, incr);
+			exec(scene, incr);
 			incr.x++;
 		}
 		incr.y++;

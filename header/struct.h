@@ -32,6 +32,8 @@
 # define RIGHT 65363
 # define UP 65362
 # define DOWN 65364
+# define Z_UP 65431
+# define Z_DOWN 65433
 
 # define SCALE_UP 65451
 # define SCALE_DOWN 65453
@@ -155,6 +157,8 @@ typedef struct s_scene
 	t_l				*light;
 	t_maps			*world;
 	t_projection	*p;
+	double			dist_curr;
+	int				color_to_put;
 }					t_scene;
 
 #endif

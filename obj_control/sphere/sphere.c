@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:16:25 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 14:54:00 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:27:23 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,20 @@ void	ft_sp_event(t_scene *data, int keycode)
 		ft_translation(&obj->center, LEFT, incr);
 	if (keycode == RIGHT)
 		ft_translation(&obj->center, RIGHT, incr);
+	if (keycode == Z_UP)
+		ft_translation(&obj->center, Z_UP, incr);
+	if (keycode == Z_DOWN)
+		ft_translation(&obj->center, Z_DOWN, incr);
 	if (keycode == SCALE_UP)
-		ft_translation(&obj->center, SCALE_UP, incr);
+		ft_scale(&obj->diameter, SCALE_UP, incr);
 	if (keycode == SCALE_DOWN)
-		ft_translation(&obj->center, SCALE_DOWN, incr);
+		ft_scale(&obj->diameter, SCALE_DOWN, incr);
 	obj->radius = obj->diameter / 2;
 	gen_new_image(data);
 	ft_launch(data);
 }
 
-int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
+int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution)
 {
 	double	a;
 	double	b;
@@ -55,14 +59,14 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, double *solution)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		*solution = get_racine(a, b, discriminant);
-		if (*solution < 0)
+		if (get_racine(a, b, discriminant) < 0)
 			return (EXIT_FAILURE);
+		*solution = compute_intersec_pts(r, get_racine(a, b, discriminant));
 	}
 	return (EXIT_SUCCESS);
 }
 
-double	lambertienne_reflection_sp(double coeff_reflection, t_l *light,
+static double	lambertienne_reflection_sp(double coeff_reflection, t_l *light,
 		t_vect *center, t_vect point)
 {
 	t_vect	v_normal;
@@ -81,20 +85,18 @@ double	lambertienne_reflection_sp(double coeff_reflection, t_l *light,
 	return (res);
 }
 
-static int	get_sp_color(t_scene *s, t_ray *r, t_maps *start, double t)
+static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 {
 	int		res;
 	int		shadow;
 	double	lambert;
 	t_sp	*sphere;
-	t_vect	point;
 
 	sphere = start->struct_obj;
-	point = sum(r->origin, vect_dot_val(r->direction, t));
 	lambert = lambertienne_reflection_sp(COEFF_REFCT, s->light, &sphere->center,
-			point);
+			*point);
 	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start->next, &point, sphere->color.color);
+	shadow = ft_add_shadow(s, start->next, point, sphere->color.color);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
@@ -103,13 +105,17 @@ static int	get_sp_color(t_scene *s, t_ray *r, t_maps *start, double t)
 int	exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 {
 	int		res;
-	double	solution;
+	int		color;
+	t_vect	solution;
 
-	res = FALSE;
+	res = EXIT_FAILURE;
+	(void)wind;
 	if (ft_intersec_sp(curr->struct_obj, r, &solution) == EXIT_SUCCESS)
 	{
-		res = get_sp_color(s, r, curr, solution);
-		ft_put_pixel(s->mlx, wind.x, wind.y, res);
+		res = EXIT_SUCCESS;
+		color = get_sp_color(s, curr, &solution);
+		cmp_dist(s, &solution, color);
+		ft_put_pixel(s->mlx, wind.x, wind.y, color);
 	}
 	return (res);
 }

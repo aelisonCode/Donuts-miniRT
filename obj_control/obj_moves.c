@@ -24,9 +24,9 @@ void	ft_translation(t_vect *point, int move, double incr)
 		point->x -= incr;
 	else if (move == RIGHT)
 		point->x += incr;
-	else if (move == SCALE_UP)
+	else if (move == Z_UP)
 		point->z += incr;
-	else if (move == SCALE_DOWN)
+	else if (move == Z_DOWN)
 		point->z -= incr;
 }
 

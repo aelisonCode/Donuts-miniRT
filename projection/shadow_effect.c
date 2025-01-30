@@ -15,16 +15,14 @@
 int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, int color_ref)
 {
 	int		res;
-	double	t;
-	t_ray	r;
 	t_vect	point;
+	t_ray	r;
 
 	res = -1;
 	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
 	r.direction = ft_normalize(substraction(s->light->pos, *ref_pts));
-	if (ft_intersec_sp(obj, &r, &t) == EXIT_SUCCESS)
+	if (ft_intersec_sp(obj, &r, &point) == EXIT_SUCCESS)
 	{
-		point = sum(r.origin, vect_dot_val(r.direction, t));
 		if (vect_lenght(substraction(s->light->pos,
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))

@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/01/29 08:00:38 by mravelon         ###   ########.fr        #
+#    Updated: 2025/01/30 12:56:50 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC = src/ft_program.c \
 	  obj_control/sphere/sphere.c \
 	  obj_control/cylender/cylender.c \
 	  obj_control/plane/plane.c \
+	  obj_control/utils.c \
 	  vect/operations.c \
 	  vect/control.c \
 	  color/color.c \
