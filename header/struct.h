@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/27 14:21:59 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:18:15 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@
 
 # define SCALE_UP 65451
 # define SCALE_DOWN 65453
+# define CHANGE_OBJ 65289
 
 # define COEFF_REFCT 1.0
 # define REFRACTION_AM 0.5

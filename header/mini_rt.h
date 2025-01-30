@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:45:50 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:16:29 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void			add_maps(t_maps **head, t_maps *new_elem);
 
 void			ft_translation(t_vect *point, int move, double incr);
 void			ft_scale(double *value, int move, double incr);
-void			ft_sp_event(t_scene *data, int keycode);
 
 void			select_primary(t_scene *scene, t_obj select);
 t_obj			is_primary_selected(t_scene *scene);
@@ -65,6 +64,7 @@ t_cy			*cylender(char **str);
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution);
 int				exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
+void			ft_sp_event(t_scene *data, t_sp *obj, int keycode);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution);
@@ -72,6 +72,7 @@ int				exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res);
+void	ft_pl_event(t_scene *s, t_pl *obj, int keycode);
 int				exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind);
 int				ft_add_shadow(t_scene *s, t_maps *other, t_vect *ref_pts,
 					int color_ref);

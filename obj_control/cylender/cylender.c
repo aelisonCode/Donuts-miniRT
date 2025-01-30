@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:53:45 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:09:03 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
  * NOT WORKING
  * NEED TO BE CHECK, RE DO ????
-*/
+ */
 
 static int	ft_cy_limit(int sol, t_ray *r, t_cy *obj)
 {
@@ -58,10 +58,10 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution)
 	return (EXIT_SUCCESS);
 }
 
-/*lambertieenne cylender 
+/*lambertieenne cylender
  * is point on the side ?
  * is point on surface ?
-*/
+ */
 double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 {
 	double	res;
@@ -78,7 +78,7 @@ double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 	return (res);
 }
 
-int		get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
+int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 {
 	int		res;
 	int		shadow;
@@ -93,7 +93,6 @@ int		get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 		res = shadow;
 	return (res);
 }
-
 
 int	exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 {

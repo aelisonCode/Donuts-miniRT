@@ -6,11 +6,35 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:25:45 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:27:32 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:15:45 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
+
+void	ft_pl_event(t_scene *s, t_pl *obj, int keycode)
+{
+	double	incr;
+
+	incr = 0.1;
+	if (!s)
+		return ;
+	if (keycode == UP)
+		ft_translation(&obj->direction, UP, incr);
+	if (keycode == DOWN)
+		ft_translation(&obj->direction, DOWN, incr);
+	if (keycode == LEFT)
+		ft_translation(&obj->direction, LEFT, incr);
+	if (keycode == RIGHT)
+		ft_translation(&obj->direction, RIGHT, incr);
+	if (keycode == Z_UP)
+		ft_translation(&obj->direction, Z_UP, incr);
+	if (keycode == Z_DOWN)
+		ft_translation(&obj->direction, Z_DOWN, incr);
+	gen_new_image(s);
+	ft_launch(s);
+
+}
 
 int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res)
 {

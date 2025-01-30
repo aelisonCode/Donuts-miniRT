@@ -6,19 +6,17 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:16:25 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:27:23 by aelison          ###   ########.fr       */
+/*   Updated: 2025/01/30 15:13:18 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
 
-void	ft_sp_event(t_scene *data, int keycode)
+void	ft_sp_event(t_scene *data, t_sp *obj, int keycode)
 {
-	t_sp	*obj;
 	double	incr;
 
 	incr = 1.0;
-	obj = get_type(data->world, Sphere);
 	if (!obj)
 		return ;
 	if (keycode == UP)
