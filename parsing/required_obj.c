@@ -65,6 +65,7 @@ t_maps	*create_map(t_obj type, void *obj)
 	maps = malloc(sizeof(t_maps));
 	if (!maps)
 		return (NULL);
+	maps->id = 0;
 	maps->type = type;
 	maps->struct_obj = obj;
 	maps->color = 0X0;
@@ -79,9 +80,12 @@ void	add_maps(t_maps **head, t_maps *new_elem)
 	{
 		*head = new_elem;
 		new_elem->selected = TRUE;
+		new_elem->id = 1;
 	}
 	else
 	{
+		new_elem->id = (*head)->id;
+		(*head)->id = new_elem->id + 1;
 		new_elem->next = *head;
 		*head = new_elem;
 	}

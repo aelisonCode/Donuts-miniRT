@@ -95,13 +95,13 @@ static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 	lambert = lambertienne_reflection_sp(COEFF_REFCT, s->light, &sphere->center,
 			*point);
 	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start->next, point, sphere->color.color);
+	shadow = ft_add_shadow(s, start->id, point, sphere->color.color);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
 }
 
-int	exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
+int	exec_sp(t_scene *s, t_maps *curr, t_ray *r)
 {
 	int		res;
 	double	t;
@@ -112,7 +112,7 @@ int	exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 	{
 		res = EXIT_SUCCESS;
 		curr->color = get_sp_color(s, curr, &solution);
-		cmp_dist(s, t, curr->color, wind);
+		cmp_dist(s, t, curr->color);
 	}
 	return (res);
 }

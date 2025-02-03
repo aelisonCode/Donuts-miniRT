@@ -42,6 +42,8 @@
 # define COEFF_REFCT 1.0
 # define REFRACTION_AM 0.5
 
+# define LIGHT_CHANGE 3
+
 typedef enum e_object
 {
 	Ambient_l,
@@ -144,6 +146,7 @@ typedef struct s_projection
 
 typedef struct s_maps
 {
+	int				id;
 	t_obj			type;
 	void			*struct_obj;
 	int				color;

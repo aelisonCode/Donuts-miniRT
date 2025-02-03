@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/struct.h"
-#include <unistd.h>
+#include "../header/mini_rt.h"
 
 void	*get_type(t_maps *obj, t_obj type)
 {
@@ -36,10 +35,10 @@ static void	retired_other(t_scene *scene, t_obj select)
 		scene->light->selected = FALSE;
 }
 
-void	select_primary(t_scene *scene, t_obj select)
+int	select_primary(t_scene *scene, t_obj select)
 {
 	if (!scene)
-		return ;
+		return (EXIT_FAILURE);
 	if (select == Light)
 	{
 		if (scene->light->selected == FALSE)
@@ -56,6 +55,7 @@ void	select_primary(t_scene *scene, t_obj select)
 			scene->cam->selected = FALSE;
 		retired_other(scene, Camera);
 	}
+	return (EXIT_SUCCESS);
 }
 
 t_obj	is_primary_selected(t_scene *scene)

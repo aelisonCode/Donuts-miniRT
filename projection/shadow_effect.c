@@ -32,22 +32,53 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, int color_ref)
 	return (res);
 }
 
-int	ft_add_shadow(t_scene *s, t_maps *other, t_vect *ref_pts, int color_ref)
+int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, int color_ref)
 {
-	int	val;
+	int		res;
+	double	t;
+	t_vect	point;
+	t_ray	r;
+
+	res = -1;
+	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
+	r.direction = ft_normalize(substraction(s->light->pos, *ref_pts));
+	if (ft_intersec_pl(obj, &r, &point, &t) == EXIT_SUCCESS)
+	{
+		if (vect_lenght(substraction(s->light->pos,
+					*ref_pts)) > vect_lenght(substraction(s->light->pos,
+					point)))
+			res = gen_color(color_ref, s->amlight, 0, 0);
+	}
+	return (res);
+}
+
+int	ft_add_shadow(t_scene *s, int not_check, t_vect *ref_pts, int color_ref)
+{
+	int		val;
+	t_maps	*tmp;
 
 	val = -1;
-	if (!s || !ref_pts || !other)
+	if (!s || !ref_pts)
 		return (val);
-	while (other)
+	tmp = s->world;
+	while (tmp)
 	{
-		if (other->type == Sphere)
+		if (not_check != tmp->id)
 		{
-			val = check_sp(s, other->struct_obj, ref_pts, color_ref);
-			if (val != -1)
-				return (val);
+			if (tmp->type == Sphere)
+			{
+				val = check_sp(s, tmp->struct_obj, ref_pts, color_ref);
+				if (val != -1)
+					return (val);
+			}
+			if (tmp->type == Plane)
+			{
+				val = check_pl(s, tmp->struct_obj, ref_pts, color_ref);
+				if (val != -1)
+					return (val);
+			}
 		}
-		other = other->next;
+		tmp = tmp->next;
 	}
 	return (-1);
 }

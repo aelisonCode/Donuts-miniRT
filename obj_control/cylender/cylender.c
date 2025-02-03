@@ -89,13 +89,13 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 	cylender = curr->struct_obj;
 	lambert = lambertienne_cy(cylender, s->light, *point);
 	res = gen_color(cylender->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, curr->next, point, cylender->color.color);
+	shadow = ft_add_shadow(s, curr->id, point, cylender->color.color);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
 }
 
-int	exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
+int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 {
 	int		res;
 	double	t;
@@ -106,8 +106,7 @@ int	exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 	{
 		res = EXIT_SUCCESS;
 		curr->color = get_cy_color(s, curr, &solution);
-		cmp_dist(s, t, curr->color, wind);
-		/* ft_put_pixel(s->mlx, wind.x, wind.y, curr->color); */
+		cmp_dist(s, t, curr->color);
 	}
 	return (res);
 }

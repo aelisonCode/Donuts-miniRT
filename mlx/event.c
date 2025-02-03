@@ -31,12 +31,12 @@ int	on_button_pressed(int button, int x, int y, void *param)
 	return (EXIT_FAILURE);
 }
 
-void	select_next_obj(t_scene *s)
+int	select_next_obj(t_scene *s)
 {
 	t_maps	*tmp;
 
 	if (!s)
-		return ;
+		return (EXIT_FAILURE);
 	tmp = s->world;
 	while (tmp && tmp->selected != TRUE)
 		tmp = tmp->next;
@@ -50,6 +50,7 @@ void	select_next_obj(t_scene *s)
 		else
 			s->world->selected = TRUE;
 	}
+	return (EXIT_SUCCESS);
 }
 
 void	exec_obj_event(t_scene *s, int keycode)
@@ -81,22 +82,12 @@ int	ft_exec_input(int keycode, t_scene *data)
 		if (keycode == K_ESCAPE)
 			result = ft_close_window(data);
 		if (keycode == CHANGE_OBJ)
-		{
-			select_next_obj(data);
-			return (EXIT_SUCCESS);
-		}
+			return (select_next_obj(data));
 		if (keycode == LIGHT)
-		{
-			select_primary(data, Light);
-			return (EXIT_SUCCESS);
-		}
+			return (select_primary(data, Light));
 		else if (keycode == CAMERA)
-		{
-			select_primary(data, Camera);
-			return (EXIT_SUCCESS);
-		}
+			return (select_primary(data, Camera));
 		type = is_primary_selected(data);
-		// ft_menu(data);
 		if (type != Non_object)
 			control_primary(data, type, keycode);
 		else

@@ -20,9 +20,8 @@ t_vect	compute_intersec_pts(t_ray *r, double t)
 	return (result);
 }
 
-int	cmp_dist(t_scene *s, double dist, int new_col, t_vect pos)
+int	cmp_dist(t_scene *s, double dist, int new_col)
 {
-	(void)pos;
 	if (s->dist_curr == -1)
 	{
 		s->dist_curr = dist;
@@ -33,8 +32,5 @@ int	cmp_dist(t_scene *s, double dist, int new_col, t_vect pos)
 		s->dist_curr = dist;
 		s->color_to_put = new_col;
 	}
-	/* printf("%d\n", s->color_to_put); */
-//	printf("%d\n", new_col);
-	/* ft_put_pixel(s->mlx, pos.x, pos.y, new_col); */
 	return (EXIT_FAILURE);
 }

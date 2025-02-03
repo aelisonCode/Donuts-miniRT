@@ -15,24 +15,22 @@
 int	control_light(t_l *light, int keycode)
 {
 	int		result;
-	double	incr;
 
-	incr = 3.0;
 	result = TRUE;
 	if (!light)
 		return (FALSE);
 	if (keycode == LEFT)
-		ft_translation(&light->pos, LEFT, incr);
+		ft_translation(&light->pos, LEFT, LIGHT_CHANGE);
 	else if (keycode == RIGHT)
-		ft_translation(&light->pos, RIGHT, incr);
+		ft_translation(&light->pos, RIGHT, LIGHT_CHANGE);
 	else if (keycode == UP)
-		ft_translation(&light->pos, UP, incr);
+		ft_translation(&light->pos, UP, LIGHT_CHANGE);
 	else if (keycode == DOWN)
-		ft_translation(&light->pos, DOWN, incr);
+		ft_translation(&light->pos, DOWN, LIGHT_CHANGE);
 	else if (keycode == Z_UP)
-		ft_translation(&light->pos, Z_UP, -incr);
+		ft_translation(&light->pos, Z_UP, -LIGHT_CHANGE);
 	else if (keycode == Z_DOWN)
-		ft_translation(&light->pos, Z_DOWN, -incr);
+		ft_translation(&light->pos, Z_DOWN, -LIGHT_CHANGE);
 	else if (keycode == SCALE_UP && light->bright < 1.0)
 		ft_scale(&light->bright, keycode, 0.1);
 	else if (keycode == SCALE_DOWN && light->bright > 0.0)

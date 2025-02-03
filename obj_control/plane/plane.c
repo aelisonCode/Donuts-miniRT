@@ -33,7 +33,6 @@ void	ft_pl_event(t_scene *s, t_pl *obj, int keycode)
 		ft_translation(&obj->direction, Z_DOWN, incr);
 	gen_new_image(s);
 	ft_launch(s);
-
 }
 
 int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
@@ -82,13 +81,13 @@ static int	get_pl_color(t_scene *s, t_maps *start, t_vect *point)
 	plane = start->struct_obj;
 	lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, plane, *point);
 	res = gen_color(plane->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start->next, point, plane->color.color);
+	shadow = ft_add_shadow(s, start->id, point, plane->color.color);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
 }
 
-int	exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind)
+int	exec_pl(t_scene *s, t_maps *obj, t_ray *r)
 {
 	int		res;
 	double	t;
@@ -99,7 +98,7 @@ int	exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind)
 	{
 		res = EXIT_SUCCESS;
 		obj->color = get_pl_color(s, obj, &solution);
-		cmp_dist(s, t, obj->color, wind);
+		cmp_dist(s, t, obj->color);
 	}
 	return (res);
 }
