@@ -80,5 +80,5 @@ int	ft_add_shadow(t_scene *s, int not_check, t_vect *ref_pts, int color_ref)
 		}
 		tmp = tmp->next;
 	}
-	return (-1);
+	return (val);
 }
