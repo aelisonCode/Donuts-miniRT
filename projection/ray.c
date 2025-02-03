@@ -45,19 +45,29 @@ void	exec(t_scene *scene, t_vect wind)
 {
 	t_maps	*ptr;
 	t_ray	r;
+	int		status;
 
 	ptr = scene->world;
 	r = create_ray(&scene->cam->view_point, scene->p, wind.x, wind.y);
 	while (ptr)
 	{
 		if (ptr->type == Sphere)
-			exec_sp(scene, ptr, &r, wind);
+			status = exec_sp(scene, ptr, &r, wind);
 		if (ptr->type == Plane)
-			exec_pl(scene, ptr, &r, wind);
+			status = exec_pl(scene, ptr, &r, wind);
 		if (ptr->type == Cylinder)
-			exec_cy(scene, ptr, &r, wind);
+			status = exec_cy(scene, ptr, &r, wind);
+		printf("TYPE: %d\n", ptr->type);
 		ptr = ptr->next;
 	}
+	if (status == EXIT_SUCCESS)	//at leat one obj intersect with ray
+	{
+		ft_put_pixel(scene->mlx, wind.x, wind.y, scene->color_to_put);
+	}
+	/* else	//no_intersection for all object */
+	/* { */
+	/* 	ft_put_pixel(scene->mlx, wind.x, wind.y, 0X0); */
+	/* } */
 }
 
 void	loop_screen(t_scene *scene)
@@ -70,6 +80,7 @@ void	loop_screen(t_scene *scene)
 		incr.x = 0;
 		while (incr.x < WINDOW_X)
 		{
+			scene->dist_curr = -1;
 			exec(scene, incr);
 			incr.x++;
 		}

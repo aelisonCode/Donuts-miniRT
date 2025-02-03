@@ -67,6 +67,7 @@ t_maps	*create_map(t_obj type, void *obj)
 		return (NULL);
 	maps->type = type;
 	maps->struct_obj = obj;
+	maps->color = 0X0;
 	maps->selected = FALSE;
 	maps->next = NULL;
 	return (maps);

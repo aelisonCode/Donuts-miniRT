@@ -40,7 +40,7 @@ void	ft_sp_event(t_scene *data, t_sp *obj, int keycode)
 	ft_launch(data);
 }
 
-int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution)
+int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution, double *t)
 {
 	double	a;
 	double	b;
@@ -57,9 +57,10 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		if (get_racine(a, b, discriminant) < 0)
+		*t = get_racine(a, b, discriminant);
+		if (*t < 0)
 			return (EXIT_FAILURE);
-		*solution = compute_intersec_pts(r, get_racine(a, b, discriminant));
+		*solution = compute_intersec_pts(r, *t);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -103,17 +104,15 @@ static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 int	exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 {
 	int		res;
-	int		color;
+	double	t;
 	t_vect	solution;
 
 	res = EXIT_FAILURE;
-	(void)wind;
-	if (ft_intersec_sp(curr->struct_obj, r, &solution) == EXIT_SUCCESS)
+	if (ft_intersec_sp(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		color = get_sp_color(s, curr, &solution);
-		cmp_dist(s, &solution, color);
-		ft_put_pixel(s->mlx, wind.x, wind.y, color);
+		curr->color = get_sp_color(s, curr, &solution);
+		cmp_dist(s, t, curr->color, wind);
 	}
 	return (res);
 }

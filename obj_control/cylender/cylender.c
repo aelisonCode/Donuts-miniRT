@@ -29,7 +29,7 @@ static int	ft_cy_limit(int sol, t_ray *r, t_cy *obj)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution)
+int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 {
 	double	a;
 	double	b;
@@ -49,11 +49,12 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		if (get_racine(a, b, discr) < 0)
+		*t = get_racine(a, b, discr);
+		if (*t < 0)
 			return (EXIT_FAILURE);
 		if (ft_cy_limit(get_racine(a, b, discr), r, obj) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		*solution = compute_intersec_pts(r, get_racine(a, b, discr));
+		*solution = compute_intersec_pts(r, *t);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -62,7 +63,7 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution)
  * is point on the side ?
  * is point on surface ?
  */
-double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
+double	lambertienne_cy(t_cy *obj, t_l *light, t_vect point)
 {
 	double	res;
 	t_vect	v_light;
@@ -74,7 +75,7 @@ double	lambertienne_cy(double coeff_refct, t_l *light, t_cy *obj, t_vect point)
 	scal = scalaire(v_normal, v_light);
 	if (scal < 0)
 		scal = 0;
-	res = coeff_refct * scal * light->bright;
+	res = COEFF_REFCT * scal * light->bright;
 	return (res);
 }
 
@@ -83,12 +84,12 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 	int		res;
 	int		shadow;
 	double	lambert;
-	t_sp	*sphere;
+	t_cy	*cylender;
 
-	sphere = curr->struct_obj;
-	lambert = lambertienne_cy(COEFF_REFCT, s->light, curr->struct_obj, *point);
-	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, curr->next, point, sphere->color.color);
+	cylender = curr->struct_obj;
+	lambert = lambertienne_cy(cylender, s->light, *point);
+	res = gen_color(cylender->color.color, s->amlight, lambert, REFRACTION_AM);
+	shadow = ft_add_shadow(s, curr->next, point, cylender->color.color);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
@@ -97,17 +98,16 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 int	exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind)
 {
 	int		res;
-	int		color;
+	double	t;
 	t_vect	solution;
 
 	res = EXIT_FAILURE;
-	(void)wind;
-	if (ft_intersec_cy(curr->struct_obj, r, &solution) == EXIT_SUCCESS)
+	if (ft_intersec_cy(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		color = get_cy_color(s, curr, &solution);
-		cmp_dist(s, &solution, color);
-		ft_put_pixel(s->mlx, wind.x, wind.y, color);
+		curr->color = get_cy_color(s, curr, &solution);
+		cmp_dist(s, t, curr->color, wind);
+		/* ft_put_pixel(s->mlx, wind.x, wind.y, curr->color); */
 	}
 	return (res);
 }

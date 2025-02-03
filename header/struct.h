@@ -13,8 +13,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define WINDOW_X 1000
-# define WINDOW_Y 600
+# define WINDOW_X 900
+# define WINDOW_Y 500
 
 # define TRUE 1
 # define FALSE 0
@@ -146,6 +146,7 @@ typedef struct s_maps
 {
 	t_obj			type;
 	void			*struct_obj;
+	int				color;
 	int				selected;
 	struct s_maps	*next;
 }					t_maps;

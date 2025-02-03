@@ -48,11 +48,11 @@ void	ft_init_scene(t_scene *data, double dist, char *title)
 	tmp->mlx_ptr = mlx_init();
 	if (tmp->mlx_ptr == NULL)
 		exit(1);
+	data->p = init_pjct(data->cam, dist);
+	data->dist_curr = -1;
+	data->color_to_put = 0X000000;
 	ft_window_init(tmp, title);
 	data->mlx = tmp;
 	ft_img_init(data, WINDOW_X, WINDOW_Y);
 	data->mlx = tmp;
-	data->p = init_pjct(data->cam, dist);
-	data->dist_curr = -1;
-	data->color_to_put = 0X0;
 }

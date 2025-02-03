@@ -20,45 +20,21 @@ t_vect	compute_intersec_pts(t_ray *r, double t)
 	return (result);
 }
 
-int	cmp_dist(t_scene *s, t_vect *pts, int new_col)
+int	cmp_dist(t_scene *s, double dist, int new_col, t_vect pos)
 {
-	double	lenght_pts;
-	t_c		*cam;
-
-	cam = s->cam;
-	lenght_pts = vect_lenght(substraction(*pts, cam->view_point));
+	(void)pos;
 	if (s->dist_curr == -1)
 	{
-		s->dist_curr = lenght_pts;
+		s->dist_curr = dist;
 		s->color_to_put = new_col;
-		return (EXIT_SUCCESS);
 	}
-	else if (s->dist_curr > lenght_pts)
+	if (s->dist_curr >= dist)
 	{
-		s->dist_curr = lenght_pts;
+		s->dist_curr = dist;
 		s->color_to_put = new_col;
-		return (EXIT_SUCCESS);
 	}
+	/* printf("%d\n", s->color_to_put); */
+//	printf("%d\n", new_col);
+	/* ft_put_pixel(s->mlx, pos.x, pos.y, new_col); */
 	return (EXIT_FAILURE);
-}
-
-void	do_intersec_other(t_scene *s, t_maps *other, t_ray *r)
-{
-	t_vect	solution;
-	t_vect	test;
-
-	test = init_vect(0, 0, 0);
-	if (!s || !other || !s)
-		return ;
-	while (other)
-	{
-		if (other->type == Sphere)
-		{
-			if (ft_intersec_sp(other->struct_obj, r, &solution) == EXIT_SUCCESS)
-			{
-				cmp_dist(s, &solution, exec_sp(s, other, r, test));
-			}
-		}
-		other = other->next;
-	}
 }

@@ -35,6 +35,19 @@ char	*get_selected(t_scene *s)
 		return ("selected obj: CAMERA");
 	if (s->light->selected == TRUE)
 		return ("selected obj: LIGHT");
+	while (tmp)
+	{
+		if (tmp->selected == TRUE)
+		{
+			if (tmp->type == Sphere)
+				return ("selected obj: Sphere");
+			else if (tmp->type == Plane)
+				return ("selected obj: Plane");
+			else if (tmp->type == Cylinder)
+				return ("selected obj: Cylender");
+		}
+		tmp = tmp->next;
+	}
 	return (NULL);
 }
 

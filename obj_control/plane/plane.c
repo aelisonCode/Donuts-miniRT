@@ -36,20 +36,19 @@ void	ft_pl_event(t_scene *s, t_pl *obj, int keycode)
 
 }
 
-int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res)
+int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 {
 	double	denominator;
-	double	tmp;
 	t_vect	x;
 
 	denominator = scalaire(ray->direction, ft_normalize(obj->direction));
 	if (fabs(denominator) < 1e-4)
 		return (EXIT_FAILURE);
 	x = substraction(obj->point, ray->origin);
-	tmp = scalaire(x, ft_normalize(obj->direction)) / denominator;
-	if (tmp >= 0)
+	*t = scalaire(x, ft_normalize(obj->direction)) / denominator;
+	if (*t >= 0)
 	{
-		*res = compute_intersec_pts(ray, tmp);
+		*res = compute_intersec_pts(ray, *t);
 		return (EXIT_SUCCESS);
 	}
 	else
@@ -92,17 +91,15 @@ static int	get_pl_color(t_scene *s, t_maps *start, t_vect *point)
 int	exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind)
 {
 	int		res;
-	int		color;
+	double	t;
 	t_vect	solution;
 
 	res = EXIT_FAILURE;
-	(void)wind;
-	if (ft_intersec_pl(obj->struct_obj, r, &solution) == EXIT_SUCCESS)
+	if (ft_intersec_pl(obj->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		color = get_pl_color(s, obj, &solution);
-		cmp_dist(s, &solution, color);
-		ft_put_pixel(s->mlx, wind.x, wind.y, color);
+		obj->color = get_pl_color(s, obj, &solution);
+		cmp_dist(s, t, obj->color, wind);
 	}
 	return (res);
 }

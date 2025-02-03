@@ -62,17 +62,19 @@ t_pl			*plane(char **str);
 t_cy			*cylender(char **str);
 
 /*SPHERE*/
-int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution);
+int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution,
+					double *t);
 int				exec_sp(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 void			ft_sp_event(t_scene *data, t_sp *obj, int keycode);
 
 /*CYLENDER*/
-int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution);
+int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution,
+					double *t);
 int				exec_cy(t_scene *s, t_maps *curr, t_ray *r, t_vect wind);
 
 /*PLANE*/
-int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res);
-void	ft_pl_event(t_scene *s, t_pl *obj, int keycode);
+int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t);
+void			ft_pl_event(t_scene *s, t_pl *obj, int keycode);
 int				exec_pl(t_scene *s, t_maps *obj, t_ray *r, t_vect wind);
 int				ft_add_shadow(t_scene *s, t_maps *other, t_vect *ref_pts,
 					int color_ref);
@@ -86,7 +88,7 @@ t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene);
 
 /*OTHER*/
-int				cmp_dist(t_scene *s, t_vect *pts, int new_col);
+int				cmp_dist(t_scene *s, double dist, int new_col, t_vect pos);
 t_vect			compute_intersec_pts(t_ray *r, double t);
 
 #endif
