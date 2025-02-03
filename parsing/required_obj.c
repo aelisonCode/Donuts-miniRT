@@ -84,8 +84,7 @@ void	add_maps(t_maps **head, t_maps *new_elem)
 	}
 	else
 	{
-		new_elem->id = (*head)->id;
-		(*head)->id = new_elem->id + 1;
+		new_elem->id = (*head)->id + 1;
 		new_elem->next = *head;
 		*head = new_elem;
 	}
