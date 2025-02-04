@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:35:18 by nyrandri         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:57:06 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@
  * NOT WORKING
  * NEED TO BE CHECK, RE DO ????
  */
-
-static int	ft_cy_limit(int sol, t_ray *r, t_cy *obj)
+/*  */
+static int	ft_cy_limit(t_cy *obj, t_vect *solution)
 {
-	t_vect	intersect;
-	double	projection;
-
-	intersect = sum(r->origin, vect_dot_val(r->direction, sol));
-	projection = scalaire(substraction(intersect, obj->center), obj->direction);
-	if (projection < 0 || projection > obj->height)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	if (solution->y <= obj->center.y + obj->height / 2)
+	{
+		if (solution->y >= obj->center.y - obj->height / 2)
+			return (EXIT_SUCCESS);
+	}
+	return (EXIT_FAILURE);
 }
 
 int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
@@ -52,9 +50,9 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 		*t = get_racine(a, b, discr);
 		if (*t < 0)
 			return (EXIT_FAILURE);
-		if (ft_cy_limit(get_racine(a, b, discr), r, obj) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
 		*solution = compute_intersec_pts(r, *t);
+		if (ft_cy_limit(obj, solution) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -105,8 +103,7 @@ int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 	if (ft_intersec_cy(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		curr->color = 0XFF0000;
-		/* curr->color = get_cy_color(s, curr, &solution); */
+		curr->color = get_cy_color(s, curr, &solution);
 		cmp_dist(s, t, curr->color);
 	}
 	return (res);
