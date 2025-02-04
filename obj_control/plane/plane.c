@@ -16,18 +16,20 @@ void	ft_pl_event(t_scene *s, t_pl *obj, int keycode, double incr)
 {
 	if (!s)
 		return ;
-	if (keycode == UP)
-		ft_translation(&obj->direction, UP, incr);
-	if (keycode == DOWN)
-		ft_translation(&obj->direction, DOWN, incr);
-	if (keycode == LEFT)
-		ft_translation(&obj->direction, LEFT, incr);
-	if (keycode == RIGHT)
-		ft_translation(&obj->direction, RIGHT, incr);
-	if (keycode == Z_UP)
-		ft_translation(&obj->direction, Z_UP, incr);
-	if (keycode == Z_DOWN)
-		ft_translation(&obj->direction, Z_DOWN, incr);
+	if (s->do_rotation == FALSE)
+	{
+		if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
+			ft_translation(&obj->direction, keycode, incr);
+		if (keycode == Z_UP || keycode == Z_DOWN)
+			ft_translation(&obj->direction, keycode, incr);
+	}
+	else if (s->do_rotation == TRUE)
+	{
+		if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
+			ft_rotate(&obj->direction, keycode, 10);
+		if (keycode == Z_UP || keycode == Z_DOWN)
+			ft_rotate(&obj->direction, keycode, 10);
+	}
 	gen_new_image(s);
 	ft_launch(s);
 }
