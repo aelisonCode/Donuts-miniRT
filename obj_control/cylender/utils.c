@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nyrandri <nyrandri@student.42antananarivo  +#+  +:+       +#+        */
+/*   By: aelison <aelison@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/04 08:09:10 by nyrandri          #+#    #+#             */
-/*   Updated: 2025/02/04 09:24:08 by nyrandri         ###   ########.fr       */
+/*   Created: 2025/02/04 08:09:10 by aelison          #+#    #+#             */
+/*   Updated: 2025/02/04 09:24:08 by aelison         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
