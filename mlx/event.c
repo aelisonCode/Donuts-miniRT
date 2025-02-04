@@ -85,10 +85,8 @@ int	ft_exec_input(int keycode, t_scene *data)
 			result = ft_close_window(data);
 		if (keycode == CHANGE_OBJ)
 			return (select_next_obj(data));
-		if (keycode == LIGHT)
-			return (select_primary(data, Light));
-		else if (keycode == CAMERA)
-			return (select_primary(data, Camera));
+		if (keycode == LIGHT || keycode == CAMERA || keycode == ROTATE)
+			return (select_primary(data, keycode));
 		type = is_primary_selected(data);
 		if (type != Non_object)
 			control_primary(data, type, keycode);

@@ -29,16 +29,27 @@ void	rotate_on_z(double ratio_deg, t_cy *obj)
 
 void	ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr)
 {
-	if (keycode == LEFT || keycode == RIGHT)
-		ft_translation(&obj->center, keycode, incr);
-	if (keycode == UP || keycode == DOWN)
-		ft_translation(&obj->center, keycode, incr);
-	if (keycode == Z_UP || keycode == Z_DOWN)
-		ft_translation(&obj->center, keycode, incr);
+	if (s->do_rotation == FALSE)
+	{
+		if (keycode == LEFT || keycode == RIGHT)
+			ft_translation(&obj->center, keycode, incr);
+		if (keycode == UP || keycode == DOWN)
+			ft_translation(&obj->center, keycode, incr);
+		if (keycode == Z_UP || keycode == Z_DOWN)
+			ft_translation(&obj->center, keycode, incr);
+	}
+	else if (s->do_rotation == TRUE)
+	{
+		if (keycode == LEFT || keycode == RIGHT)
+			ft_rotate(&obj->direction, keycode, incr);
+		if (keycode == UP || keycode == DOWN)
+			ft_rotate(&obj->direction, keycode, incr);
+		if (keycode == Z_UP || keycode == Z_DOWN)
+			ft_rotate(&obj->direction, keycode, incr);
+	}
 	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
-		rotate_on_z(2, obj);
-	/* 	ft_scale(&obj->diameter, keycode, incr); */
-	/* obj->radius = obj->diameter / 2; */
+		ft_scale(&obj->diameter, keycode, incr);
+	obj->radius = obj->diameter / 2;
 	gen_new_image(s);
 	ft_launch(s);
 }

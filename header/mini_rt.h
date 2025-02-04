@@ -45,8 +45,9 @@ void			add_maps(t_maps **head, t_maps *new_elem);
 
 void			ft_translation(t_vect *point, int move, double incr);
 void			ft_scale(double *value, int move, double incr);
+void			ft_rotate(t_vect *direction, int keycode, int incr_deg);
 
-int				select_primary(t_scene *scene, t_obj select);
+int				select_primary(t_scene *scene, int select);
 t_obj			is_primary_selected(t_scene *scene);
 void			control_primary(t_scene *scene, t_obj type, int keycode);
 

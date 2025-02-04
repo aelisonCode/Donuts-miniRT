@@ -50,7 +50,8 @@ void	ft_init_scene(t_scene *data, double dist, char *title)
 		exit(1);
 	data->p = init_pjct(data->cam, dist);
 	data->dist_curr = -1;
-	data->color_to_put = 0X000000;
+	data->color_to_put = 0X0;
+	data->do_rotation = FALSE;
 	ft_window_init(tmp, title);
 	data->mlx = tmp;
 	ft_img_init(data, WINDOW_X, WINDOW_Y);
