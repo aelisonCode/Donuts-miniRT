@@ -24,22 +24,7 @@ void	rotate_on_z(double ratio_deg, t_cy *obj)
 	res.x = v.x * cos(ratio_rad) - v.y * sin(ratio_rad);
 	res.y = v.x * sin(ratio_rad) + v.y * cos(ratio_rad);
 	res.z = v.z;
-	obj->direction = init_vect(res.x, res.y, res.z);
-	/* obj->direction = init_vect(res.x, res.y, res.z); */
-	/* static double	tmp; */
-	/* tmp += ratio_deg; */
-	/*  */
-	/* (void)obj; */
-	/* if (tmp >= 90 && tmp <= 180) */
-	/* { */
-	/* 	dir->y = 0; */
-	/* } */
-	/* else */
-	/* {	 */
-	/* 	dir->x = (dir->x * cos(ratio_rad)) - (dir->y * sin(ratio_rad)); */
-	/* 	dir->y = (dir->x * sin(ratio_rad)) + (dir->y * cos(ratio_rad)); */
-	/* } */
-	/* *dir = ft_normalize(*dir); */
+	obj->direction = ft_normalize(res);
 }
 
 void	ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr)

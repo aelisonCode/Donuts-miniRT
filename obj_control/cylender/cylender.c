@@ -12,19 +12,11 @@
 
 #include "../../header/mini_rt.h"
 
-/*
- * NOT WORKING
- * NEED TO BE CHECK, RE DO ????
- */
-/*  */
 static int	ft_cy_limit(t_cy *obj, t_vect *solution)
 {
-	if (solution->y <= obj->center.y + obj->height / 2)
-	{
-		if (solution->y >= obj->center.y - obj->height / 2)
-			return (EXIT_SUCCESS);
-	}
-	return (EXIT_FAILURE);
+	if (vect_lenght(substraction(obj->center, *solution)) > obj->height / 2)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
