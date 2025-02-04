@@ -6,35 +6,24 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:16:25 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 15:13:18 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/04 08:22:55 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
 
-void	ft_sp_event(t_scene *data, t_sp *obj, int keycode)
+void	ft_sp_event(t_scene *data, t_sp *obj, int keycode, double incr)
 {
-	double	incr;
-
-	incr = 1.0;
 	if (!obj)
 		return ;
-	if (keycode == UP)
-		ft_translation(&obj->center, UP, incr);
-	if (keycode == DOWN)
-		ft_translation(&obj->center, DOWN, incr);
-	if (keycode == LEFT)
-		ft_translation(&obj->center, LEFT, incr);
-	if (keycode == RIGHT)
-		ft_translation(&obj->center, RIGHT, incr);
-	if (keycode == Z_UP)
-		ft_translation(&obj->center, Z_UP, incr);
-	if (keycode == Z_DOWN)
-		ft_translation(&obj->center, Z_DOWN, incr);
-	if (keycode == SCALE_UP)
-		ft_scale(&obj->diameter, SCALE_UP, incr);
-	if (keycode == SCALE_DOWN)
-		ft_scale(&obj->diameter, SCALE_DOWN, incr);
+	if (keycode == UP || keycode == DOWN)
+		ft_translation(&obj->center, keycode, incr);
+	if (keycode == LEFT || keycode == RIGHT)
+		ft_translation(&obj->center, keycode, incr);
+	if (keycode == Z_UP || keycode == Z_DOWN)
+		ft_translation(&obj->center, keycode, -incr);
+	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
+		ft_scale(&obj->diameter, keycode, incr);
 	obj->radius = obj->diameter / 2;
 	gen_new_image(data);
 	ft_launch(data);
@@ -95,7 +84,7 @@ static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 	lambert = lambertienne_reflection_sp(COEFF_REFCT, s->light, &sphere->center,
 			*point);
 	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start->id, point, sphere->color.color);
+	shadow = ft_add_shadow(s, start, point);
 	if (shadow != -1)
 		res = shadow;
 	return (res);

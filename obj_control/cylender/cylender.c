@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 15:09:03 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/04 08:35:18 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
 	cylender = curr->struct_obj;
 	lambert = lambertienne_cy(cylender, s->light, *point);
 	res = gen_color(cylender->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, curr->id, point, cylender->color.color);
+	shadow = ft_add_shadow(s, curr, point);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
@@ -105,7 +105,8 @@ int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 	if (ft_intersec_cy(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		curr->color = get_cy_color(s, curr, &solution);
+		curr->color = 0XFF0000;
+		/* curr->color = get_cy_color(s, curr, &solution); */
 		cmp_dist(s, t, curr->color);
 	}
 	return (res);

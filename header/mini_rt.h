@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 15:16:29 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/04 08:22:42 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,18 @@ t_cy			*cylender(char **str);
 int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution,
 					double *t);
 int				exec_sp(t_scene *s, t_maps *curr, t_ray *r);
-void			ft_sp_event(t_scene *data, t_sp *obj, int keycode);
+void			ft_sp_event(t_scene *data, t_sp *obj, int keycode, double incr);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution,
 					double *t);
 int				exec_cy(t_scene *s, t_maps *curr, t_ray *r);
+void			ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t);
-void			ft_pl_event(t_scene *s, t_pl *obj, int keycode);
+void			ft_pl_event(t_scene *s, t_pl *obj, int keycode, double incr);
 int				exec_pl(t_scene *s, t_maps *obj, t_ray *r);
-int				ft_add_shadow(t_scene *s, int not_check, t_vect *ref_pts,
-					int color_ref);
 
 /*VECTOR*/
 t_vect			make_vector(char *str);
@@ -90,5 +89,6 @@ void			loop_screen(t_scene *scene);
 /*OTHER*/
 int				cmp_dist(t_scene *s, double dist, int new_col);
 t_vect			compute_intersec_pts(t_ray *r, double t);
+int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts);
 
 #endif

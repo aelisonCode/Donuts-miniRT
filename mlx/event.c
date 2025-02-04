@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 07:21:54 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 15:22:59 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/04 08:32:02 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	on_button_pressed(int button, int x, int y, void *param)
 	if (obj != NULL)
 	{
 		if (button == LEFT_BUTTON)
-		{
 			ft_put_pixel(s->mlx, x, y, 0XFF00FF);
-		}
+		else if (button == RIGHT_BUTTON || button == MID_BUTTON)
+			ft_put_pixel(s->mlx, x, y, 0X0);
 		mlx_put_image_to_window(s->mlx->mlx_ptr, s->mlx->mlx_window,
 			s->mlx->img_ptr, 0, 0);
 	}
@@ -63,9 +63,11 @@ void	exec_obj_event(t_scene *s, int keycode)
 		if (head->selected == TRUE)
 		{
 			if (head->type == Sphere)
-				ft_sp_event(s, head->struct_obj, keycode);
+				ft_sp_event(s, head->struct_obj, keycode, 1.0);
 			else if (head->type == Plane)
-				ft_pl_event(s, head->struct_obj, keycode);
+				ft_pl_event(s, head->struct_obj, keycode, 0.1);
+			else if (head->type == Cylinder)
+				ft_cy_event(s, head->struct_obj, keycode, 1.0);
 		}
 		head = head->next;
 	}

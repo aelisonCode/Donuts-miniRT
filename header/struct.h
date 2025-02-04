@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/30 15:18:15 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/04 08:28:12 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@
 
 # define COEFF_REFCT 1.0
 # define REFRACTION_AM 0.5
-
-# define LIGHT_CHANGE 3
 
 typedef enum e_object
 {

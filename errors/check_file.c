@@ -12,7 +12,6 @@
 
 #include "../header/errors.h"
 #include "../header/utils.h"
-#include <unistd.h>
 
 static int	get_required_obj(int value)
 {
@@ -71,9 +70,11 @@ static int	create_object(char *tmp, int line, int *res)
 		ft_putstr_fd("Error\nWrong format on line ", STDERR_FILENO);
 		ft_putnbr_fd(line, STDERR_FILENO);
 		ft_putchar_fd('\n', STDERR_FILENO);
-		*res = EXIT_FAILURE;
+		*res = -1;
 		return (*res);
 	}
+	if (*res == -1)
+		return (EXIT_FAILURE);
 	if (valid_ok == EXIT_FAILURE)
 		*res = EXIT_FAILURE;
 	else if (valid_ok == EXIT_SUCCESS)

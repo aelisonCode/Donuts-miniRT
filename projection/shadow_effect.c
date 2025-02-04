@@ -6,13 +6,57 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:16:15 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/29 16:34:47 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/04 08:36:42 by nyrandri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
+#include "../header/vector.h"
 
-int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, int color_ref)
+t_vect	get_dir(t_maps *curr, t_vect pts)
+{
+	t_vect	res;
+	t_sp	*tmp_sp;
+	t_pl	*tmp_pl;
+	t_cy	*tmp_cy;
+
+	res = init_vect(1, 1, 1);
+	if (curr->type == Sphere)
+	{
+		tmp_sp = (t_sp *)curr->struct_obj;
+		res = init_vect(tmp_sp->center.x, tmp_sp->center.y, tmp_sp->center.z);
+		res = ft_normalize(substraction(pts, res));
+		return (res);
+	}
+	if (curr->type == Plane)
+	{
+		tmp_pl = (t_pl *)curr->struct_obj;
+		res = init_vect(1, 0, 0);
+		res = substraction(res, tmp_pl->direction);
+		res = cross(res, tmp_pl->direction);
+		return (res);
+	}
+	if (curr->type == Cylinder)
+	{
+		tmp_cy = (t_cy *)curr->struct_obj;
+		res = init_vect(tmp_cy->center.x, tmp_cy->center.y, tmp_cy->center.z);
+		res = ft_normalize(substraction(pts, res));
+		return (res);
+	}
+	return (res);
+}
+
+int	is_in_view(t_ray r, t_vect pts, t_maps *curr)
+{
+	t_vect	dir;
+
+	dir = get_dir(curr, pts);
+	if (scalaire(r.direction, dir) < 0)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target)
 {
 	int		res;
 	double	t;
@@ -27,12 +71,16 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, int color_ref)
 		if (vect_lenght(substraction(s->light->pos,
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
-			res = gen_color(color_ref, s->amlight, 0, 0);
+		{
+			(void)target;
+			/* if (is_in_view(r, *ref_pts, target) == EXIT_SUCCESS) */
+			res = gen_color(0, s->amlight, 0, 0);
+		}
 	}
 	return (res);
 }
 
-int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, int color_ref)
+int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, t_maps *target)
 {
 	int		res;
 	double	t;
@@ -47,33 +95,35 @@ int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, int color_ref)
 		if (vect_lenght(substraction(s->light->pos,
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
-			res = gen_color(color_ref, s->amlight, 0, 0);
+			(void)target;
+		/* if (is_in_view(r, *ref_pts, target) == EXIT_SUCCESS) */
+		res = gen_color(0, s->amlight, 0, 0);
 	}
 	return (res);
 }
 
-int	ft_add_shadow(t_scene *s, int not_check, t_vect *ref_pts, int color_ref)
+int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts)
 {
 	int		val;
 	t_maps	*tmp;
 
 	val = -1;
-	if (!s || !ref_pts)
+	if (!s || !target || !ref_pts)
 		return (val);
 	tmp = s->world;
 	while (tmp)
 	{
-		if (not_check != tmp->id)
+		if (target->id != tmp->id)
 		{
 			if (tmp->type == Sphere)
 			{
-				val = check_sp(s, tmp->struct_obj, ref_pts, color_ref);
+				val = check_sp(s, tmp->struct_obj, ref_pts, target);
 				if (val != -1)
 					return (val);
 			}
 			if (tmp->type == Plane)
 			{
-				val = check_pl(s, tmp->struct_obj, ref_pts, color_ref);
+				val = check_pl(s, tmp->struct_obj, ref_pts, target);
 				if (val != -1)
 					return (val);
 			}
