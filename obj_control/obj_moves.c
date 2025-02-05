@@ -12,24 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-void	ft_translation(t_vect *point, int move, double incr)
-{
-	if (!point)
-		return ;
-	if (move == UP)
-		point->y += incr;
-	else if (move == DOWN)
-		point->y -= incr;
-	else if (move == LEFT)
-		point->x -= incr;
-	else if (move == RIGHT)
-		point->x += incr;
-	else if (move == Z_UP)
-		point->z += incr;
-	else if (move == Z_DOWN)
-		point->z -= incr;
-}
-
 void	ft_rotate_on_z(t_vect *direction, double ratio_deg)
 {
 	double	ratio_rad;
@@ -64,10 +46,9 @@ void	ft_rotate_on_x(t_vect *direction, double ratio_deg)
 	direction->x = v.x;
 	direction->y = v.y * cos(ratio_rad) - v.z * sin(ratio_rad);
 	direction->z = v.y * sin(ratio_rad) + v.z * cos(ratio_rad);
-
 }
 
-void	ft_rotate(t_vect *direction,int keycode, int incr_deg)
+void	ft_rotate(t_vect *direction, int keycode, int incr_deg)
 {
 	if (!direction)
 		return ;
@@ -84,7 +65,6 @@ void	ft_rotate(t_vect *direction,int keycode, int incr_deg)
 	else if (keycode == RIGHT)
 		ft_rotate_on_x(direction, -incr_deg);
 }
-
 
 void	ft_scale(double *value, int move, double incr)
 {

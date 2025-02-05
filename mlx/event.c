@@ -12,23 +12,138 @@
 
 #include "../header/mini_rt.h"
 
+static int	change_state(t_scene *s, t_maps *ptr)
+{
+	t_maps	*tmp;
+
+	if (!s || !ptr)
+		return (EXIT_FAILURE);
+	tmp = s->world;
+	if (ptr->selected == TRUE)
+		ptr->selected = FALSE;
+	else if (ptr->selected == FALSE)
+		ptr->selected = TRUE;
+	while (tmp)
+	{
+		if (tmp != ptr)
+			tmp->selected = FALSE;
+		tmp = tmp->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static t_color	*get_col(t_maps *obj)
+{
+	t_sp	*tmp_sp;
+	t_pl	*tmp_pl;
+	t_cy	*tmp_cy;
+
+	tmp_sp = NULL;
+	tmp_pl = NULL;
+	tmp_cy = NULL;
+	if (!obj)
+		return (NULL);
+	if (obj->type == Sphere)
+	{
+		tmp_sp = obj->struct_obj;
+		return (&tmp_sp->color);
+	}
+	if (obj->type == Plane)
+	{
+		tmp_pl = obj->struct_obj;
+		return (&tmp_pl->color);
+	}
+	if (obj->type == Cylinder)
+	{
+		tmp_cy = obj->struct_obj;
+		return (&tmp_cy->color);
+	}
+	return (NULL);
+}
+
+static int	rand_col(t_color *col)
+{
+	if (!col)
+		return (EXIT_FAILURE);
+	if (col->r < 255)
+		col->r += 50;
+	else
+		col->r = 0;
+	if (col->g < 255)
+		col->g += 50;
+	else
+		col->g = 0;
+	if (col->b < 255)
+		col->b += 50;
+	else
+		col->b = 0;
+	col->color = create_color(col->r, col->g, col->b);
+	return (EXIT_SUCCESS);
+}
+
+static int	get_obj(t_scene *s, int x, int y, int do_move)
+{
+	t_ray	r;
+	t_vect	solution;
+	double	t;
+	t_maps	*head;
+
+	r = create_ray(&s->cam->view_point, s->p, x, y);
+	head = s->world;
+	while (head)
+	{
+		if (head->type == Sphere)
+		{
+			if (ft_intersec_sp(head->struct_obj, &r, &solution, &t) == EXIT_SUCCESS)
+			{
+				if (do_move == 0)
+					return (change_state(s, head));
+				else
+					return (rand_col(get_col(head)));
+			}
+		}
+		else if (head->type == Plane)
+		{
+			if (ft_intersec_pl(head->struct_obj, &r, &solution, &t) == EXIT_SUCCESS)
+			{
+				if (do_move == 0)
+					return (change_state(s, head));
+				else
+					return (rand_col(get_col(head)));
+			}
+		}
+		else if (head->type == Cylinder)
+		{
+			if (ft_intersec_cy(head->struct_obj, &r, &solution, &t) == EXIT_SUCCESS)
+			{
+				if (do_move == 0)
+					return (change_state(s, head));
+				else
+					return (rand_col(get_col(head)));
+			}
+		}
+
+		head = head->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	on_button_pressed(int button, int x, int y, void *param)
 {
 	t_scene	*s;
-	t_sp	*obj;
 
+	if (!param)
+		return (EXIT_FAILURE);
 	s = (t_scene *)param;
-	obj = get_type(s->world, Sphere);
-	if (obj != NULL)
+	if (button == LEFT_BUTTON)
+		return (get_obj(s, x, y, 0));
+	else if (button == RIGHT_BUTTON)
 	{
-		if (button == LEFT_BUTTON)
-			ft_put_pixel(s->mlx, x, y, 0XFF00FF);
-		else if (button == RIGHT_BUTTON || button == MID_BUTTON)
-			ft_put_pixel(s->mlx, x, y, 0X0);
-		mlx_put_image_to_window(s->mlx->mlx_ptr, s->mlx->mlx_window,
-			s->mlx->img_ptr, 0, 0);
+		get_obj(s, x, y, 1);
+		gen_new_image(s);
+		ft_launch(s);
 	}
-	return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	select_next_obj(t_scene *s)

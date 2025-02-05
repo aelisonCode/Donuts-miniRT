@@ -53,14 +53,25 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
  * is point on the side ?
  * is point on surface ?
  */
-double	lambertienne_cy(t_cy *obj, t_l *light, t_vect point)
+
+static t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
+{
+	double	closest_pts;
+	t_vect	res;
+
+	closest_pts = scalaire(r->direction, vect_dot_val(obj->direction, t));
+	closest_pts = closest_pts + scalaire(substraction(r->origin, obj->center), obj->direction);
+	res = substraction(point, obj->center);
+	res = ft_normalize(substraction(res, vect_dot_val(obj->direction,closest_pts)));
+	return (res);
+}
+
+double	lambertienne_cy(t_vect v_normal, t_l *light, t_vect point)
 {
 	double	res;
 	t_vect	v_light;
-	t_vect	v_normal;
 	double	scal;
 
-	v_normal = ft_normalize(substraction(point, obj->center));
 	v_light = ft_normalize(substraction(light->pos, point));
 	scal = scalaire(v_normal, v_light);
 	if (scal < 0)
@@ -69,15 +80,13 @@ double	lambertienne_cy(t_cy *obj, t_l *light, t_vect point)
 	return (res);
 }
 
-int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point)
+int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point, double lambert)
 {
 	int		res;
 	int		shadow;
-	double	lambert;
 	t_cy	*cylender;
 
 	cylender = curr->struct_obj;
-	lambert = lambertienne_cy(cylender, s->light, *point);
 	res = gen_color(cylender->color.color, s->amlight, lambert, REFRACTION_AM);
 	shadow = ft_add_shadow(s, curr, point);
 	if (shadow != -1)
@@ -89,13 +98,17 @@ int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 {
 	int		res;
 	double	t;
+	double	lambert;
+	t_vect	normal;
 	t_vect	solution;
 
 	res = EXIT_FAILURE;
 	if (ft_intersec_cy(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		curr->color = get_cy_color(s, curr, &solution);
+		normal = ft_normal_cy(r, curr->struct_obj, t, solution);
+		lambert = lambertienne_cy(normal, s->light, solution);
+		curr->color = get_cy_color(s, curr, &solution, lambert);
 		cmp_dist(s, t, curr->color);
 	}
 	return (res);

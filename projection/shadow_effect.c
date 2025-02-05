@@ -17,7 +17,6 @@ t_vect	get_dir(t_maps *curr, t_vect pts)
 {
 	t_vect	res;
 	t_sp	*tmp_sp;
-	t_pl	*tmp_pl;
 	t_cy	*tmp_cy;
 
 	res = init_vect(1, 1, 1);
@@ -26,14 +25,6 @@ t_vect	get_dir(t_maps *curr, t_vect pts)
 		tmp_sp = (t_sp *)curr->struct_obj;
 		res = init_vect(tmp_sp->center.x, tmp_sp->center.y, tmp_sp->center.z);
 		res = ft_normalize(substraction(pts, res));
-		return (res);
-	}
-	if (curr->type == Plane)
-	{
-		tmp_pl = (t_pl *)curr->struct_obj;
-		res = init_vect(1, 0, 0);
-		res = substraction(res, tmp_pl->direction);
-		res = cross(res, tmp_pl->direction);
 		return (res);
 	}
 	if (curr->type == Cylinder)
@@ -72,9 +63,11 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target)
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
 		{
-			(void)target;
-			/* if (is_in_view(r, *ref_pts, target) == EXIT_SUCCESS) */
-			res = gen_color(0, s->amlight, 0, 0);
+			res = gen_color(obj->color.color, s->amlight, EPSILON, EPSILON);
+			if (target->type == Plane)
+				return (res);
+			if (is_in_view(r, *ref_pts, target) == EXIT_FAILURE)
+				res = -1;
 		}
 	}
 	return (res);
@@ -87,6 +80,7 @@ int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, t_maps *target)
 	t_vect	point;
 	t_ray	r;
 
+	(void)target;
 	res = -1;
 	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
 	r.direction = ft_normalize(substraction(s->light->pos, *ref_pts));
@@ -95,13 +89,36 @@ int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, t_maps *target)
 		if (vect_lenght(substraction(s->light->pos,
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
-			(void)target;
-		/* if (is_in_view(r, *ref_pts, target) == EXIT_SUCCESS) */
-		res = gen_color(0, s->amlight, 0, 0);
+			res = gen_color(obj->color.color, s->amlight, EPSILON, EPSILON);
 	}
 	return (res);
 }
 
+int	check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, t_maps *target)
+{
+	int		res;
+	double	t;
+	t_vect	point;
+	t_ray	r;
+
+	res = -1;
+	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
+	r.direction = ft_normalize(substraction(s->light->pos, *ref_pts));
+	if (ft_intersec_cy(obj, &r, &point, &t) == EXIT_SUCCESS)
+	{
+		if (vect_lenght(substraction(s->light->pos,
+					*ref_pts)) > vect_lenght(substraction(s->light->pos,
+					point)))
+		{
+			res = gen_color(obj->color.color, s->amlight, EPSILON, EPSILON);
+			if (target->type == Plane)
+				return (res);
+			if (is_in_view(r, *ref_pts, target) == EXIT_FAILURE)
+				res = -1;
+		}
+	}
+	return (res);
+}
 int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts)
 {
 	int		val;
@@ -126,6 +143,12 @@ int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts)
 				val = check_pl(s, tmp->struct_obj, ref_pts, target);
 				if (val != -1)
 					return (val);
+			}
+			if (tmp->type == Cylinder)
+			{
+				val = check_cy(s, tmp->struct_obj, ref_pts, target);
+				if (val != -1)
+				return (val);
 			}
 		}
 		tmp = tmp->next;

@@ -18,14 +18,16 @@ void	ft_pl_event(t_scene *s, t_pl *obj, int keycode, double incr)
 		return ;
 	if (s->do_rotation == FALSE)
 	{
-		if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
+		if (keycode == UP || keycode == DOWN || keycode == LEFT
+			|| keycode == RIGHT)
 			ft_translation(&obj->direction, keycode, incr);
 		if (keycode == Z_UP || keycode == Z_DOWN)
 			ft_translation(&obj->direction, keycode, incr);
 	}
 	else if (s->do_rotation == TRUE)
 	{
-		if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
+		if (keycode == UP || keycode == DOWN || keycode == LEFT
+			|| keycode == RIGHT)
 			ft_rotate(&obj->direction, keycode, 10);
 		if (keycode == Z_UP || keycode == Z_DOWN)
 			ft_rotate(&obj->direction, keycode, 10);
@@ -40,7 +42,7 @@ int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 	t_vect	x;
 
 	denominator = scalaire(ray->direction, ft_normalize(obj->direction));
-	if (fabs(denominator) < 1e-4)
+	if (fabs(denominator) < EPSILON)
 		return (EXIT_FAILURE);
 	x = substraction(obj->point, ray->origin);
 	*t = scalaire(x, ft_normalize(obj->direction)) / denominator;

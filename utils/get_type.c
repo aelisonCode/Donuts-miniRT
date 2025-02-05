@@ -35,33 +35,30 @@ static void	retired_other(t_scene *scene, t_obj select)
 		scene->light->selected = FALSE;
 }
 
+static void	change_state(int *to_change)
+{
+	if (*to_change == FALSE)
+		*to_change = TRUE;
+	else if (*to_change == TRUE)
+		*to_change = FALSE;
+}
+
 int	select_primary(t_scene *scene, int select)
 {
 	if (!scene)
 		return (EXIT_FAILURE);
 	if (select == LIGHT)
 	{
-		if (scene->light->selected == FALSE)
-			scene->light->selected = TRUE;
-		else
-			scene->light->selected = FALSE;
+		change_state(&scene->light->selected);
 		retired_other(scene, Light);
 	}
 	else if (select == CAMERA)
 	{
-		if (scene->cam->selected == FALSE)
-			scene->cam->selected = TRUE;
-		else
-			scene->cam->selected = FALSE;
+		change_state(&scene->cam->selected);
 		retired_other(scene, Camera);
 	}
 	else if (select == ROTATE)
-	{
-		if (scene->do_rotation == FALSE)
-			scene->do_rotation = TRUE;
-		else if (scene->do_rotation == TRUE)
-			scene->do_rotation = FALSE;
-	}
+		change_state(&scene->do_rotation);
 	return (EXIT_SUCCESS);
 }
 

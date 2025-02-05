@@ -34,3 +34,23 @@ int	cmp_dist(t_scene *s, double dist, int new_col)
 	}
 	return (EXIT_FAILURE);
 }
+
+void	ft_translation(t_vect *point, int move, double incr)
+{
+	if (!point)
+		return ;
+	if (move == UP)
+		point->y += incr;
+	else if (move == DOWN)
+		point->y -= incr;
+	else if (move == LEFT)
+		point->x -= incr;
+	else if (move == RIGHT)
+		point->x += incr;
+	else if (move == Z_UP)
+		point->z += incr;
+	else if (move == Z_DOWN)
+		point->z -= incr;
+}
+
+

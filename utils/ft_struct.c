@@ -14,7 +14,7 @@
 
 int	control_light(t_l *light, int keycode, double incr)
 {
-	int		result;
+	int	result;
 
 	result = TRUE;
 	if (!light)
@@ -34,21 +34,23 @@ int	control_light(t_l *light, int keycode, double incr)
 
 int	control_cam(int do_rotation, t_c *cam, int keycode, double incr)
 {
-	int		result;
+	int	result;
 
 	result = TRUE;
 	if (!cam)
 		return (FALSE);
 	if (do_rotation == FALSE)
 	{
-		if (keycode == LEFT || keycode == RIGHT || keycode == UP || keycode == DOWN)
+		if (keycode == LEFT || keycode == RIGHT || keycode == UP
+			|| keycode == DOWN)
 			ft_translation(&cam->view_point, keycode, incr);
 		else if (keycode == Z_UP || keycode == Z_DOWN)
 			ft_translation(&cam->view_point, keycode, incr);
 	}
 	else if (do_rotation == TRUE)
 	{
-		if (keycode == LEFT || keycode == RIGHT || keycode == UP || keycode == DOWN)
+		if (keycode == LEFT || keycode == RIGHT || keycode == UP
+			|| keycode == DOWN)
 			ft_rotate(&cam->direction, keycode, 20);
 		else if (keycode == Z_UP || keycode == Z_DOWN)
 			ft_rotate(&cam->direction, keycode, 20);

@@ -42,6 +42,7 @@
 
 # define COEFF_REFCT 1.0
 # define REFRACTION_AM 0.5
+# define EPSILON 1e-4
 
 typedef enum e_object
 {
