@@ -12,43 +12,6 @@
 
 #include "../../header/mini_rt.h"
 
-static int	ft_cy_limit(t_cy *obj, t_vect *solution)
-{
-	if (vect_lenght(substraction(obj->center, *solution)) > obj->height / 2)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}
-
-int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
-{
-	double	a;
-	double	b;
-	double	c;
-	t_vect	dist;
-	double	discr;
-
-	dist = substraction(r->origin, obj->center);
-	a = scalaire(r->direction, r->direction) - pow(scalaire(r->direction,
-				obj->direction), 2);
-	b = 2 * (scalaire(r->direction, dist) - (scalaire(r->direction,
-					obj->direction)) * (scalaire(dist, obj->direction)));
-	c = scalaire(dist, dist) - pow(scalaire(dist, obj->direction), 2)
-		- (obj->radius * obj->radius);
-	discr = (b * b) - (4 * a * c);
-	if (discr < 0)
-		return (EXIT_FAILURE);
-	if (solution != NULL)
-	{
-		*t = get_root(a, b, discr);
-		if (*t < 0)
-			return (EXIT_FAILURE);
-		*solution = compute_intersec_pts(r, *t);
-		if (ft_cy_limit(obj, solution) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
 static t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
 {
 	double	closest_pts;
