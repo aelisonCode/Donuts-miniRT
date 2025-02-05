@@ -43,7 +43,7 @@ t_pl	*plane(char **str)
 	return (pl);
 }
 
-t_cy	*cylender(char **str)
+t_cy	*cylinder(char **str)
 {
 	t_cy	*cy;
 

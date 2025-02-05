@@ -55,7 +55,7 @@ int	for_plane(char **all)
 	return (5);
 }
 
-int	for_cylender(char **all)
+int	for_cylinder(char **all)
 {
 	int		i;
 	t_scene	*s;
@@ -69,9 +69,9 @@ int	for_cylender(char **all)
 	}
 	if (i != 6)
 		return (0);
-	if (for_cylender_param(all) == 1)
+	if (for_cylinder_param(all) == 1)
 		return (0);
 	s = get_struct();
-	add_maps(&s->world, create_map(Cylinder, cylender(all)));
+	add_maps(&s->world, create_map(Cylinder, cylinder(all)));
 	return (6);
 }

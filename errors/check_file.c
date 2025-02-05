@@ -53,7 +53,7 @@ static int	parse_object(char *str)
 	else if (ft_strncmp(split[0], "pl", 3) == EXIT_SUCCESS)
 		result = for_plane(split);
 	else if (ft_strncmp(split[0], "cy", 3) == EXIT_SUCCESS)
-		result = for_cylender(split);
+		result = for_cylinder(split);
 	ft_free_tab(split);
 	return (result);
 }

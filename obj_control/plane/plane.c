@@ -22,7 +22,7 @@ void	ft_pl_event(t_scene *s, t_pl *obj, int keycode, double incr)
 			|| keycode == RIGHT)
 			ft_translation(&obj->direction, keycode, incr);
 		if (keycode == Z_UP || keycode == Z_DOWN)
-			ft_translation(&obj->direction, keycode, incr);
+			ft_translation(&obj->direction, keycode, -incr);
 	}
 	else if (s->do_rotation == TRUE)
 	{

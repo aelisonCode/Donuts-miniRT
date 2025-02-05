@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cylender.c                                         :+:      :+:    :+:   */
+/*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,7 +39,7 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		*t = get_racine(a, b, discr);
+		*t = get_root(a, b, discr);
 		if (*t < 0)
 			return (EXIT_FAILURE);
 		*solution = compute_intersec_pts(r, *t);
@@ -48,11 +48,6 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 	}
 	return (EXIT_SUCCESS);
 }
-
-/*lambertieenne cylender
- * is point on the side ?
- * is point on surface ?
- */
 
 static t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
 {
@@ -84,10 +79,10 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point, double lambert)
 {
 	int		res;
 	int		shadow;
-	t_cy	*cylender;
+	t_cy	*cylinder;
 
-	cylender = curr->struct_obj;
-	res = gen_color(cylender->color.color, s->amlight, lambert, REFRACTION_AM);
+	cylinder = curr->struct_obj;
+	res = gen_color(cylinder->color.color, s->amlight, lambert, REFRACTION_AM);
 	shadow = ft_add_shadow(s, curr, point);
 	if (shadow != -1)
 		res = shadow;

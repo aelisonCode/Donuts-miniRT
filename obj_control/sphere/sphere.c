@@ -16,9 +16,7 @@ void	ft_sp_event(t_scene *data, t_sp *obj, int keycode, double incr)
 {
 	if (!obj)
 		return ;
-	if (keycode == UP || keycode == DOWN)
-		ft_translation(&obj->center, keycode, incr);
-	if (keycode == LEFT || keycode == RIGHT)
+	if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
 		ft_translation(&obj->center, keycode, incr);
 	if (keycode == Z_UP || keycode == Z_DOWN)
 		ft_translation(&obj->center, keycode, -incr);
@@ -46,7 +44,7 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution, double *t)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		*t = get_racine(a, b, discriminant);
+		*t = get_root(a, b, discriminant);
 		if (*t < 0)
 			return (EXIT_FAILURE);
 		*solution = compute_intersec_pts(r, *t);

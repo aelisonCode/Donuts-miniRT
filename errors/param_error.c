@@ -35,7 +35,7 @@ int	for_plane_param(char **all)
 	return (0);
 }
 
-int	for_cylender_param(char **all)
+int	for_cylinder_param(char **all)
 {
 	if (check_vector(all[1], 3) == 1)
 		return (1);

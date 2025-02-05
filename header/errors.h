@@ -22,7 +22,7 @@ int	for_camera(char **all, int *t);
 int	for_light(char **all, int *t);
 int	for_sphere(char **all);
 int	for_plane(char **all);
-int	for_cylender(char **all);
+int	for_cylinder(char **all);
 int	check_file(char *str);
 int	is_valid_format(char *str);
 int	for_ambient_param(char **all);
@@ -30,5 +30,5 @@ int	for_camera_param(char **all);
 int	for_light_param(char **all);
 int	for_sphere_param(char **all);
 int	for_plane_param(char **all);
-int	for_cylender_param(char **all);
+int	for_cylinder_param(char **all);
 #endif

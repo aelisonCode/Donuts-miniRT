@@ -60,7 +60,7 @@ t_c				*camera(char **str);
 t_l				*light(char **str);
 t_sp			*sphere(char **str);
 t_pl			*plane(char **str);
-t_cy			*cylender(char **str);
+t_cy			*cylinder(char **str);
 
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution,
@@ -82,7 +82,7 @@ int				exec_pl(t_scene *s, t_maps *obj, t_ray *r);
 /*VECTOR*/
 t_vect			make_vector(char *str);
 t_color			make_color(char *str);
-double			get_racine(double a, double b, double disc);
+double			get_root(double a, double b, double disc);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
 t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene);

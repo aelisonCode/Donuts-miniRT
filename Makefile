@@ -23,8 +23,8 @@ PRINT = $(LIB_PATH)ft_printf/libftprintf.a
 SRC = src/ft_program.c \
 	  obj_control/obj_moves.c \
 	  obj_control/sphere/sphere.c \
-	  obj_control/cylender/cylender.c \
-	  obj_control/cylender/utils.c \
+	  obj_control/cylinder/cylinder.c \
+	  obj_control/cylinder/utils.c \
 	  obj_control/plane/plane.c \
 	  obj_control/utils.c \
 	  vect/operations.c \

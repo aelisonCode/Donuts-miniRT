@@ -54,7 +54,7 @@ double	get_angle(t_vect a, t_vect b)
 	return (res);
 }
 
-double	get_racine(double a, double b, double disc)
+double	get_root(double a, double b, double disc)
 {
 	double	r_1;
 	double	r_2;
