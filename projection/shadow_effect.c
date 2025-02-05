@@ -43,7 +43,7 @@ int	is_in_view(t_ray r, t_vect pts, t_maps *curr)
 
 	dir = get_dir(curr, pts);
 	if (scalaire(r.direction, dir) < 0)
-		return (EXIT_FAILURE);
+			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
