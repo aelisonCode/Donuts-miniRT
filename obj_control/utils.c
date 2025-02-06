@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:56:01 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:25:08 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 10:19:42 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,3 @@ void	ft_translation(t_vect *point, int move, double incr)
 	else if (move == Z_DOWN)
 		point->z -= incr;
 }
-
-

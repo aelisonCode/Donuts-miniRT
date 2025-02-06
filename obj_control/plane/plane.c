@@ -46,13 +46,12 @@ int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 		return (EXIT_FAILURE);
 	x = substraction(obj->point, ray->origin);
 	*t = scalaire(x, ft_normalize(obj->direction)) / denominator;
-	if (*t >= 0)
+	if (*t > EPSILON)
 	{
 		*res = compute_intersec_pts(ray, *t);
 		return (EXIT_SUCCESS);
 	}
-	else
-		return (EXIT_FAILURE);
+	return (EXIT_FAILURE);
 }
 
 static double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,

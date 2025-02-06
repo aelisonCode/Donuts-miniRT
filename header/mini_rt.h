@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:22:42 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 11:26:41 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,13 @@ int				select_primary(t_scene *scene, int select);
 t_obj			is_primary_selected(t_scene *scene);
 void			control_primary(t_scene *scene, t_obj type, int keycode);
 
-/*MLX_DEBUG*/
-void			ft_menu(t_scene *s);
+int				ft_released(int keycode, t_scene *s);
+int				ft_pressed(int keycode, t_scene *s);
+int				select_next_obj(t_scene *s);
+char			*get_selected(t_scene *s);
+void			exec_obj_event(t_scene *s, int keycode);
+int				ft_mouse_to_obj(t_scene *s, t_maps *ptr, t_ray *r, int do_move);
+int				ft_show_control(t_scene *s);
 
 /*OBJECT*/
 t_a				*ambient_l(char **str);
@@ -61,6 +66,9 @@ t_l				*light(char **str);
 t_sp			*sphere(char **str);
 t_pl			*plane(char **str);
 t_cy			*cylinder(char **str);
+int				select_state(t_scene *s, t_maps *ptr);
+t_color			*get_col(t_maps *obj);
+int				rand_col(t_color *col);
 
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution,
@@ -73,6 +81,7 @@ int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution,
 					double *t);
 int				exec_cy(t_scene *s, t_maps *curr, t_ray *r);
 void			ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr);
+int				compute_edge(t_cy *obj, t_ray *r, t_vect *solution);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t);
@@ -86,6 +95,14 @@ double			get_root(double a, double b, double disc);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
 t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene);
+
+/*EFFECT*/
+int				check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts,
+					t_maps *target);
+int				check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts,
+					t_maps *target);
+int				check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts,
+					t_maps *target);
 
 /*OTHER*/
 int				cmp_dist(t_scene *s, double dist, int new_col);

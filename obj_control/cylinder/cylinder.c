@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:57:06 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:18:45 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
 	t_vect	res;
 
 	closest_pts = scalaire(r->direction, vect_dot_val(obj->direction, t));
-	closest_pts = closest_pts + scalaire(substraction(r->origin, obj->center), obj->direction);
+	closest_pts = closest_pts + scalaire(substraction(r->origin, obj->center),
+			obj->direction);
 	res = substraction(point, obj->center);
-	res = ft_normalize(substraction(res, vect_dot_val(obj->direction,closest_pts)));
+	res = ft_normalize(substraction(res, vect_dot_val(obj->direction,
+					closest_pts)));
 	return (res);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/02/04 08:28:12 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 08:24:53 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define LEFT_BUTTON 1
 # define RIGHT_BUTTON 3
 # define MID_BUTTON 2
+
+# define CTRL 65507
+# define SHIFT 65505
 
 # define K_ESCAPE 65307
 # define CAMERA 99
@@ -165,6 +168,8 @@ typedef struct s_scene
 	int				do_rotation;
 	double			dist_curr;
 	int				color_to_put;
+	int				show_control;
+	int				current;
 }					t_scene;
 
 #endif

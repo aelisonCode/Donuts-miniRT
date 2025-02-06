@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:09:10 by aelison          #+#    #+#             */
-/*   Updated: 2025/02/04 09:24:08 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 10:18:08 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,11 @@ void	ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr)
 	}
 	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
 	{
-		ft_scale(&obj->diameter, keycode, incr);
+		ft_scale(&obj->height, keycode, incr);
 		obj->radius = obj->diameter / 2.0;
 	}
 	gen_new_image(s);
 	ft_launch(s);
-}
-
-static int	is_in_cy_limit(t_cy *obj, t_vect *solution)
-{
-
-	if (vect_lenght(substraction(obj->center, *solution)) > (obj->height / 2) + EPSILON)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
 static t_vect	get_coeff(t_ray *r, t_cy *obj)
@@ -62,28 +54,6 @@ static t_vect	get_coeff(t_ray *r, t_cy *obj)
 	return (res);
 }
 
-static int	ft_cy_limit(t_cy *obj, t_ray *r)
-{
-	double	t;
-	t_vect	solution;
-	t_vect	top_pos;
-	t_vect	bot_pos;
-	t_pl	edge;
-
-	top_pos = sum(obj->center, vect_dot_val(obj->direction, obj->height / 2));
-	bot_pos = sum(obj->center, vect_dot_val(vect_dot_val(obj->direction, -1), obj->height / 2));
-	edge.point = init_vect(top_pos.x, top_pos.y, top_pos.z);
-	edge.direction = obj->direction;
-	if (ft_intersec_pl(&edge, r, &solution, &t) == EXIT_SUCCESS)
-	{
-		if (vect_lenght(substraction(solution, top_pos)) <= obj->radius)
-			return (EXIT_SUCCESS);
-		if (vect_lenght(substraction(solution, bot_pos)) <= obj->radius)
-			return (EXIT_SUCCESS);
-	}
-	return (EXIT_FAILURE);
-}
-
 int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 {
 	double	discr;
@@ -99,7 +69,7 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 		if (*t < EPSILON)
 			return (EXIT_FAILURE);
 		*solution = compute_intersec_pts(r, *t);
-		if (is_in_cy_limit(obj, solution) == EXIT_FAILURE)
+		if (compute_edge(obj, r, solution) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
