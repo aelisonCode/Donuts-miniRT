@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 15:44:32 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:09:58 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void			loop_screen(t_scene *scene);
 
 /*EFFECT*/
 int				check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts,
-					t_maps *target);
+					t_maps *target, double lambert);
 int				check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts,
 					t_maps *target);
 int				check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts,

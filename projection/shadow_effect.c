@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:16:15 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/07 10:53:09 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/07 11:23:43 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,14 @@ double	shadow_intensity(t_vect *inter, t_vect *obj_inter, t_ray ray)
 }
 
 static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
-		t_maps *target)
+		t_maps *target, double lambert)
 {
 	int	val;
 
 	val = -1;
 	if (ptr->type == Sphere)
 	{
-		val = check_sp(s, ptr->struct_obj, ref_pts, target);
+		val = check_sp(s, ptr->struct_obj, ref_pts, target, lambert);
 		if (val != -1)
 			return (val);
 	}
@@ -101,16 +101,6 @@ static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
 			return (val);
 	}
 	return (val);
-}
-
-int	is_in_view(t_ray r, t_vect pts, t_maps *curr)
-{
-	t_vect	dir;
-
-	dir = get_dir(curr, pts);
-	if (scalaire(r.direction, dir) < 0)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }
 
 int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lambert)
@@ -185,8 +175,6 @@ int	check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, t_maps *target)
 			res = gen_color(obj->color.color, s->amlight, EPSILON, EPSILON);
 			if (target->type == Plane)
 				return (res);
-			if (is_in_view(r, *ref_pts, target) == EXIT_FAILURE)
-				res = -1;
 		}
 	}
 	return (res);
@@ -205,7 +193,7 @@ int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts, double lambert)
 	{
 		if (target->id != tmp->id)
 		{
-			val = ft_exec_obj(s, tmp, ref_pts, target);
+			val = ft_exec_obj(s, tmp, ref_pts, target, lambert);
 			if (val != -1)
 				return (val);
 		}
