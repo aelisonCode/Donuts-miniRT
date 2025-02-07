@@ -6,37 +6,32 @@
 /*   By: aelison <aelison@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 08:09:10 by aelison          #+#    #+#             */
-/*   Updated: 2025/02/06 10:18:08 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:51:40 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
 
-void	ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr)
+void	ft_cy_event(t_scene *data, t_maps *curr, int keycode, double incr)
 {
-	if (s->do_rotation == FALSE)
-	{
-		if (keycode == LEFT || keycode == RIGHT || keycode == UP
-			|| keycode == DOWN)
-			ft_translation(&obj->center, keycode, incr);
-		if (keycode == Z_UP || keycode == Z_DOWN)
-			ft_translation(&obj->center, keycode, -incr);
-	}
-	else if (s->do_rotation == TRUE)
-	{
-		if (keycode == LEFT || keycode == RIGHT || keycode == UP
-			|| keycode == DOWN)
-			ft_rotate(&obj->direction, keycode, 3);
-		if (keycode == Z_UP || keycode == Z_DOWN)
-			ft_rotate(&obj->direction, keycode, 3);
-	}
-	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
-	{
-		ft_scale(&obj->height, keycode, incr);
-		obj->radius = obj->diameter / 2.0;
-	}
-	gen_new_image(s);
-	ft_launch(s);
+	t_cy	*tmp;
+
+	if (!data || !curr)
+		return ;
+	tmp = curr->struct_obj;
+	if (data->do_color != FALSE && (keycode == SCALE_UP
+			|| keycode == SCALE_DOWN))
+		ft_color(&tmp->color, data->do_color, keycode, 5);
+	else if (data->do_diameter == TRUE)
+		ft_diameter(&tmp->diameter, &tmp->radius, keycode, incr);
+	else if (data->do_height == TRUE)
+		ft_height(&tmp->height, keycode, incr);
+	else if (data->do_z == TRUE)
+		ft_center(&tmp->center, keycode, incr);
+	else if (data->do_rotation == TRUE)
+		ft_rotation(&tmp->direction, keycode, 10);
+	gen_new_image(data);
+	ft_launch(data);
 }
 
 static t_vect	get_coeff(t_ray *r, t_cy *obj)

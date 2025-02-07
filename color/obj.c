@@ -32,30 +32,36 @@ int	rand_col(t_color *col)
 	return (EXIT_SUCCESS);
 }
 
-t_color	*get_col_sp(t_sp *obj)
+t_color	get_col_sp(t_sp *obj)
 {
-	return (&obj->color);
+	return (obj->color);
 }
 
-t_color	*get_col_pl(t_pl *obj)
+t_color	get_col_pl(t_pl *obj)
 {
-	return (&obj->color);
+	return (obj->color);
 }
 
-t_color	*get_col_cy(t_cy *obj)
+t_color	get_col_cy(t_cy *obj)
 {
-	return (&obj->color);
+	return (obj->color);
 }
 
-t_color	*get_col(t_maps *obj)
+t_color	get_col(t_maps *obj)
 {
+	t_color	tmp;
+
+	tmp.r = 0XFFFFFF;
+	tmp.g = 0XFFFFFF;
+	tmp.b = 0XFFFFFF;
+	tmp.color = create_color(tmp.r, tmp.g, tmp.b);
 	if (!obj)
-		return (NULL);
+		return (tmp);
 	if (obj->type == Sphere)
 		return (get_col_sp(obj->struct_obj));
 	if (obj->type == Plane)
 		return (get_col_pl(obj->struct_obj));
 	if (obj->type == Cylinder)
 		return (get_col_cy(obj->struct_obj));
-	return (NULL);
+	return (tmp);
 }

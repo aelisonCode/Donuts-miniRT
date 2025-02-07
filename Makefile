@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/02/06 11:27:21 by aelison          ###   ########.fr        #
+#    Updated: 2025/02/06 15:05:27 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRC = src/ft_program.c \
 	  obj_control/cylinder/edge.c \
 	  obj_control/plane/plane.c \
 	  obj_control/utils.c \
+	  obj_control/transform.c \
 	  vect/operations.c \
 	  vect/control.c \
 	  color/color.c \

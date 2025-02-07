@@ -12,7 +12,7 @@
 
 #include "../../header/mini_rt.h"
 
-static t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
+t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
 {
 	double	closest_pts;
 	t_vect	res;

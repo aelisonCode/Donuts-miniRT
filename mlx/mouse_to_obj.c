@@ -16,13 +16,17 @@ int	ft_mouse_to_sp(t_scene *s, t_maps *ptr, t_ray *r, int do_move)
 {
 	double	t;
 	t_vect	solution;
+	t_color	tmp;
 
 	if (ft_intersec_sp(ptr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		if (do_move == 0)
 			return (select_state(s, ptr));
 		else
-			return (rand_col(get_col(ptr)));
+		{
+			tmp = get_col(ptr);
+			return (rand_col(&tmp));
+		}
 	}
 	return (EXIT_FAILURE);
 }
@@ -31,13 +35,17 @@ int	ft_mouse_to_pl(t_scene *s, t_maps *ptr, t_ray *r, int do_move)
 {
 	double	t;
 	t_vect	solution;
+	t_color	tmp;
 
 	if (ft_intersec_pl(ptr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		if (do_move == 0)
 			return (select_state(s, ptr));
 		else
-			return (rand_col(get_col(ptr)));
+		{
+			tmp = get_col(ptr);
+			return (rand_col(&tmp));
+		}
 	}
 	return (EXIT_FAILURE);
 }
@@ -46,13 +54,17 @@ int	ft_mouse_to_cy(t_scene *s, t_maps *ptr, t_ray *r, int do_move)
 {
 	double	t;
 	t_vect	solution;
+	t_color	tmp;
 
 	if (ft_intersec_cy(ptr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		if (do_move == 0)
 			return (select_state(s, ptr));
 		else
-			return (rand_col(get_col(ptr)));
+		{
+			tmp = get_col(ptr);
+			return (rand_col(&tmp));
+		}
 	}
 	return (EXIT_FAILURE);
 }

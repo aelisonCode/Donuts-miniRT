@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 13:01:43 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/22 13:05:40 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 14:06:08 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	retired_other(t_scene *scene, t_obj select)
 		scene->light->selected = FALSE;
 }
 
-static void	change_state(int *to_change)
+void	change_state(int *to_change)
 {
 	if (*to_change == FALSE)
 		*to_change = TRUE;
@@ -57,8 +57,6 @@ int	select_primary(t_scene *scene, int select)
 		change_state(&scene->cam->selected);
 		retired_other(scene, Camera);
 	}
-	else if (select == ROTATE)
-		change_state(&scene->do_rotation);
 	return (EXIT_SUCCESS);
 }
 

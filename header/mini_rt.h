@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 11:26:41 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:13:22 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,11 @@ void			control_primary(t_scene *scene, t_obj type, int keycode);
 int				ft_released(int keycode, t_scene *s);
 int				ft_pressed(int keycode, t_scene *s);
 int				select_next_obj(t_scene *s);
-char			*get_selected(t_scene *s);
+char			*get_selected(t_scene *s, t_maps **ptr);
 void			exec_obj_event(t_scene *s, int keycode);
 int				ft_mouse_to_obj(t_scene *s, t_maps *ptr, t_ray *r, int do_move);
 int				ft_show_control(t_scene *s);
+void			select_mod(t_scene *s, int keycode);
 
 /*OBJECT*/
 t_a				*ambient_l(char **str);
@@ -67,25 +68,34 @@ t_sp			*sphere(char **str);
 t_pl			*plane(char **str);
 t_cy			*cylinder(char **str);
 int				select_state(t_scene *s, t_maps *ptr);
-t_color			*get_col(t_maps *obj);
+t_color			get_col(t_maps *obj);
 int				rand_col(t_color *col);
+void			change_state(int *to_change);
 
+void			ft_center(t_vect *to_change, int keycode, int incr);
+void			ft_rotation(t_vect *to_change, int keycode, int incr);
+void			ft_diameter(double *diameter, double *radius, int keycode,
+					int incr);
+void			ft_height(double *height, int keycode, int incr);
+void			ft_color(t_color *ref, int to_change, int keycode, int incr);
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution,
 					double *t);
 int				exec_sp(t_scene *s, t_maps *curr, t_ray *r);
-void			ft_sp_event(t_scene *data, t_sp *obj, int keycode, double incr);
+void			ft_sp_event(t_scene *data, t_maps *curr, int keycode,
+					double incr);
 
 /*CYLENDER*/
 int				ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution,
 					double *t);
 int				exec_cy(t_scene *s, t_maps *curr, t_ray *r);
-void			ft_cy_event(t_scene *s, t_cy *obj, int keycode, double incr);
+void			ft_cy_event(t_scene *s, t_maps *obj, int keycode, double incr);
 int				compute_edge(t_cy *obj, t_ray *r, t_vect *solution);
+t_vect			ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point);
 
 /*PLANE*/
 int				ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t);
-void			ft_pl_event(t_scene *s, t_pl *obj, int keycode, double incr);
+void			ft_pl_event(t_scene *s, t_maps *obj, int keycode, double incr);
 int				exec_pl(t_scene *s, t_maps *obj, t_ray *r);
 
 /*VECTOR*/
@@ -104,6 +114,7 @@ int				check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts,
 int				check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts,
 					t_maps *target);
 
+void			ft_scale_color(int *color_base, int keycode, int incr);
 /*OTHER*/
 int				cmp_dist(t_scene *s, double dist, int new_col);
 t_vect			compute_intersec_pts(t_ray *r, double t);

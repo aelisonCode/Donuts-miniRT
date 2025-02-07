@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 07:21:54 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 11:22:00 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:33:10 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	ft_released(int keycode, t_scene *s)
 
 	if (s)
 	{
+		select_mod(s, keycode);
 		if (keycode == CTRL)
 			s->show_control = FALSE;
 		if (keycode == SHIFT)
@@ -74,7 +75,7 @@ int	ft_released(int keycode, t_scene *s)
 			ft_close_window(s);
 		if (keycode == CHANGE_OBJ)
 			return (select_next_obj(s));
-		if (keycode == LIGHT || keycode == CAMERA || keycode == ROTATE)
+		if (keycode == LIGHT || keycode == CAMERA)
 			return (select_primary(s, keycode));
 		type = is_primary_selected(s);
 		if (type != Non_object)
