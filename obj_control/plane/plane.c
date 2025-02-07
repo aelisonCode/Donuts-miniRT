@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:25:45 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:23:42 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:48:09 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	get_pl_color(t_scene *s, t_maps *start, t_vect *point)
 	plane = start->struct_obj;
 	lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, plane, *point);
 	res = gen_color(plane->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start, point);
+	shadow = ft_add_shadow(s, start, point, EPSILON);
 	if (shadow != -1)
 		res = shadow;
 	return (res);

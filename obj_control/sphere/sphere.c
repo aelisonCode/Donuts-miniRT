@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 09:16:25 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:22:55 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:43:28 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 	lambert = lambertienne_reflection_sp(COEFF_REFCT, s->light, &sphere->center,
 			*point);
 	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start, point);
+	shadow = ft_add_shadow(s, start, point, lambert);
 	if (shadow != -1)
 		res = shadow;
 	return (res);

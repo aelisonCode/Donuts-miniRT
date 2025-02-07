@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:07:48 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:57:06 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:47:42 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point, double lambert)
 
 	cylinder = curr->struct_obj;
 	res = gen_color(cylinder->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, curr, point);
+	shadow = ft_add_shadow(s, curr, point, EPSILON);
 	if (shadow != -1)
 		res = shadow;
 	return (res);

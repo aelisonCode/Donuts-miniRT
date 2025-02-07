@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/04 08:22:42 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:44:32 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ void			loop_screen(t_scene *scene);
 /*OTHER*/
 int				cmp_dist(t_scene *s, double dist, int new_col);
 t_vect			compute_intersec_pts(t_ray *r, double t);
-int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts);
-
+int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts, double lambert);
 #endif
