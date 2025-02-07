@@ -1,16 +1,14 @@
 TO_DO:
-	- add cylinder, other ???
-	- add other object and put_pixel the furthest to the nearest
-	- add fond (for shadow)
-	- do shadow
+	- shadow upgrade the mirror effect
+	- uprade a menu to understand command ?
+	- upgrade selection by mouse
+	- generate a random color on selecte obj with right click
+	- optimize code : less compute, for better speed
+	- create a lot of map !!!!
 	- select object and control it to : translate, rotate,.....
 
 
 MAKEFILE:
-  - compile le tout et les inclus pour etre utilise
-  - place les fichiers objets dans le dossier obj, avec leur dossier associe
-  - verifie la norm avec "make n"
-  - compile en mode debug et creer executable "no leaks" : "make grind"
   - execute programme avec/sans arguments : \
       "make run" : compile et execute le programme \
       "make run ARG=..." : compile et execute avec un ou des arguments \
@@ -18,8 +16,4 @@ MAKEFILE:
     
 INCLUDE:
 - libft bonus: la libft et les listes simplement chaine
-- ft_printf: contient les options: %p %c %s %d %i %u %x %X %%
-
-Main actuel:
- - Cree la window, ptr sur mlx
- - close window et free corectement en appuiyant sur echappe ou la croix
+- ft_printf: contient les options: %p %c %s %d %i %u %x %X %%	TO DELETTE NOT USE

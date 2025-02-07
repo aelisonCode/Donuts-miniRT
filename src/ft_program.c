@@ -12,34 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-/*TO DELETE !!!!*/
-void	dda_algo(t_mlx *mlx, t_vect start, t_vect goal)
-{
-	t_vect	diff;
-	double	inc;
-	double	step_x;
-	double	step_y;
-	double	i;
-
-	i = 0;
-	diff = init_vect(goal.x - start.x, goal.y - start.y, goal.z - start.z);
-	inc = 0;
-	if (fabs(diff.x) > fabs(diff.y))
-		inc = fabs(diff.x);
-	else
-		inc = fabs(diff.y);
-	step_x = diff.x / inc;
-	step_y = diff.y / inc;
-	diff = init_vect(start.x, start.y, start.z);
-	while (i <= inc)
-	{
-		ft_put_pixel(mlx, diff.x, diff.y, 0X0000FF);
-		diff.x += step_x;
-		diff.y += step_y;
-		i++;
-	}
-}
-
 void	*get_struct(void)
 {
 	static t_scene	res;

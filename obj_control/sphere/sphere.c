@@ -12,17 +12,20 @@
 
 #include "../../header/mini_rt.h"
 
-void	ft_sp_event(t_scene *data, t_sp *obj, int keycode, double incr)
+void	ft_sp_event(t_scene *data, t_maps *curr, int keycode, double incr)
 {
-	if (!obj)
+	t_sp	*tmp;
+
+	if (!data || !curr)
 		return ;
-	if (keycode == UP || keycode == DOWN || keycode == LEFT || keycode == RIGHT)
-		ft_translation(&obj->center, keycode, incr);
-	if (keycode == Z_UP || keycode == Z_DOWN)
-		ft_translation(&obj->center, keycode, -incr);
-	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
-		ft_scale(&obj->diameter, keycode, incr);
-	obj->radius = obj->diameter / 2;
+	tmp = curr->struct_obj;
+	if (data->do_color != FALSE && (keycode == SCALE_UP
+			|| keycode == SCALE_DOWN))
+		ft_color(&tmp->color, data->do_color, keycode, 5);
+	if (data->do_diameter == TRUE)
+		ft_diameter(&tmp->diameter, &tmp->radius, keycode, incr);
+	if (data->do_z == TRUE)
+		ft_center(&tmp->center, keycode, incr);
 	gen_new_image(data);
 	ft_launch(data);
 }

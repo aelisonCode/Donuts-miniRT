@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 07:04:52 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/20 07:06:52 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 15:22:06 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,47 @@ void	gen_new_image(t_scene *scene)
 			&data->size_line, &data->endian);
 	if (data->img_addr == NULL)
 		ft_close_window(scene);
+}
+
+static void	retired_other(int *a, int *b, int *c, int *d)
+{
+	*a = FALSE;
+	*b = FALSE;
+	*c = FALSE;
+	*d = FALSE;
+}
+
+void	select_mod(t_scene *s, int keycode)
+{
+	if (keycode == RED || keycode == GREEN || keycode == BLUE)
+	{
+		if (s->do_color == keycode)
+			s->do_color = FALSE;
+		else
+			s->do_color = keycode;
+		retired_other(&s->do_z, &s->do_height, &s->do_diameter, &s->do_rotation);
+	}
+	else if (keycode == Z_AXIS)
+	{
+		change_state(&s->do_z);
+		retired_other(&s->do_color, &s->do_height, &s->do_diameter, &s->do_rotation);
+	}
+	else if (keycode == DIAMETER)
+	{
+		change_state(&s->do_diameter);
+		retired_other(&s->do_z, &s->do_height, &s->do_color, &s->do_rotation);
+	}
+	else if (keycode == HEIGHT)
+	{
+		change_state(&s->do_height);
+		retired_other(&s->do_z, &s->do_color, &s->do_diameter, &s->do_rotation);
+	}
+	else if (keycode == ROTATE)
+	{
+		change_state(&s->do_rotation);
+		retired_other(&s->do_z, &s->do_color, &s->do_diameter, &s->do_height);
+	}
+	if (s->do_color == FALSE && s->do_z == FALSE && s->do_diameter == FALSE
+		&& s->do_height == FALSE && s->do_rotation == FALSE)
+		s->do_z = TRUE;
 }

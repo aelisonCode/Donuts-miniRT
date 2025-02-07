@@ -76,28 +76,31 @@ double	shadow_intensity(t_vect *inter, t_vect *obj_inter, t_ray ray)
 	return (i);
 }
 
-t_vect	get_dir(t_maps *curr, t_vect pts)
+static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
+		t_maps *target)
 {
-	t_vect	res;
-	t_sp	*tmp_sp;
-	t_cy	*tmp_cy;
+	int	val;
 
-	res = init_vect(1, 1, 1);
-	if (curr->type == Sphere)
+	val = -1;
+	if (ptr->type == Sphere)
 	{
-		tmp_sp = (t_sp *)curr->struct_obj;
-		res = init_vect(tmp_sp->center.x, tmp_sp->center.y, tmp_sp->center.z);
-		res = ft_normalize(substraction(pts, res));
-		return (res);
+		val = check_sp(s, ptr->struct_obj, ref_pts, target);
+		if (val != -1)
+			return (val);
 	}
-	if (curr->type == Cylinder)
+	if (ptr->type == Plane)
 	{
-		tmp_cy = (t_cy *)curr->struct_obj;
-		res = init_vect(tmp_cy->center.x, tmp_cy->center.y, tmp_cy->center.z);
-		res = ft_normalize(substraction(pts, res));
-		return (res);
+		val = check_pl(s, ptr->struct_obj, ref_pts, target);
+		if (val != -1)
+			return (val);
 	}
-	return (res);
+	if (ptr->type == Cylinder)
+	{
+		val = check_cy(s, ptr->struct_obj, ref_pts, target);
+		if (val != -1)
+			return (val);
+	}
+	return (val);
 }
 
 int	is_in_view(t_ray r, t_vect pts, t_maps *curr)
@@ -202,24 +205,9 @@ int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts, double lambert)
 	{
 		if (target->id != tmp->id)
 		{
-			if (tmp->type == Sphere)
-			{
-				val = check_sp(s, tmp->struct_obj, ref_pts, target, lambert);
-				if (val != -1)
-					return (val);
-			}
-			if (tmp->type == Plane)
-			{
-				val = check_pl(s, tmp->struct_obj, ref_pts, target);
-				if (val != -1)
-					return (val);
-			}
-			if (tmp->type == Cylinder)
-			{
-				val = check_cy(s, tmp->struct_obj, ref_pts, target);
-				if (val != -1)
+			val = ft_exec_obj(s, tmp, ref_pts, target);
+			if (val != -1)
 				return (val);
-			}
 		}
 		tmp = tmp->next;
 	}

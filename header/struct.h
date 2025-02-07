@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/02/04 08:28:12 by aelison         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:33:00 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,26 @@
 # define RIGHT_BUTTON 3
 # define MID_BUTTON 2
 
+# define CTRL 65507
+# define SHIFT 65505
+
 # define K_ESCAPE 65307
 # define CAMERA 99
 # define LIGHT 108
 # define AMBIENT 97
 
+# define RED 65436
+# define GREEN 65433
+# define BLUE 65435
+
+# define DIAMETER 100
+# define HEIGHT 104
+# define Z_AXIS 122
+
 # define LEFT 65361
 # define RIGHT 65363
 # define UP 65362
 # define DOWN 65364
-# define Z_UP 65431
-# define Z_DOWN 65433
 # define ROTATE 114
 
 # define SCALE_UP 65451
@@ -163,8 +172,14 @@ typedef struct s_scene
 	t_maps			*world;
 	t_projection	*p;
 	int				do_rotation;
+	int				do_z;
+	int				do_diameter;
+	int				do_height;
+	int				do_color;
 	double			dist_curr;
 	int				color_to_put;
+	int				show_control;
+	int				current;
 }					t_scene;
 
 #endif

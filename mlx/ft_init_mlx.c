@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:27:53 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/21 11:00:07 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:04:33 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,15 @@ void	ft_init_scene(t_scene *data, double dist, char *title)
 	if (tmp->mlx_ptr == NULL)
 		exit(1);
 	data->p = init_pjct(data->cam, dist);
-	data->dist_curr = -1;
-	data->color_to_put = 0X0;
-	data->do_rotation = FALSE;
 	ft_window_init(tmp, title);
 	data->mlx = tmp;
 	ft_img_init(data, WINDOW_X, WINDOW_Y);
 	data->mlx = tmp;
+	data->do_rotation = FALSE;
+	data->show_control = FALSE;
+	data->current = FALSE;
+	data->do_z = TRUE;
+	data->do_height = FALSE;
+	data->do_diameter = FALSE;
+	data->do_color = FALSE;
 }

@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 09:39:16 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/27 15:59:13 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 14:45:14 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void	ft_rotate(t_vect *direction, int keycode, int incr_deg)
 {
 	if (!direction)
 		return ;
-	if (keycode == Z_UP)
+	if (keycode == SCALE_UP)
 		ft_rotate_on_z(direction, incr_deg);
-	else if (keycode == Z_DOWN)
+	else if (keycode == SCALE_DOWN)
 		ft_rotate_on_z(direction, -incr_deg);
 	else if (keycode == UP)
 		ft_rotate_on_y(direction, incr_deg);

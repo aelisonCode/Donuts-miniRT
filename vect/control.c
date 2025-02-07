@@ -59,18 +59,25 @@ double	get_root(double a, double b, double disc)
 	double	r_1;
 	double	r_2;
 
+	if (disc == 0)
+	{
+		r_1 = ((-b) / (2 * a));
+		if (r_1 < 0)
+			return (-1);
+		return (r_1);
+	}
 	r_1 = (-b - sqrt(disc)) / (2 * a);
 	r_2 = (-b + sqrt(disc)) / (2 * a);
-	if (r_1 > 0 && r_2 > 0)
+	if (r_1 > EPSILON && r_2 > EPSILON)
 	{
 		if (r_1 < r_2)
 			return (r_1);
 		else
 			return (r_2);
 	}
-	else if (r_1 > 0)
+	else if (r_1 > EPSILON)
 		return (r_1);
-	else if (r_2 > 0)
+	else if (r_2 > EPSILON)
 		return (r_2);
 	return (-1);
 }

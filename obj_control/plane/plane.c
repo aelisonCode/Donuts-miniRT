@@ -6,34 +6,28 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:25:45 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 15:48:09 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:51:33 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../header/mini_rt.h"
 
-void	ft_pl_event(t_scene *s, t_pl *obj, int keycode, double incr)
+void	ft_pl_event(t_scene *data, t_maps *curr, int keycode, double incr)
 {
-	if (!s)
+	t_pl	*tmp;
+
+	if (!data || !curr)
 		return ;
-	if (s->do_rotation == FALSE)
-	{
-		if (keycode == UP || keycode == DOWN || keycode == LEFT
-			|| keycode == RIGHT)
-			ft_translation(&obj->direction, keycode, incr);
-		if (keycode == Z_UP || keycode == Z_DOWN)
-			ft_translation(&obj->direction, keycode, -incr);
-	}
-	else if (s->do_rotation == TRUE)
-	{
-		if (keycode == UP || keycode == DOWN || keycode == LEFT
-			|| keycode == RIGHT)
-			ft_rotate(&obj->direction, keycode, 10);
-		if (keycode == Z_UP || keycode == Z_DOWN)
-			ft_rotate(&obj->direction, keycode, 10);
-	}
-	gen_new_image(s);
-	ft_launch(s);
+	tmp = curr->struct_obj;
+	if (data->do_color != FALSE && (keycode == SCALE_UP
+			|| keycode == SCALE_DOWN))
+		ft_color(&tmp->color, data->do_color, keycode, 5);
+	if (data->do_z == TRUE)
+		ft_center(&tmp->point, keycode, incr + 1);
+	if (data->do_rotation == TRUE)
+		ft_rotation(&tmp->direction, keycode, incr + 1);
+	gen_new_image(data);
+	ft_launch(data);
 }
 
 int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
@@ -46,13 +40,12 @@ int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 		return (EXIT_FAILURE);
 	x = substraction(obj->point, ray->origin);
 	*t = scalaire(x, ft_normalize(obj->direction)) / denominator;
-	if (*t >= 0)
+	if (*t > EPSILON)
 	{
 		*res = compute_intersec_pts(ray, *t);
 		return (EXIT_SUCCESS);
 	}
-	else
-		return (EXIT_FAILURE);
+	return (EXIT_FAILURE);
 }
 
 static double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,

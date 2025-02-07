@@ -6,61 +6,24 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:33:31 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/30 14:35:53 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/06 11:24:33 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
 
-static void	write_line(t_mlx *mlx, char *mssg, t_vect pos, int color)
+void	ft_config_event(t_scene *scene)
 {
-	char	*tmp;
+	t_mlx	*data;
 
-	tmp = "no selected object";
-	if (!mlx)
+	if (!scene)
 		return ;
-	if (!mssg)
-		mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y, color, tmp);
-	else
-		mlx_string_put(mlx->mlx_ptr, mlx->mlx_window, pos.x, pos.y, color,
-			mssg);
-}
-
-char	*get_selected(t_scene *s)
-{
-	t_maps	*tmp;
-
-	tmp = s->world;
-	if (s->cam->selected == TRUE)
-		return ("selected obj: CAMERA");
-	if (s->light->selected == TRUE)
-		return ("selected obj: LIGHT");
-	while (tmp)
-	{
-		if (tmp->selected == TRUE)
-		{
-			if (tmp->type == Sphere)
-				return ("selected obj: Sphere");
-			else if (tmp->type == Plane)
-				return ("selected obj: Plane");
-			else if (tmp->type == Cylinder)
-				return ("selected obj: Cylender");
-		}
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-void	ft_menu(t_scene *s)
-{
-	t_mlx	*mlx;
-	t_vect	pos_line;
-	int		color;
-
-	color = 0X00FF00;
-	mlx = s->mlx;
-	pos_line = init_vect(5, 30, 0);
-	write_line(mlx, get_selected(s), pos_line, color);
+	data = scene->mlx;
+	mlx_hook(data->mlx_window, 2, 1L << 0, ft_pressed, scene);
+	mlx_hook(data->mlx_window, 3, 1L << 1, ft_released, scene);
+	mlx_hook(data->mlx_window, 17, 1L << 17, ft_close_window, scene);
+	mlx_mouse_hook(data->mlx_window, on_button_pressed, scene);
+	mlx_loop_hook(data->mlx_ptr, ft_show_control, scene);
 }
 
 void	ft_launch(t_scene *scene)
@@ -73,8 +36,6 @@ void	ft_launch(t_scene *scene)
 	loop_screen(scene);
 	mlx_put_image_to_window(data->mlx_ptr, data->mlx_window, data->img_ptr, 0,
 		0);
-	mlx_key_hook(data->mlx_window, ft_exec_input, scene);
-	mlx_mouse_hook(data->mlx_window, on_button_pressed, scene);
-	mlx_hook(data->mlx_window, 17, 1L << 17, ft_close_window, scene);
+	ft_config_event(scene);
 	mlx_loop(data->mlx_ptr);
 }

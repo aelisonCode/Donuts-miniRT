@@ -12,15 +12,17 @@
 
 #include "../../header/mini_rt.h"
 
-static t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
+t_vect	ft_normal_cy(t_ray *r, t_cy *obj, double t, t_vect point)
 {
 	double	closest_pts;
 	t_vect	res;
 
 	closest_pts = scalaire(r->direction, vect_dot_val(obj->direction, t));
-	closest_pts = closest_pts + scalaire(substraction(r->origin, obj->center), obj->direction);
+	closest_pts = closest_pts + scalaire(substraction(r->origin, obj->center),
+			obj->direction);
 	res = substraction(point, obj->center);
-	res = ft_normalize(substraction(res, vect_dot_val(obj->direction,closest_pts)));
+	res = ft_normalize(substraction(res, vect_dot_val(obj->direction,
+					closest_pts)));
 	return (res);
 }
 
@@ -54,20 +56,18 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point, double lambert)
 
 int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 {
-	int		res;
 	double	t;
 	double	lambert;
 	t_vect	normal;
 	t_vect	solution;
 
-	res = EXIT_FAILURE;
 	if (ft_intersec_cy(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
-		res = EXIT_SUCCESS;
 		normal = ft_normal_cy(r, curr->struct_obj, t, solution);
 		lambert = lambertienne_cy(normal, s->light, solution);
 		curr->color = get_cy_color(s, curr, &solution, lambert);
 		cmp_dist(s, t, curr->color);
+		return (EXIT_SUCCESS);
 	}
-	return (res);
+	return (EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/02/04 08:20:39 by aelison         ###   ########.fr        #
+#    Updated: 2025/02/06 15:05:27 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,12 +25,15 @@ SRC = src/ft_program.c \
 	  obj_control/sphere/sphere.c \
 	  obj_control/cylinder/cylinder.c \
 	  obj_control/cylinder/utils.c \
+	  obj_control/cylinder/edge.c \
 	  obj_control/plane/plane.c \
 	  obj_control/utils.c \
+	  obj_control/transform.c \
 	  vect/operations.c \
 	  vect/control.c \
 	  color/color.c \
 	  color/create.c \
+	  color/obj.c \
 	  errors/ft_error.c \
 	  errors/check_file.c \
 	  errors/check_obj.c \
@@ -38,11 +41,14 @@ SRC = src/ft_program.c \
 	  errors/utils.c \
 	  errors/param_error.c\
 	  errors/param_view_err.c\
+	  mlx/mouse_to_obj.c \
+	  mlx/menu.c \
 	  mlx/ft_init_mlx.c \
 	  mlx/close_mlx.c \
 	  mlx/event.c \
 	  mlx/utils.c \
 	  mlx/launch.c \
+	  mlx/obj.c \
 	  utils/ft_control_string.c \
 	  utils/ft_atof.c\
 	  utils/ft_free.c \
@@ -54,6 +60,7 @@ SRC = src/ft_program.c \
 	  projection/ray.c \
 	  projection/init_projection.c \
 	  projection/shadow_effect.c \
+	  projection/shadow_obj.c \
 	  libft/get_next_line/get_next_line.c \
 	  libft/get_next_line/get_next_line_utils.c \
 
