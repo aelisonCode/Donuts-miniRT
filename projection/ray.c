@@ -12,8 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-/*return a vector on plan projection for the x and y coordinate*/
-/*What's the position of x and y on plan projection ?*/
 t_vect	compute_point(t_projection *p, int x, int y)
 {
 	t_vect	res;

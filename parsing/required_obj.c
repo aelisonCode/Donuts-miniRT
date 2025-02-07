@@ -61,10 +61,12 @@ t_l	*light(char **str)
 t_maps	*create_map(t_obj type, void *obj)
 {
 	t_maps	*maps;
+	t_vect	center;
 
 	maps = malloc(sizeof(t_maps));
 	if (!maps)
 		return (NULL);
+	center = init_vect(50, 50, 0);
 	maps->id = 0;
 	maps->type = type;
 	maps->struct_obj = obj;
