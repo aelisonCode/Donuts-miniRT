@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 16:16:15 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/07 11:23:43 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:45:01 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,40 @@ double	distance(t_vect o, t_vect d)
 	return (res);
 }
 
+double ft_round(double s)
+{
+	double res;
+
+	res = 0.0;
+	if (s < 0.5 && s >= 0)
+	{
+		if (s == 0)
+			res = 1;
+		if (s >= 0 && s < 0.2)
+			res = s + 0.8;
+		if (s >= 0.2 && s < 0.3)
+			res = s + 0.6;
+		if (s >= 0.3 && s < 0.4)
+			res = s + 0.4;
+		if (s >= 0.4 && s < 0.5)
+			res = s + 0.2;
+	}
+	else if (s > 0.5 && s <= 1)
+	{
+		if (s == 1)
+			res = 0;
+		if (s < 1 && s <= 0.9)
+			res = s - 0.8;
+		if (s < 0.9 && s >= 0.8)
+			res = s - 0.6;
+		if (s < 0.8 && s >= 0.7)
+			res = s - 0.4;
+		if (s < 0.7 && s >= 0.6)
+			res = s - 0.2;
+	}
+	return (res);
+}
+
 double	shadow_intensity(t_vect *inter, t_vect *obj_inter, t_ray ray)
 {
 	double d_max;
@@ -71,8 +105,9 @@ double	shadow_intensity(t_vect *inter, t_vect *obj_inter, t_ray ray)
 
 	(void)obj_inter;
 	d_max = distance(ray.origin, *inter);
-	d = distance(*inter, ray.origin);
-	i = fmax(0.2, (1 - (d / d_max)));
+	d = distance(*obj_inter, ray.origin);
+	i = fmax(0, (1 - (d / d_max)));
+	i = 1 - (1 / (1 + (0.01 * pow(d_max, 2))));
 	return (i);
 }
 
@@ -103,6 +138,8 @@ static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
 	return (val);
 }
 
+
+
 int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lambert)
 {
 	int		res;
@@ -113,6 +150,7 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lamb
 	t_sp	*tmp;
 
 	res = -1;
+	shadow = 0.0;
 	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
 	r.direction = ft_normalize(substraction(s->light->pos, *ref_pts));
 	if (ft_intersec_sp(obj, &r, &point, &t) == EXIT_SUCCESS)
@@ -125,7 +163,7 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lamb
 			if (res == EXIT_SUCCESS)
 			{
 				tmp = target->struct_obj;
-				shadow = lambert * (1 + shadow_intensity(ref_pts, &point, r));
+				shadow = lambert * (1 - (shadow_intensity(ref_pts, &point, r)));
 				res = gen_color(tmp->color.color, s->amlight, shadow, EPSILON);
 			}
 			else
