@@ -65,12 +65,14 @@ void	select_mod(t_scene *s, int keycode)
 			s->do_color = FALSE;
 		else
 			s->do_color = keycode;
-		retired_other(&s->do_z, &s->do_height, &s->do_diameter, &s->do_rotation);
+		retired_other(&s->do_z, &s->do_height, &s->do_diameter,
+			&s->do_rotation);
 	}
 	else if (keycode == Z_AXIS)
 	{
 		change_state(&s->do_z);
-		retired_other(&s->do_color, &s->do_height, &s->do_diameter, &s->do_rotation);
+		retired_other(&s->do_color, &s->do_height, &s->do_diameter,
+			&s->do_rotation);
 	}
 	else if (keycode == DIAMETER)
 	{

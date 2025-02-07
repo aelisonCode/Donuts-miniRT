@@ -12,7 +12,7 @@
 
 #include "../header/mini_rt.h"
 
-void	ft_center(t_vect *to_change, int keycode, int incr)
+void	ft_center(t_vect *to_change, int keycode, double incr)
 {
 	if (!to_change)
 		return ;
@@ -23,7 +23,7 @@ void	ft_center(t_vect *to_change, int keycode, int incr)
 		ft_translation(to_change, keycode, -incr);
 }
 
-void	ft_rotation(t_vect *to_change, int keycode, int incr)
+void	ft_rotation(t_vect *to_change, int keycode, double incr)
 {
 	if (!to_change)
 		return ;
@@ -34,19 +34,25 @@ void	ft_rotation(t_vect *to_change, int keycode, int incr)
 		ft_rotate(to_change, keycode, incr);
 }
 
-void	ft_diameter(double *diameter, double *radius, int keycode, int incr)
+void	ft_diameter(double *diameter, double *radius, int keycode, double incr)
 {
 	if (!diameter || !radius)
 		return ;
-	ft_scale(diameter, keycode, incr);
+	if (keycode == SCALE_DOWN &&  *diameter > 1.0)
+		ft_scale(diameter, keycode, incr);
+	else if (keycode == SCALE_UP && *diameter < 50.0)
+		ft_scale(diameter, keycode, incr);
 	*radius = *diameter / 2.0;
 }
 
-void	ft_height(double *height, int keycode, int incr)
+void	ft_height(double *height, int keycode, double incr)
 {
 	if (!height)
 		return ;
-	ft_scale(height, keycode, incr);
+	if (keycode == SCALE_DOWN && *height > 1.0)
+		ft_scale(height, keycode, incr);
+	else if (keycode == SCALE_UP && *height < 50.0)
+		ft_scale(height, keycode, incr);
 }
 
 void	ft_color(t_color *ref, int to_change, int keycode, int incr)

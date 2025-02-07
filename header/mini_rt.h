@@ -72,11 +72,11 @@ t_color			get_col(t_maps *obj);
 int				rand_col(t_color *col);
 void			change_state(int *to_change);
 
-void			ft_center(t_vect *to_change, int keycode, int incr);
-void			ft_rotation(t_vect *to_change, int keycode, int incr);
+void			ft_center(t_vect *to_change, int keycode, double incr);
+void			ft_rotation(t_vect *to_change, int keycode, double incr);
 void			ft_diameter(double *diameter, double *radius, int keycode,
-					int incr);
-void			ft_height(double *height, int keycode, int incr);
+					double incr);
+void			ft_height(double *height, int keycode, double incr);
 void			ft_color(t_color *ref, int to_change, int keycode, int incr);
 /*SPHERE*/
 int				ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution,

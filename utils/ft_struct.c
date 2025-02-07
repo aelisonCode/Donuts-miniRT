@@ -24,7 +24,12 @@ int	control_light(t_scene *s, t_l *light, int keycode, double incr)
 	if (s->do_color != FALSE)
 		ft_color(&light->color, s->do_color, keycode, incr);
 	if (s->do_z == FALSE)
-		ft_scale(&light->bright, keycode, 0.1);
+	{
+		if (keycode == SCALE_DOWN && light->bright > 0)
+			ft_scale(&light->bright, keycode, 0.1);
+		else if (keycode == SCALE_UP && light->bright < 1.0)
+			ft_scale(&light->bright, keycode, 0.1);
+	}
 	return (result);
 }
 
@@ -40,7 +45,11 @@ int	control_cam(t_scene *s, t_c *cam, int keycode, double incr)
 	if (s->do_z == TRUE)
 		ft_center(&cam->view_point, keycode, incr);
 	if (s->do_z == FALSE)
+	{
 		ft_scale(&cam->fov, keycode, incr);
+		free(s->p);
+		s->p = init_pjct(cam, 1);
+	}
 	return (result);
 }
 
@@ -55,9 +64,9 @@ void	control_primary(t_scene *scene, t_obj type, int keycode)
 		gen_new_image(scene);
 		ft_launch(scene);
 	}
-	else if (keycode != CAMERA && type == Camera)
+	if (keycode != CAMERA && type == Camera)
 	{
-		if (control_cam(scene, scene->cam, keycode, 1.0) == FALSE)
+		if (control_cam(scene, scene->cam, keycode, -0.1) == FALSE)
 			return ;
 		gen_new_image(scene);
 		ft_launch(scene);
