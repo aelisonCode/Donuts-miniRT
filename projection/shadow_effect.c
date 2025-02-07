@@ -19,7 +19,7 @@ double	double_abs(double x)
 	return (x);
 }
 
-int	make_shadow(t_l light, t_ray *r, t_vect *inter, t_sp *obj)
+int	make_shadow(t_ray *r, t_vect *inter, t_sp *obj)
 {
 	double a;
 	double b;
@@ -29,9 +29,7 @@ int	make_shadow(t_l light, t_ray *r, t_vect *inter, t_sp *obj)
 	double delta;
 	double d_one;
 	double d_two;
-	t_vect	v;
 
-	(void)light;
 	dist = substraction(r->origin, obj->center);
 	a = scalaire(r->direction, r->direction);
 	b = 2 * scalaire(r->direction, dist);
@@ -41,7 +39,7 @@ int	make_shadow(t_l light, t_ray *r, t_vect *inter, t_sp *obj)
 		return (EXIT_FAILURE);
 	if (delta == 0)
 		return (EXIT_SUCCESS);
-	first = (inter->x - (r->origin.x)) / v.x;
+	first = (inter->x - (r->origin.x)) / inter->x;
 	d_one = ((-1 * b) + sqrt(delta)) / (2 * a);
 	d_two = ((-1 * b) - sqrt(delta)) / (2 * a);
 	d_one = round(d_one);
@@ -109,35 +107,6 @@ double	shadow_intensity(t_vect *inter, t_vect *obj_inter, t_ray ray)
 	return (i);
 }
 
-static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
-		t_maps *target, double lambert)
-{
-	int	val;
-
-	val = -1;
-	if (ptr->type == Sphere)
-	{
-		val = check_sp(s, ptr->struct_obj, ref_pts, target, lambert);
-		if (val != -1)
-			return (val);
-	}
-	if (ptr->type == Plane)
-	{
-		val = check_pl(s, ptr->struct_obj, ref_pts, target);
-		if (val != -1)
-			return (val);
-	}
-	if (ptr->type == Cylinder)
-	{
-		val = check_cy(s, ptr->struct_obj, ref_pts, target);
-		if (val != -1)
-			return (val);
-	}
-	return (val);
-}
-
-
-
 int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lambert)
 {
 	int		res;
@@ -157,7 +126,7 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lamb
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
 		{
-			res = make_shadow(*s->light, &r, ref_pts, target->struct_obj);
+			res = make_shadow(&r, ref_pts, target->struct_obj);
 			if (res == EXIT_SUCCESS)
 			{
 				tmp = target->struct_obj;
@@ -214,6 +183,33 @@ int	check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, t_maps *target)
 		}
 	}
 	return (res);
+}
+
+static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
+		t_maps *target, double lambert)
+{
+	int	val;
+
+	val = -1;
+	if (ptr->type == Sphere)
+	{
+		val = check_sp(s, ptr->struct_obj, ref_pts, target, lambert);
+		if (val != -1)
+			return (val);
+	}
+	if (ptr->type == Plane)
+	{
+		val = check_pl(s, ptr->struct_obj, ref_pts, target);
+		if (val != -1)
+			return (val);
+	}
+	if (ptr->type == Cylinder)
+	{
+		val = check_cy(s, ptr->struct_obj, ref_pts, target);
+		if (val != -1)
+			return (val);
+	}
+	return (val);
 }
 
 int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts, double lambert)

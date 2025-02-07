@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/errors.h"
 #include "../header/mini_rt.h"
-#include "../header/struct.h"
 
 int	for_ambient_l(t_scene *s, char **all, int *t)
 {
