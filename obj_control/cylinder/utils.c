@@ -60,7 +60,7 @@ int	ft_intersec_cy(t_cy *obj, t_ray *r, t_vect *solution, double *t)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		*t = get_root(coeff.x, coeff.y, discr);
+		*t = get_root(coeff.x, coeff.y, discr, &obj->t2);
 		if (*t < EPSILON)
 			return (EXIT_FAILURE);
 		*solution = compute_intersec_pts(r, *t);

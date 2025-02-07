@@ -25,6 +25,9 @@ t_sp	*sphere(char **str)
 	ft_replace_str(str[3], "\n", '\0');
 	sp->color = make_color(str[3]);
 	sp->color.color = create_color(sp->color.r, sp->color.g, sp->color.b);
+	sp->t1 = -1;
+	sp->t2 = -1;
+	sp->v_normal = init_vect(0,0,0);
 	return (sp);
 }
 
@@ -40,6 +43,7 @@ t_pl	*plane(char **str)
 	ft_replace_str(str[3], "\n", '\0');
 	pl->color = make_color(str[3]);
 	pl->color.color = create_color(pl->color.r, pl->color.g, pl->color.b);
+	pl->t = -1;
 	return (pl);
 }
 
@@ -58,5 +62,8 @@ t_cy	*cylinder(char **str)
 	ft_replace_str(str[5], "\n", '\0');
 	cy->color = make_color(str[5]);
 	cy->color.color = create_color(cy->color.r, cy->color.g, cy->color.b);
+	cy->t1 = -1;
+	cy->t2 = -1;
+	cy->v_normal = init_vect(0,0,0);
 	return (cy);
 }

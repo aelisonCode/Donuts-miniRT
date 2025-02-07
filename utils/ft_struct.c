@@ -41,12 +41,16 @@ int	control_cam(t_scene *s, t_c *cam, int keycode, double incr)
 	if (!cam || !s)
 		return (FALSE);
 	if (s->do_rotation == TRUE)
+	{
 		ft_rotation(&cam->direction, keycode, incr);
+		free(s->p);
+		s->p = init_pjct(cam, 1);
+	}
 	if (s->do_z == TRUE)
 		ft_center(&cam->view_point, keycode, incr);
 	if (s->do_z == FALSE)
 	{
-		ft_scale(&cam->fov, keycode, incr);
+		ft_scale(&cam->fov, keycode, incr * 5);
 		free(s->p);
 		s->p = init_pjct(cam, 1);
 	}

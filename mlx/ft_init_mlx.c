@@ -26,14 +26,13 @@ static void	ft_img_init(t_scene *scene, int x, int y)
 		ft_close_window(scene);
 }
 
-static void	ft_window_init(t_mlx *data, char *title)
+static void	ft_window_init(t_scene *s, t_mlx *data, char *title)
 {
 	data->mlx_window = mlx_new_window(data->mlx_ptr, WINDOW_X, WINDOW_Y, title);
 	if (data->mlx_window == NULL)
 	{
-		ft_putendl_fd("Error: mlx_new_window fail", STDERR_FILENO);
-		mlx_destroy_window(data->mlx_ptr, data->mlx_window);
-		mlx_destroy_display(data->mlx_ptr);
+		ft_putendl_fd("Error\nMlx_new_window fail", STDERR_FILENO);
+		ft_close_window(s);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -49,9 +48,6 @@ void	ft_init_scene(t_scene *data, double dist, char *title)
 	if (tmp->mlx_ptr == NULL)
 		exit(1);
 	data->p = init_pjct(data->cam, dist);
-	ft_window_init(tmp, title);
-	data->mlx = tmp;
-	ft_img_init(data, WINDOW_X, WINDOW_Y);
 	data->mlx = tmp;
 	data->do_rotation = FALSE;
 	data->show_control = FALSE;
@@ -60,4 +56,6 @@ void	ft_init_scene(t_scene *data, double dist, char *title)
 	data->do_height = FALSE;
 	data->do_diameter = FALSE;
 	data->do_color = FALSE;
+	ft_img_init(data, WINDOW_X, WINDOW_Y);
+	ft_window_init(data, tmp, title);
 }

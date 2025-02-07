@@ -91,9 +91,9 @@ static int	file_content(t_scene *s, int fd)
 	int		error;
 	char	*tmp;
 
+	i = 0;
 	tmp = "\0";
 	obj = EXIT_FAILURE;
-	i = 0;
 	error = EXIT_FAILURE;
 	while (tmp)
 	{

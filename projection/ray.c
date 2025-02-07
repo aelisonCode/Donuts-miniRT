@@ -52,9 +52,9 @@ void	exec(t_scene *scene, t_vect wind)
 	{
 		if (ptr->type == Sphere)
 			status *= exec_sp(scene, ptr, &r);
-		if (ptr->type == Plane)
+		else if (ptr->type == Plane)
 			status *= exec_pl(scene, ptr, &r);
-		if (ptr->type == Cylinder)
+		else if (ptr->type == Cylinder)
 			status *= exec_cy(scene, ptr, &r);
 		ptr = ptr->next;
 	}

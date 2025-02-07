@@ -42,6 +42,7 @@ int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 	*t = scalaire(x, ft_normalize(obj->direction)) / denominator;
 	if (*t > EPSILON)
 	{
+		obj->t = *t;
 		*res = compute_intersec_pts(ray, *t);
 		return (EXIT_SUCCESS);
 	}

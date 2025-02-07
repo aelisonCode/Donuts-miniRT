@@ -140,14 +140,15 @@ int	check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, t_maps *target, double lamb
 	return (res);
 }
 
-int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, t_maps *target)
+int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, t_maps *target, double lambert)
 {
 	int		res;
 	double	t;
 	t_vect	point;
 	t_ray	r;
+	t_pl	*tmp;
+	double	shadow;
 
-	(void)target;
 	res = -1;
 	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
 	r.direction = ft_normalize(substraction(s->light->pos, *ref_pts));
@@ -156,17 +157,29 @@ int	check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, t_maps *target)
 		if (vect_lenght(substraction(s->light->pos,
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
-			res = gen_color(obj->color.color, s->amlight, EPSILON, EPSILON);
+		{
+			res = make_shadow(&r, ref_pts, target->struct_obj);
+			if (res == EXIT_SUCCESS)
+			{
+				tmp = target->struct_obj;
+				shadow = lambert * (1 - (shadow_intensity(ref_pts, &point, r)));
+				res = gen_color(tmp->color.color, s->amlight, shadow, EPSILON);
+			}
+			else
+				res = -1;
+		}
 	}
 	return (res);
 }
 
-int	check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, t_maps *target)
+int	check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, t_maps *target, double lambert)
 {
 	int		res;
 	double	t;
 	t_vect	point;
 	t_ray	r;
+	t_cy	*tmp;
+	double	shadow;
 
 	res = -1;
 	r.origin = init_vect(ref_pts->x, ref_pts->y, ref_pts->z);
@@ -177,9 +190,15 @@ int	check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, t_maps *target)
 					*ref_pts)) > vect_lenght(substraction(s->light->pos,
 					point)))
 		{
-			res = gen_color(obj->color.color, s->amlight, EPSILON, EPSILON);
-			if (target->type == Plane)
-				return (res);
+			res = make_shadow(&r, ref_pts, target->struct_obj);
+			if (res == EXIT_SUCCESS)
+			{
+				tmp = target->struct_obj;
+				shadow = lambert * (1 - (shadow_intensity(ref_pts, &point, r)));
+				res = gen_color(tmp->color.color, s->amlight, shadow, EPSILON);
+			}
+			else
+				res = -1;
 		}
 	}
 	return (res);
@@ -199,13 +218,13 @@ static int	ft_exec_obj(t_scene *s, t_maps *ptr, t_vect *ref_pts,
 	}
 	if (ptr->type == Plane)
 	{
-		val = check_pl(s, ptr->struct_obj, ref_pts, target);
+		val = check_pl(s, ptr->struct_obj, ref_pts, target, lambert);
 		if (val != -1)
 			return (val);
 	}
 	if (ptr->type == Cylinder)
 	{
-		val = check_cy(s, ptr->struct_obj, ref_pts, target);
+		val = check_cy(s, ptr->struct_obj, ref_pts, target, lambert);
 		if (val != -1)
 			return (val);
 	}

@@ -25,7 +25,7 @@ void	ft_sp_event(t_scene *data, t_maps *curr, int keycode, double incr)
 	if (data->do_diameter == TRUE)
 		ft_diameter(&tmp->diameter, &tmp->radius, keycode, incr);
 	if (data->do_z == TRUE)
-		ft_center(&tmp->center, keycode, incr);
+		ft_center(&tmp->center, keycode, incr + 1.5);
 	gen_new_image(data);
 	ft_launch(data);
 }
@@ -47,7 +47,8 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution, double *t)
 		return (EXIT_FAILURE);
 	if (solution != NULL)
 	{
-		*t = get_root(a, b, discriminant);
+		*t = get_root(a, b, discriminant, &obj->t2);
+		obj->t1 = *t;
 		if (*t < 0)
 			return (EXIT_FAILURE);
 		*solution = compute_intersec_pts(r, *t);
@@ -55,22 +56,17 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution, double *t)
 	return (EXIT_SUCCESS);
 }
 
-static double	lambertienne_reflection_sp(double coeff_reflection, t_l *light,
-		t_vect *center, t_vect point)
+static double	lambertienne_reflection_sp(t_sp *obj, t_l *light, t_vect *point)
 {
-	t_vect	v_normal;
 	t_vect	v_light;
 	double	scal;
 	double	res;
-	int		x;
 
-	x = 0;
-	v_normal = ft_normalize(substraction(point, *center));
-	v_light = ft_normalize(substraction(light->pos, point));
-	scal = scalaire(v_normal, v_light);
+	v_light = ft_normalize(substraction(light->pos, *point));
+	scal = scalaire(obj->v_normal, v_light);
 	if (scal < 0)
 		scal = 0;
-	res = coeff_reflection * scal * light->bright;
+	res = COEFF_REFCT * scal * light->bright;
 	return (res);
 }
 
@@ -82,8 +78,7 @@ static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 	t_sp	*sphere;
 
 	sphere = start->struct_obj;
-	lambert = lambertienne_reflection_sp(COEFF_REFCT, s->light, &sphere->center,
-			*point);
+	lambert = lambertienne_reflection_sp(start->struct_obj, s->light, point);
 	res = gen_color(sphere->color.color, s->amlight, lambert, REFRACTION_AM);
 	shadow = ft_add_shadow(s, start, point, lambert);
 	if (shadow != -1)
@@ -93,16 +88,19 @@ static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
 
 int	exec_sp(t_scene *s, t_maps *curr, t_ray *r)
 {
-	int		res;
+	t_sp	*obj;
 	double	t;
 	t_vect	solution;
 
-	res = EXIT_FAILURE;
-	if (ft_intersec_sp(curr->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
+	if (!s || !curr || !r)
+		return (EXIT_FAILURE);
+	obj = curr->struct_obj;
+	if (ft_intersec_sp(obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
-		res = EXIT_SUCCESS;
+		obj->v_normal = ft_normalize(substraction(solution, obj->center));
 		curr->color = get_sp_color(s, curr, &solution);
 		cmp_dist(s, t, curr->color);
+		return (EXIT_SUCCESS);
 	}
-	return (res);
+	return (EXIT_FAILURE);
 }
