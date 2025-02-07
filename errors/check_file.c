@@ -30,7 +30,7 @@ static int	get_required_obj(int value)
 	return (EXIT_SUCCESS);
 }
 
-static int	parse_object(char *str)
+static int	parse_object(t_scene *s, char *str)
 {
 	int			result;
 	char		**split;
@@ -43,27 +43,27 @@ static int	parse_object(char *str)
 	if (split[0][0] == '\n')
 		result = 7;
 	else if (ft_strncmp(split[0], "A", 2) == EXIT_SUCCESS)
-		result = for_ambient_l(split, &exist[0]);
+		result = for_ambient_l(s, split, &exist[0]);
 	else if (ft_strncmp(split[0], "C", 2) == EXIT_SUCCESS)
-		result = for_camera(split, &exist[1]);
+		result = for_camera(s, split, &exist[1]);
 	else if (ft_strncmp(split[0], "L", 2) == EXIT_SUCCESS)
-		result = (for_light(split, &exist[2]));
+		result = (for_light(s, split, &exist[2]));
 	else if (ft_strncmp(split[0], "sp", 3) == EXIT_SUCCESS)
-		result = for_sphere(split);
+		result = for_sphere(s, split);
 	else if (ft_strncmp(split[0], "pl", 3) == EXIT_SUCCESS)
-		result = for_plane(split);
+		result = for_plane(s, split);
 	else if (ft_strncmp(split[0], "cy", 3) == EXIT_SUCCESS)
-		result = for_cylinder(split);
+		result = for_cylinder(s, split);
 	ft_free_tab(split);
 	return (result);
 }
 
-static int	create_object(char *tmp, int line, int *res)
+static int	create_object(t_scene *s, char *tmp, int line, int *res)
 {
 	int	valid_ok;
 	int	val;
 
-	val = parse_object(tmp);
+	val = parse_object(s, tmp);
 	valid_ok = get_required_obj(val);
 	if (val == 0)
 	{
@@ -84,7 +84,7 @@ static int	create_object(char *tmp, int line, int *res)
 	return (EXIT_SUCCESS);
 }
 
-static int	file_content(int fd)
+static int	file_content(t_scene *s, int fd)
 {
 	int		i;
 	int		obj;
@@ -102,14 +102,14 @@ static int	file_content(int fd)
 		{
 			i++;
 			ft_replace_str(tmp, "\t\a\b\v\f\r", ' ');
-			obj = create_object(tmp, i, &error);
+			obj = create_object(s, tmp, i, &error);
 			free(tmp);
 		}
 	}
 	return (obj);
 }
 
-int	check_file(char *str)
+int	check_file(t_scene *s, char *str)
 {
 	int	result;
 	int	fd;
@@ -122,7 +122,7 @@ int	check_file(char *str)
 		ft_putendl_fd(str, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	result = file_content(fd);
+	result = file_content(s, fd);
 	if (result == EXIT_FAILURE)
 		ft_putstr_fd("Error\nParse: failed to create obj\n", STDERR_FILENO);
 	close(fd);

@@ -14,10 +14,9 @@
 #include "../header/mini_rt.h"
 #include "../header/struct.h"
 
-int	for_ambient_l(char **all, int *t)
+int	for_ambient_l(t_scene *s, char **all, int *t)
 {
 	int		i;
-	t_scene	*s;
 
 	i = 1;
 	if (*t != 0)
@@ -32,16 +31,14 @@ int	for_ambient_l(char **all, int *t)
 		return (0);
 	if (for_ambient_param(all) == 1)
 		return (0);
-	s = get_struct();
 	s->amlight = ambient_l(all);
 	(*t)++;
 	return (1);
 }
 
-int	for_camera(char **all, int *t)
+int	for_camera(t_scene *s, char **all, int *t)
 {
 	int		i;
-	t_scene	*s;
 
 	i = 1;
 	if (*t != 0)
@@ -57,15 +54,13 @@ int	for_camera(char **all, int *t)
 	if (for_camera_param(all) == 1)
 		return (0);
 	(*t)++;
-	s = get_struct();
 	s->cam = camera(all);
 	return (2);
 }
 
-int	for_light(char **all, int *t)
+int	for_light(t_scene *s, char **all, int *t)
 {
 	int		i;
-	t_scene	*s;
 
 	i = 1;
 	if (*t != 0)
@@ -81,7 +76,6 @@ int	for_light(char **all, int *t)
 	if (for_light_param(all) == 1)
 		return (0);
 	(*t)++;
-	s = get_struct();
 	s->light = light(all);
 	return (3);
 }

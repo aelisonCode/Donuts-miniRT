@@ -39,7 +39,6 @@ void			ft_free_map(t_maps **head);
 
 void			ft_put_pixel(t_mlx *data, int x, int y, int color);
 void			ft_launch(t_scene *data);
-void			*get_struct(void);
 t_maps			*create_map(t_obj type, void *obj);
 void			add_maps(t_maps **head, t_maps *new_elem);
 

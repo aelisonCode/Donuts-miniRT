@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
-#include "../header/vector.h"
-#include <math.h>
 
 double	double_abs(double x)
 {
@@ -239,5 +237,3 @@ int	ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts, double lambert)
 	}
 	return (val);
 }
-
-

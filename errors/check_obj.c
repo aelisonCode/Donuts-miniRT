@@ -13,10 +13,9 @@
 #include "../header/errors.h"
 #include "../header/mini_rt.h"
 
-int	for_sphere(char **all)
+int	for_sphere(t_scene *s, char **all)
 {
 	int		i;
-	t_scene	*s;
 
 	i = 1;
 	while (all[i])
@@ -29,15 +28,13 @@ int	for_sphere(char **all)
 		return (0);
 	if (for_sphere_param(all) == 1)
 		return (0);
-	s = get_struct();
 	add_maps(&s->world, create_map(Sphere, sphere(all)));
 	return (4);
 }
 
-int	for_plane(char **all)
+int	for_plane(t_scene *s, char **all)
 {
 	int		i;
-	t_scene	*s;
 
 	i = 1;
 	while (all[i])
@@ -50,15 +47,13 @@ int	for_plane(char **all)
 		return (0);
 	if (for_plane_param(all) == 1)
 		return (0);
-	s = get_struct();
 	add_maps(&s->world, create_map(Plane, plane(all)));
 	return (5);
 }
 
-int	for_cylinder(char **all)
+int	for_cylinder(t_scene *s, char **all)
 {
 	int		i;
-	t_scene	*s;
 
 	i = 1;
 	while (all[i])
@@ -71,7 +66,6 @@ int	for_cylinder(char **all)
 		return (0);
 	if (for_cylinder_param(all) == 1)
 		return (0);
-	s = get_struct();
 	add_maps(&s->world, create_map(Cylinder, cylinder(all)));
 	return (6);
 }
