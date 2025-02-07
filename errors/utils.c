@@ -64,7 +64,7 @@ int	limit(char **str, double max, double min)
 			i++;
 		else
 		{
-			ft_putstr_fd("error : don't respect the rang \n", STDERR_FILENO);
+			ft_putstr_fd("Error\nDon't respect the rang\n", STDERR_FILENO);
 			return (1);
 		}
 	}
@@ -82,7 +82,7 @@ int	check_vector_l(char *str, double max, double min, long lg)
 		i++;
 	if (i != lg)
 	{
-		ft_putstr_fd("error : missing some arg \n", STDERR_FILENO);
+		ft_putstr_fd("Error\nMissing some arg\n", STDERR_FILENO);
 		ft_free_tab(split);
 		return (1);
 	}
@@ -103,7 +103,7 @@ int	check_vector(char *str, long lg)
 		i++;
 	if (i != lg)
 	{
-		ft_putstr_fd("error : missing some arg lvl 1\n", STDERR_FILENO);
+		ft_putstr_fd("Error\nmissing some arg lvl 1\n", STDERR_FILENO);
 		ft_free_tab(split);
 		return (1);
 	}

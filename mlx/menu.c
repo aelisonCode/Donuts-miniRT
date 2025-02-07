@@ -29,26 +29,24 @@ static void	write_line(t_mlx *mlx, char *mssg, t_vect pos, int color)
 static void	ft_menu_unique(t_mlx *data, t_vect msg_pos, int incr, int color)
 {
 	write_line(data, "Tap 'C', 'L' to enter/out camera or light mode", msg_pos,
-			color);
+		color);
 	msg_pos.y += incr;
-	write_line(data, "Must quit these mode if you want to change !", msg_pos, color);
+	write_line(data, "Must quit these mode if you want to change !", msg_pos,
+		color);
 	msg_pos.y += incr;
-	write_line(data, "Tap 'R' to enter/out rotation mode", msg_pos, color);
+	write_line(data, "Tap 'R' to enter rotation mode", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap 'Z' to enter/out Z Axis mode", msg_pos, color);
+	write_line(data, "Tap 'Z' to enter Z Axis mode", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap 'D' to enter/out Diameter mode", msg_pos, color);
+	write_line(data, "Tap 'D' to enter Diameter mode", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap 'H' to enter/out Height mode", msg_pos, color);
+	write_line(data, "Tap 'H' to enter Height mode", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap '1' for red color", msg_pos,
-			color);
+	write_line(data, "Tap '1' for red color", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap '2' for green color",
-			msg_pos, color);
+	write_line(data, "Tap '2' for green color", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap '3' for blue color", msg_pos,
-			color);
+	write_line(data, "Tap '3' for blue color", msg_pos, color);
 }
 
 static void	ft_menu(t_mlx *data, t_vect msg_pos, int incr, int color)
@@ -59,8 +57,8 @@ static void	ft_menu(t_mlx *data, t_vect msg_pos, int incr, int color)
 	msg_pos.y += incr;
 	write_line(data, "Tap SHIFT to see object select", msg_pos, color);
 	msg_pos.y += incr;
-	write_line(data, "Tap + or - to change unique properties/ z axis:",
-		msg_pos, color);
+	write_line(data, "Tap + or - to change unique properties/ z axis:", msg_pos,
+		color);
 	msg_pos.y += incr;
 	msg_pos.x += incr;
 	ft_menu_unique(data, msg_pos, incr, color);
@@ -85,7 +83,7 @@ int	ft_show_control(t_scene *s)
 	int		color;
 
 	incr = 20;
-	color = 0XAB0FAF;
+	color = 0X655AFF;
 	msg_pos = init_vect(5, 30, 0);
 	if (s && s->show_control == TRUE)
 		ft_menu(s->mlx, msg_pos, incr, color);
@@ -96,7 +94,7 @@ int	ft_show_control(t_scene *s)
 		else if (s->cam->selected == TRUE)
 			write_line(s->mlx, "Cam selected", msg_pos, 0XFFFFFF);
 		else
-		ft_obj_select(s, msg_pos);
+			ft_obj_select(s, msg_pos);
 	}
 	return (EXIT_SUCCESS);
 }

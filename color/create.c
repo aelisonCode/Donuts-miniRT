@@ -19,7 +19,7 @@ void	ft_scale_color(int *color_base, int keycode, int incr)
 		return ;
 	if (keycode == SCALE_UP && *color_base < 255)
 		*color_base += incr;
-	if (keycode == SCALE_DOWN && *color_base > 0)
+	else if (keycode == SCALE_DOWN && *color_base > 0)
 		*color_base -= incr;
 }
 
