@@ -48,7 +48,7 @@ void	ft_rotate_on_x(t_vect *direction, double ratio_deg)
 	direction->z = v.y * sin(ratio_rad) + v.z * cos(ratio_rad);
 }
 
-void	ft_rotate(t_vect *direction, int keycode, int incr_deg)
+void	ft_rotate(t_vect *direction, int keycode, double incr_deg)
 {
 	if (!direction)
 		return ;
@@ -57,13 +57,13 @@ void	ft_rotate(t_vect *direction, int keycode, int incr_deg)
 	else if (keycode == SCALE_DOWN)
 		ft_rotate_on_z(direction, -incr_deg);
 	else if (keycode == UP)
-		ft_rotate_on_y(direction, incr_deg);
-	else if (keycode == DOWN)
-		ft_rotate_on_y(direction, -incr_deg);
-	else if (keycode == LEFT)
 		ft_rotate_on_x(direction, incr_deg);
-	else if (keycode == RIGHT)
+	else if (keycode == DOWN)
 		ft_rotate_on_x(direction, -incr_deg);
+	else if (keycode == LEFT)
+		ft_rotate_on_y(direction, incr_deg);
+	else if (keycode == RIGHT)
+		ft_rotate_on_y(direction, -incr_deg);
 }
 
 void	ft_scale(double *value, int move, double incr)

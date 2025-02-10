@@ -20,7 +20,7 @@ void	ft_center(t_vect *to_change, int keycode, double incr)
 		|| keycode == DOWN)
 		ft_translation(to_change, keycode, incr);
 	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
-		ft_translation(to_change, keycode, -incr);
+		ft_translation(to_change, keycode, incr);
 }
 
 void	ft_rotation(t_vect *to_change, int keycode, double incr)

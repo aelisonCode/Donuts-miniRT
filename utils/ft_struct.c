@@ -41,22 +41,18 @@ int	control_cam(t_scene *s, t_c *cam, int keycode, double incr)
 	if (!cam || !s)
 		return (FALSE);
 	if (s->do_rotation == TRUE)
-	{
-		ft_rotation(&cam->direction, keycode, incr);
-		free(s->p);
-		s->p = init_pjct(cam, 1);
-	}
-	if (s->do_z == TRUE)
+		ft_rotation(&cam->direction, keycode, incr * 5);
+	else if (s->do_z == TRUE)
 		ft_center(&cam->view_point, keycode, incr);
-	if (s->do_z == FALSE)
+	else if (s->do_z == FALSE)
 	{
 		if (cam->fov > 0 && keycode == SCALE_DOWN)
 			ft_scale(&cam->fov, keycode, incr * 5);
 		if (cam->fov < 180 && keycode == SCALE_UP)
 			ft_scale(&cam->fov, keycode, incr * 5);
-		free(s->p);
-		s->p = init_pjct(cam, 1);
 	}
+	free(s->p);
+	s->p = init_pjct(cam, 1);
 	return (result);
 }
 
@@ -73,7 +69,7 @@ void	control_primary(t_scene *scene, t_obj type, int keycode)
 	}
 	if (keycode != CAMERA && type == Camera)
 	{
-		if (control_cam(scene, scene->cam, keycode, -0.1) == FALSE)
+		if (control_cam(scene, scene->cam, keycode, 0.5) == FALSE)
 			return ;
 		gen_new_image(scene);
 		ft_launch(scene);
