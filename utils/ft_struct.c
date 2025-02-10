@@ -50,7 +50,10 @@ int	control_cam(t_scene *s, t_c *cam, int keycode, double incr)
 		ft_center(&cam->view_point, keycode, incr);
 	if (s->do_z == FALSE)
 	{
-		ft_scale(&cam->fov, keycode, incr * 5);
+		if (cam->fov > 0 && keycode == SCALE_DOWN)
+			ft_scale(&cam->fov, keycode, incr * 5);
+		if (cam->fov < 180 && keycode == SCALE_UP)
+			ft_scale(&cam->fov, keycode, incr * 5);
 		free(s->p);
 		s->p = init_pjct(cam, 1);
 	}

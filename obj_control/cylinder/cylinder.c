@@ -47,8 +47,8 @@ int	get_cy_color(t_scene *s, t_maps *curr, t_vect *point, double lambert)
 	t_cy	*cylinder;
 
 	cylinder = curr->struct_obj;
-	res = gen_color(cylinder->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, curr, point, EPSILON);
+	res = gen_color(cylinder->color.color, s->amlight, lambert);
+	shadow = ft_add_shadow(s, curr, point);
 	if (shadow != -1)
 		res = shadow;
 	return (res);
@@ -60,14 +60,15 @@ int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 	double	t;
 	double	lambert;
 	t_vect	solution;
+	t_vect	v_normal;
 
 	if (!s || !curr || !r)
 		return (EXIT_FAILURE);
 	obj = curr->struct_obj;
 	if (ft_intersec_cy(obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
-		obj->v_normal = ft_normal_cy(r, obj, t, solution);
-		lambert = lambertienne_cy(obj->v_normal, s->light, solution);
+		v_normal = ft_normal_cy(r, obj, t, solution);
+		lambert = lambertienne_cy(v_normal, s->light, solution);
 		curr->color = get_cy_color(s, curr, &solution, lambert);
 		cmp_dist(s, t, curr->color);
 		return (EXIT_SUCCESS);

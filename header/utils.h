@@ -30,6 +30,4 @@ void	ft_disp_vect(t_vect *vect);
 void	ft_disp_content_a(t_a *curr);
 void	ft_disp_content_c(t_c *curr);
 void	ft_disp_content_l(t_l *curr);
-
-void	*get_type(t_maps *obj, t_obj type);
 #endif

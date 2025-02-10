@@ -42,7 +42,6 @@ int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 	*t = scalaire(x, ft_normalize(obj->direction)) / denominator;
 	if (*t > EPSILON)
 	{
-		obj->t = *t;
 		*res = compute_intersec_pts(ray, *t);
 		return (EXIT_SUCCESS);
 	}
@@ -75,8 +74,8 @@ static int	get_pl_color(t_scene *s, t_maps *start, t_vect *point)
 
 	plane = start->struct_obj;
 	lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, plane, *point);
-	res = gen_color(plane->color.color, s->amlight, lambert, REFRACTION_AM);
-	shadow = ft_add_shadow(s, start, point, EPSILON);
+	res = gen_color(plane->color.color, s->amlight, lambert);
+	shadow = ft_add_shadow(s, start, point);
 	if (shadow != -1)
 		res = shadow;
 	return (res);

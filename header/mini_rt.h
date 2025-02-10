@@ -100,22 +100,28 @@ int				exec_pl(t_scene *s, t_maps *obj, t_ray *r);
 /*VECTOR*/
 t_vect			make_vector(char *str);
 t_color			make_color(char *str);
-double			get_root(double a, double b, double disc, double *t2);
+double			get_root(double a, double b, double disc);
 t_ray			create_ray(t_vect *origin, t_projection *p, int x, int y);
 t_projection	*init_pjct(t_c *cam, double dist);
 void			loop_screen(t_scene *scene);
 
 /*EFFECT*/
-int				check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts,
-					t_maps *target, double lambert);
+/* int				check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts, */
+/* 					t_maps *target, double lambert); */
+/* int				check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts, */
+/* 					t_maps *target, double lambert); */
+/* int				check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts, */
+/* 					t_maps *target, double lambert); */
 int				check_pl(t_scene *s, t_pl *obj, t_vect *ref_pts,
-					t_maps *target, double lambert);
+					t_maps *target);
 int				check_cy(t_scene *s, t_cy *obj, t_vect *ref_pts,
-					t_maps *target, double lambert);
+					t_maps *target);
+int				check_sp(t_scene *s, t_sp *obj, t_vect *ref_pts,
+					t_maps *target);
 
 void			ft_scale_color(int *color_base, int keycode, int incr);
 /*OTHER*/
 int				cmp_dist(t_scene *s, double dist, int new_col);
 t_vect			compute_intersec_pts(t_ray *r, double t);
-int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts, double lambert);
+int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts);
 #endif

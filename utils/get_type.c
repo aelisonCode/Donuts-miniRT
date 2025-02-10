@@ -12,19 +12,6 @@
 
 #include "../header/mini_rt.h"
 
-void	*get_type(t_maps *obj, t_obj type)
-{
-	if (!obj)
-		return (NULL);
-	while (obj)
-	{
-		if (obj->type == type)
-			return (obj->struct_obj);
-		obj = obj->next;
-	}
-	return (NULL);
-}
-
 static void	retired_other(t_scene *scene, t_obj select)
 {
 	if (!scene)

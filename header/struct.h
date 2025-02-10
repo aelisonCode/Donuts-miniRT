@@ -125,9 +125,6 @@ typedef struct s_sp
 	double			diameter;
 	double			radius;
 	t_color			color;
-	double			t1;
-	double			t2;
-	t_vect			v_normal;
 }					t_sp;
 
 typedef struct s_pl
@@ -135,7 +132,6 @@ typedef struct s_pl
 	t_vect			point;
 	t_vect			direction;
 	t_color			color;
-	double			t;
 }					t_pl;
 
 typedef struct s_cy
@@ -146,9 +142,6 @@ typedef struct s_cy
 	double			height;
 	t_color			color;
 	double			radius;
-	double			t1;
-	double			t2;
-	t_vect			v_normal;
 }					t_cy;
 
 typedef struct s_projection

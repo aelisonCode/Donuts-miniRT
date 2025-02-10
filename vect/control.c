@@ -49,12 +49,13 @@ double	get_angle(t_vect a, t_vect b)
 	numerator = scalaire(a, b);
 	denominator = vect_lenght(a) * vect_lenght(b);
 	if (denominator == 0)
-		return (1);
+		return (0);
 	res = acos(numerator / denominator);
+	res = res * (180 / M_PI);
 	return (res);
 }
 
-double	get_root(double a, double b, double disc, double *t2)
+double	get_root(double a, double b, double disc)
 {
 	double	r_1;
 	double	r_2;
@@ -71,15 +72,9 @@ double	get_root(double a, double b, double disc, double *t2)
 	if (r_1 > EPSILON && r_2 > EPSILON)
 	{
 		if (r_1 < r_2)
-		{
-			*t2 = r_2;
 			return (r_1);
-		}
 		else
-		{
-			*t2 = r_1;
 			return (r_2);
-		}
 	}
 	else if (r_1 > EPSILON)
 		return (r_1);

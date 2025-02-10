@@ -19,6 +19,6 @@ int	get_red(int color);
 int	get_green(int color);
 int	get_blue(int color);
 int	create_color(int red, int green, int blue);
-int	gen_color(int color, t_a *ambient_struct, double lambert, double reflect);
+int	gen_color(int color, t_a *ambient_struct, double lambert);
 int	create_color(int red, int green, int blue);
 #endif
