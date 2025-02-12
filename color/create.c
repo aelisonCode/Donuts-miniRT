@@ -13,7 +13,6 @@
 #include "../header/color.h"
 #include "../header/struct.h"
 
-
 void	ft_scale_color(int *color_base, int keycode, int incr)
 {
 	if (!color_base)
@@ -31,37 +30,6 @@ double	create_ambient(t_a *ambient, double color)
 	res = ambient->ratio * color * REFRACTION_AM;
 	return (res);
 }
-/*  */
-/* double	create_diffuse(int color, double ref_diff) */
-/* { */
-/* 	double	res; */
-/*  */
-/* 	res = ref_diff * color; */
-/* 	return (res); */
-/* } */
-/*  */
-/* double shadow(t_l l, t_vect inter, t_vect inter_obj) */
-/* { */
-/* 	double	d_o; */
-/* 	double	d_s; */
-/* 	double	res; */
-/* 	d_o = distances(l.pos, inter); */
-/* 	d_s = distances(l.pos, inter_obj); */
-/* 	res = subpow(d_s, d_o) / pow(d_o, 2); */
-/* 	return (res); */
-/* } */
-/*  */
-/* double	create_shadow(t_l l, t_vect inter, t_vect inter_obj) */
-/* { */
-/* 	double res; */
-/* 	double d_o; */
-/* 	double s; */
-/*  */
-/* 	d_o = vect_lenght(substraction(l.pos, inter)); */
-/* 	s = shadow(l, inter, inter_obj); */
-/* 	res = (1 - s) * ((l.bright) / pow(d_o, 2)); */
-/* 	return (res); */
-/* } */
 
 int	gen_color(int color, t_a *am, double lambert)
 {

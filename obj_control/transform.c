@@ -16,8 +16,7 @@ void	ft_center(t_vect *to_change, int keycode, double incr)
 {
 	if (!to_change)
 		return ;
-	if (keycode == LEFT || keycode == RIGHT || keycode == UP
-		|| keycode == DOWN)
+	if (keycode == LEFT || keycode == RIGHT || keycode == UP || keycode == DOWN)
 		ft_translation(to_change, keycode, incr);
 	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
 		ft_translation(to_change, keycode, incr);
@@ -27,8 +26,7 @@ void	ft_rotation(t_vect *to_change, int keycode, double incr)
 {
 	if (!to_change)
 		return ;
-	if (keycode == LEFT || keycode == RIGHT || keycode == UP
-		|| keycode == DOWN)
+	if (keycode == LEFT || keycode == RIGHT || keycode == UP || keycode == DOWN)
 		ft_rotate(to_change, keycode, incr);
 	if (keycode == SCALE_UP || keycode == SCALE_DOWN)
 		ft_rotate(to_change, keycode, incr);
@@ -38,7 +36,7 @@ void	ft_diameter(double *diameter, double *radius, int keycode, double incr)
 {
 	if (!diameter || !radius)
 		return ;
-	if (keycode == SCALE_DOWN &&  *diameter > 1.0)
+	if (keycode == SCALE_DOWN && *diameter > 1.0)
 		ft_scale(diameter, keycode, incr);
 	else if (keycode == SCALE_UP && *diameter < 50.0)
 		ft_scale(diameter, keycode, incr);

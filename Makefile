@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/02/06 15:05:27 by aelison          ###   ########.fr        #
+#    Updated: 2025/02/12 10:01:00 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC = src/ft_program.c \
 	  errors/param_view_err.c\
 	  mlx/mouse_to_obj.c \
 	  mlx/menu.c \
+	  mlx/menu_output.c \
 	  mlx/ft_init_mlx.c \
 	  mlx/close_mlx.c \
 	  mlx/event.c \
@@ -84,7 +85,7 @@ MINILBX_PATH = ./minilibx-linux/
 
 MINILBX = ${MINILBX_PATH}/libmlx_Linux.a
 
-LINKING = -L$(MINILBX_PATH) -lmlx -lXext -lX11 -lm
+LINKING = -L$(MINILBX_PATH) -lmlx -lXext -lX11 -lm -O3
 
 all: $(OBJ_DIR) $(MINILBX) $(NAME)
 

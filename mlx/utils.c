@@ -12,25 +12,18 @@
 
 #include "../header/mini_rt.h"
 
-int	ft_is_in_window(int x, int y)
-{
-	if (x >= 0 && x <= WINDOW_X)
-	{
-		if (y >= 0 && y <= WINDOW_Y)
-			return (EXIT_SUCCESS);
-	}
-	return (EXIT_FAILURE);
-}
-
 void	ft_put_pixel(t_mlx *data, int x, int y, int color)
 {
 	char	*tmp;
 
-	if (ft_is_in_window(x, y) == EXIT_SUCCESS)
+	if (x >= 0 && x <= WINDOW_X)
 	{
-		tmp = data->img_addr + (y * data->size_line + x * (data->byte_p_pixel
-					/ 8));
-		*(unsigned int *)tmp = color;
+		if (y >= 0 && y <= WINDOW_Y)
+		{
+			tmp = data->img_addr + (y * data->size_line + x
+					* (data->byte_p_pixel / 8));
+			*(unsigned int *)tmp = color;
+		}
 	}
 }
 
@@ -57,24 +50,9 @@ static void	retired_other(int *a, int *b, int *c, int *d)
 	*d = FALSE;
 }
 
-void	select_mod(t_scene *s, int keycode)
+static void	select_aux(t_scene *s, int keycode)
 {
-	if (keycode == RED || keycode == GREEN || keycode == BLUE)
-	{
-		if (s->do_color == keycode)
-			s->do_color = FALSE;
-		else
-			s->do_color = keycode;
-		retired_other(&s->do_z, &s->do_height, &s->do_diameter,
-			&s->do_rotation);
-	}
-	else if (keycode == Z_AXIS)
-	{
-		change_state(&s->do_z);
-		retired_other(&s->do_color, &s->do_height, &s->do_diameter,
-			&s->do_rotation);
-	}
-	else if (keycode == DIAMETER)
+	if (keycode == DIAMETER)
 	{
 		change_state(&s->do_diameter);
 		retired_other(&s->do_z, &s->do_height, &s->do_color, &s->do_rotation);
@@ -92,4 +70,24 @@ void	select_mod(t_scene *s, int keycode)
 	if (s->do_color == FALSE && s->do_z == FALSE && s->do_diameter == FALSE
 		&& s->do_height == FALSE && s->do_rotation == FALSE)
 		s->do_z = TRUE;
+}
+
+void	select_mod(t_scene *s, int keycode)
+{
+	if (keycode == RED || keycode == GREEN || keycode == BLUE)
+	{
+		if (s->do_color == keycode)
+			s->do_color = FALSE;
+		else
+			s->do_color = keycode;
+		retired_other(&s->do_z, &s->do_height, &s->do_diameter,
+			&s->do_rotation);
+	}
+	else if (keycode == Z_AXIS)
+	{
+		change_state(&s->do_z);
+		retired_other(&s->do_color, &s->do_height, &s->do_diameter,
+			&s->do_rotation);
+	}
+	select_aux(s, keycode);
 }
