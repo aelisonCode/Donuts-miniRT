@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 10:37:14 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 15:08:29 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:33:30 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	select_state(t_scene *s, t_maps *ptr)
 	if (!s || !ptr)
 		return (EXIT_FAILURE);
 	tmp = s->world;
-	if (ptr->selected == TRUE)
-		ptr->selected = FALSE;
-	else if (ptr->selected == FALSE)
+	if (ptr->selected == FALSE)
 		ptr->selected = TRUE;
 	while (tmp)
 	{

@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 09:57:58 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/12 10:00:03 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:38:52 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static void	ft_menu_unique(t_mlx *data, t_vect msg_pos, int incr, int color)
 	write_line(data, "Tap 'C', 'L' to enter/out camera or light mode", msg_pos,
 		color);
 	msg_pos.y += incr;
-	write_line(data, "Must quit these mode if you want to change !", msg_pos,
-		color);
+	write_line(data, "Must quit these mode if you want to touch object !",
+		msg_pos, color);
 	msg_pos.y += incr;
 	write_line(data, "Tap 'R' to enter rotation mode", msg_pos, color);
 	msg_pos.y += incr;
@@ -49,6 +49,8 @@ void	ft_menu(t_mlx *data, t_vect msg_pos, int incr, int color)
 	write_line(data, "Tap TABULATION to change object", msg_pos, color);
 	msg_pos.y += incr;
 	write_line(data, "Tap SHIFT to see object select", msg_pos, color);
+	msg_pos.y += incr;
+	write_line(data, "Tap ENTER to change pxl/normal mode", msg_pos, color);
 	msg_pos.y += incr;
 	write_line(data, "Tap + or - to change unique properties/ z axis:", msg_pos,
 		color);

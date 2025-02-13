@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/13 10:25:33 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:36:24 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_pl			*plane(char **str);
 t_cy			*cylinder(char **str);
 int				select_state(t_scene *s, t_maps *ptr);
 t_color			get_col(t_maps *obj);
-int				rand_col(t_color *col);
 void			change_state(int *to_change);
 
 void			ft_center(t_vect *to_change, int keycode, double incr);

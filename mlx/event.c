@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 07:21:54 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 15:33:10 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:37:45 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,6 @@ int	on_button_pressed(int button, int x, int y, void *param)
 	s = (t_scene *)param;
 	if (button == LEFT_BUTTON)
 		return (get_obj(s, x, y, 0));
-	else if (button == RIGHT_BUTTON)
-	{
-		get_obj(s, x, y, 1);
-		gen_new_image(s);
-		ft_launch(s);
-	}
 	return (EXIT_SUCCESS);
 }
 

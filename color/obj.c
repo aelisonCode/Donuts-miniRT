@@ -6,31 +6,11 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 10:46:14 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 11:04:00 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:36:26 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/mini_rt.h"
-
-int	rand_col(t_color *col)
-{
-	if (!col)
-		return (EXIT_FAILURE);
-	if (col->r < 255)
-		col->r += 50;
-	else
-		col->r = 0;
-	if (col->g < 255)
-		col->g += 50;
-	else
-		col->g = 0;
-	if (col->b < 255)
-		col->b += 50;
-	else
-		col->b = 0;
-	col->color = create_color(col->r, col->g, col->b);
-	return (EXIT_SUCCESS);
-}
 
 t_color	get_col_sp(t_sp *obj)
 {
