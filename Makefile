@@ -6,7 +6,7 @@
 #    By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/31 11:11:45 by aelison           #+#    #+#              #
-#    Updated: 2025/02/12 10:01:00 by aelison          ###   ########.fr        #
+#    Updated: 2025/02/13 10:26:25 by aelison          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ SRC = src/ft_program.c \
 	  parsing/components.c \
 	  parsing/physics_obj.c \
 	  projection/ray.c \
+	  projection/ray_tracing.c \
 	  projection/init_projection.c \
 	  projection/shadow_effect.c \
 	  projection/shadow_obj.c \

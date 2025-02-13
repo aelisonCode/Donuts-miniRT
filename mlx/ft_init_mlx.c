@@ -56,6 +56,7 @@ void	ft_init_scene(t_scene *data, double dist, char *title)
 	data->do_height = FALSE;
 	data->do_diameter = FALSE;
 	data->do_color = FALSE;
+	data->do_pxl = FALSE;
 	ft_img_init(data, WINDOW_X, WINDOW_Y);
 	ft_window_init(data, tmp, title);
 }

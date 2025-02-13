@@ -74,6 +74,11 @@ static void	select_aux(t_scene *s, int keycode)
 
 void	select_mod(t_scene *s, int keycode)
 {
+	if (keycode == RENDERER)
+	{
+		change_state(&s->do_pxl);
+		return ;
+	}
 	if (keycode == RED || keycode == GREEN || keycode == BLUE)
 	{
 		if (s->do_color == keycode)

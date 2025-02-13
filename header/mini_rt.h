@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:09:40 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/12 10:00:16 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:25:33 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,5 @@ int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts);
 void			write_line(t_mlx *mlx, char *mssg, t_vect pos, int color);
 void			ft_menu(t_mlx *data, t_vect msg_pos, int incr, int color);
 int				is_in_limit(t_cy *obj, t_vect *solution);
+void			exec(t_scene *scene, t_vect wind, int step);
 #endif

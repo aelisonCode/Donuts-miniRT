@@ -52,6 +52,7 @@
 # define COEFF_REFCT 1.0
 # define REFRACTION_AM 0.5
 # define EPSILON 1e-4
+# define RENDERER 65293
 
 typedef enum e_object
 {
@@ -180,6 +181,7 @@ typedef struct s_scene
 	int				color_to_put;
 	int				show_control;
 	int				current;
+	int				do_pxl;
 }					t_scene;
 
 #endif
