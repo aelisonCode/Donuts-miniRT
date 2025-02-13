@@ -100,6 +100,11 @@ static int	file_content(t_scene *s, int fd)
 		tmp = get_next_line(fd);
 		if (tmp)
 		{
+			if (ft_strchr(tmp, '#') != NULL)
+			{
+				free(tmp);
+				continue ;
+			}
 			i++;
 			ft_replace_str(tmp, "\t\a\b\v\f\r", ' ');
 			obj = create_object(s, tmp, i, &error);

@@ -18,8 +18,6 @@ LIB_PATH = ./libft/
 
 LIB = $(LIB_PATH)libft.a
 
-PRINT = $(LIB_PATH)ft_printf/libftprintf.a
-
 SRC = src/ft_program.c \
 	  obj_control/obj_moves.c \
 	  obj_control/sphere/sphere.c \
@@ -62,14 +60,12 @@ SRC = src/ft_program.c \
 	  projection/init_projection.c \
 	  projection/shadow_effect.c \
 	  projection/shadow_obj.c \
-	  libft/get_next_line/get_next_line.c \
-	  libft/get_next_line/get_next_line_utils.c \
 
 OBJ_DIR = obj
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
-CC = clang
+CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
@@ -99,51 +95,48 @@ v: fclean grind
 n:
 	@norminette $(SRC) header/
 
-$(NAME): $(OBJ) $(LIB) $(PRINT)
-	@echo "Creating miniRT exec..."
-	@$(CC)  $(CFLAGS) ${OBJ} ${LIB} ${PRINT} $(MINILBX) $(LINKING) -o $(NAME)
-	@echo "Creating Successful !"
+$(NAME): $(OBJ) $(LIB)
+	@echo "Creating miniRT exec [$(NAME)]"
+	@$(CC)  $(CFLAGS) ${OBJ} ${LIB} $(MINILBX) $(LINKING) -o $(NAME)
+	@echo "Creating [$(NAME)] Successful !"
 
-$(NAME_DB): $(OBJ) $(LIB) $(PRINT)
-	@echo "Creating no_leaks exec..."
-	$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIB) $(PRINT) $(MINILBX) $(LINKING) -o $(NAME_DB)
-	@echo "Creating Successful !"
+$(NAME_DB): $(OBJ) $(LIB)
+	@echo "Creating no_leaks exec [$(NAME_DB)]"
+	$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LIB) $(MINILBX) $(LINKING) -o $(NAME_DB)
+	@echo "Creating [$(NAME_DB)] Successful !"
 
 $(LIB):
-	@echo "Compiling Libft..."
+	@echo "Creating Libft archive [$@]"
 	@make -C $(LIB_PATH) -s bonus
-
-$(PRINT): $(LIB)
-	@echo "Compiling ft_printf..."
-	@make -C $(LIB_PATH)ft_printf/ -s all
+	@echo "Archive [$@] create !"
 
 $(MINILBX):
 	@if [ ! -d "$(MINILBX_PATH)" ]; then \
 		git clone $(MINILBX_CLONE); \
 	fi
-	@echo "Compiling minilibx..."
+	@echo "Creating Minilibx archive [$@]"
 	@make -C $(MINILBX_PATH) -s all
+	@echo "Archive [$@] create !"
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@${CC} $(CFLAGS)  -o $@ -c $<
+	@echo "Compiling [$<]"
+	@${CC} $(CFLAGS) -c $< -o $@
 
 clean:
-	@echo "Clean obj files..."
+	@echo "Clean obj files"
 	@make -C $(LIB_PATH) -s clean
-	@make -C $(LIB_PATH)ft_printf/ -s clean
 	@rm   -rf $(OBJ_DIR)
 	@echo "Complete clean !"
 
 fclean: clean
 	@make -C $(LIB_PATH) -s fclean
-	@make -C $(LIB_PATH)ft_printf/ -s fclean
 	@rm -rf $(NAME)
 	@rm -rf $(NAME_DB)
-	clear
+	@echo "Executable [$(NAME)] removed!"
 
 re: fclean all
 

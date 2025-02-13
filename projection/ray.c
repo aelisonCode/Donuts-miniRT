@@ -39,7 +39,7 @@ t_ray	create_ray(t_vect *origin, t_projection *p, int x, int y)
 	return (res);
 }
 
-void	exec(t_scene *scene, t_vect wind)
+void	exec(t_scene *scene, t_vect wind, int step)
 {
 	t_maps	*ptr;
 	t_ray	r;
@@ -59,13 +59,22 @@ void	exec(t_scene *scene, t_vect wind)
 		ptr = ptr->next;
 	}
 	if (status == EXIT_SUCCESS)
-		ft_put_pixel(scene->mlx, wind.x, wind.y, scene->color_to_put);
+	{
+		while (step)
+		{
+			ft_put_pixel(scene->mlx, wind.x, wind.y, scene->color_to_put);
+			wind.x++;
+			step--;
+		}
+	}
 }
 
 void	loop_screen(t_scene *scene)
 {
 	t_vect	incr;
+	int		step;
 
+	step = WINDOW_X / 100;
 	incr.y = 0;
 	while (incr.y < WINDOW_Y)
 	{
@@ -74,8 +83,8 @@ void	loop_screen(t_scene *scene)
 		{
 			scene->dist_curr = -1;
 			scene->color_to_put = 0X0;
-			exec(scene, incr);
-			incr.x++;
+			exec(scene, incr, step);
+			incr.x += step;
 		}
 		incr.y++;
 	}

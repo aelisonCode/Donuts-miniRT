@@ -17,7 +17,6 @@
 # include "../header/errors.h"
 # include "../header/utils.h"
 # include "../header/vector.h"
-# include "../libft/ft_printf/ft_printf.h"
 # include "../libft/get_next_line/get_next_line.h"
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -103,4 +102,5 @@ t_vect			compute_intersec_pts(t_ray *r, double t);
 int				ft_add_shadow(t_scene *s, t_maps *target, t_vect *ref_pts);
 void			write_line(t_mlx *mlx, char *mssg, t_vect pos, int color);
 void			ft_menu(t_mlx *data, t_vect msg_pos, int incr, int color);
+int				is_in_limit(t_cy *obj, t_vect *solution);
 #endif

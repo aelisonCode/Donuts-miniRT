@@ -13,8 +13,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define WINDOW_X 900
-# define WINDOW_Y 500
+# define WINDOW_X 1300
+# define WINDOW_Y 800
 
 # define TRUE 1
 # define FALSE 0
