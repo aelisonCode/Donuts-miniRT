@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:01:07 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/15 14:51:42 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:03:54 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,12 @@ int	ft_error_init(int argc, char **argv)
 		}
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	init_x(int *i, int *obj, int *error, char **tmp)
+{
+	*i = 0;
+	*tmp = "\0";
+	*obj = EXIT_FAILURE;
+	*error = EXIT_FAILURE;
 }

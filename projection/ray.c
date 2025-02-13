@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 13:50:33 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/05 15:14:44 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/13 09:57:11 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,16 @@ t_ray	create_ray(t_vect *origin, t_projection *p, int x, int y)
 	return (res);
 }
 
+void	put(t_scene *scene, t_vect wind, int step)
+{
+	while (step)
+	{
+		ft_put_pixel(scene->mlx, wind.x, wind.y, scene->color_to_put);
+		wind.x++;
+		step--;
+	}
+}
+
 void	exec(t_scene *scene, t_vect wind, int step)
 {
 	t_maps	*ptr;
@@ -59,14 +69,7 @@ void	exec(t_scene *scene, t_vect wind, int step)
 		ptr = ptr->next;
 	}
 	if (status == EXIT_SUCCESS)
-	{
-		while (step)
-		{
-			ft_put_pixel(scene->mlx, wind.x, wind.y, scene->color_to_put);
-			wind.x++;
-			step--;
-		}
-	}
+		put(scene, wind, step);
 }
 
 void	loop_screen(t_scene *scene)
