@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 12:55:29 by mravelon          #+#    #+#             */
-/*   Updated: 2025/01/15 17:25:36 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/02/13 10:03:45 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,7 @@ static int	file_content(t_scene *s, int fd)
 	int		error;
 	char	*tmp;
 
-	i = 0;
-	tmp = "\0";
-	obj = EXIT_FAILURE;
-	error = EXIT_FAILURE;
+	init_x(&i, &obj, &error, &tmp);
 	while (tmp)
 	{
 		tmp = get_next_line(fd);
