@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:56:01 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 14:28:09 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 11:44:14 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ t_vect	compute_intersec_pts(t_ray *r, double t)
 	t_vect	result;
 
 	result = sum(r->origin, vect_dot_val(r->direction, t));
+	result.x += EPSILON;
+	result.y += EPSILON;
+	result.z += EPSILON;
 	return (result);
 }
 

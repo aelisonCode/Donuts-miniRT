@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 08:38:53 by aelison           #+#    #+#             */
-/*   Updated: 2025/01/23 15:19:03 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 11:36:09 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_vect	ft_normalize(t_vect to_norm)
 	double	lenght;
 
 	lenght = vect_lenght(to_norm);
-	res = init_vect(0, 0, 0);
+	res = init_vect(1, 1, 1);
 	if (lenght == 0)
 		return (res);
 	res.x = to_norm.x / lenght;

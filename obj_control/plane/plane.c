@@ -6,7 +6,7 @@
 /*   By: aelison <aelison@student.42antananarivo.m  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 15:25:45 by aelison           #+#    #+#             */
-/*   Updated: 2025/02/06 15:51:33 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 11:50:16 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,
 	double	scal;
 	double	res;
 
-	v_normal = ft_normalize(obj->direction);
+	v_normal = obj->direction;
 	v_light = ft_normalize(substraction(light->pos, point));
 	scal = scalaire(v_normal, v_light);
 	if (scal < 0)

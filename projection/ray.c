@@ -33,8 +33,13 @@ void	ft_render(t_scene *scene, int step)
 
 void	loop_screen(t_scene *s)
 {
+	int	step;
+
+	step = WINDOW_X / 100;
+	if (step < 1)
+		step = 1;
 	if (s->do_pxl == FALSE)
 		ft_render(s, 1);
 	else
-		ft_render(s, WINDOW_X / 100);
+		ft_render(s, step);
 }

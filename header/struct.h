@@ -6,15 +6,15 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 15:53:34 by mravelon          #+#    #+#             */
-/*   Updated: 2025/02/06 15:33:00 by aelison          ###   ########.fr       */
+/*   Updated: 2025/02/13 10:40:37 by aelison          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 
-# define WINDOW_X 1300
-# define WINDOW_Y 800
+# define WINDOW_X 900
+# define WINDOW_Y 500
 
 # define TRUE 1
 # define FALSE 0
