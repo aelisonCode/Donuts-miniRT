@@ -58,18 +58,19 @@ int	exec_cy(t_scene *s, t_maps *curr, t_ray *r)
 {
 	t_cy	*obj;
 	double	t;
-	double	lambert;
+	/* double	lambert; */
 	t_vect	solution;
-	t_vect	v_normal;
+	/* t_vect	v_normal; */
 
 	if (!s || !curr || !r)
 		return (EXIT_FAILURE);
 	obj = curr->struct_obj;
 	if (ft_intersec_cy(obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
-		v_normal = ft_normal_cy(r, obj, t, solution);
-		lambert = lambertienne_cy(v_normal, s->light, solution);
-		curr->color = get_cy_color(s, curr, &solution, lambert);
+		/* v_normal = ft_normal_cy(r, obj, t, solution); */
+		/* lambert = lambertienne_cy(v_normal, s->light, solution); */
+		/* curr->color = get_cy_color(s, curr, &solution, lambert); */
+		curr->color = obj->color.color;
 		cmp_dist(s, t, curr->color);
 		return (EXIT_SUCCESS);
 	}

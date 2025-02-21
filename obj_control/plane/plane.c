@@ -48,50 +48,53 @@ int	ft_intersec_pl(t_pl *obj, t_ray *ray, t_vect *res, double *t)
 	return (EXIT_FAILURE);
 }
 
-static double	lambertienne_reflection_pl(double coeff_reflection, t_l *light,
-		t_pl *obj, t_vect point)
-{
-	t_vect	v_normal;
-	t_vect	v_light;
-	double	scal;
-	double	res;
+/* static double	lambertienne_reflection_pl(double coeff_reflection, t_l *light, */
+/* 		t_pl *obj, t_vect point) */
+/* { */
+/* 	t_vect	v_normal; */
+/* 	t_vect	v_light; */
+/* 	double	scal; */
+/* 	double	res; */
+/*  */
+/* 	v_normal = obj->direction; */
+/* 	v_light = ft_normalize(substraction(light->pos, point)); */
+/* 	scal = scalaire(v_normal, v_light); */
+/* 	if (scal < 0) */
+/* 		scal = 0; */
+/* 	res = coeff_reflection * scal * light->bright; */
+/* 	return (res); */
+/* } */
 
-	v_normal = obj->direction;
-	v_light = ft_normalize(substraction(light->pos, point));
-	scal = scalaire(v_normal, v_light);
-	if (scal < 0)
-		scal = 0;
-	res = coeff_reflection * scal * light->bright;
-	return (res);
-}
-
-static int	get_pl_color(t_scene *s, t_maps *start, t_vect *point)
-{
-	int		res;
-	int		shadow;
-	double	lambert;
-	t_pl	*plane;
-
-	plane = start->struct_obj;
-	lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, plane, *point);
-	res = gen_color(plane->color.color, s->amlight, lambert);
-	shadow = ft_add_shadow(s, start, point);
-	if (shadow != -1)
-		res = shadow;
-	return (res);
-}
+/* static int	get_pl_color(t_scene *s, t_maps *start, t_vect *point) */
+/* { */
+/* 	int		res; */
+/* 	int		shadow; */
+/* 	double	lambert; */
+/* 	t_pl	*plane; */
+/*  */
+/* 	plane = start->struct_obj; */
+/* 	lambert = lambertienne_reflection_pl(COEFF_REFCT, s->light, plane, *point); */
+/* 	res = gen_color(plane->color.color, s->amlight, lambert); */
+/* 	shadow = ft_add_shadow(s, start, point); */
+/* 	if (shadow != -1) */
+/* 		res = shadow; */
+/* 	return (res); */
+/* } */
 
 int	exec_pl(t_scene *s, t_maps *obj, t_ray *r)
 {
+	t_pl	*pl;
 	int		res;
 	double	t;
 	t_vect	solution;
 
 	res = EXIT_FAILURE;
+	pl = obj->struct_obj;
 	if (ft_intersec_pl(obj->struct_obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
 		res = EXIT_SUCCESS;
-		obj->color = get_pl_color(s, obj, &solution);
+		obj->color = pl->color.color;
+		/* obj->color = get_pl_color(s, obj, &solution); */
 		cmp_dist(s, t, obj->color);
 	}
 	return (res);

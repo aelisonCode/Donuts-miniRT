@@ -55,37 +55,37 @@ int	ft_intersec_sp(t_sp *obj, t_ray *r, t_vect *solution, double *t)
 	return (EXIT_SUCCESS);
 }
 
-static double	lambertienne_reflection_sp(t_sp *obj, t_l *light, t_vect *point)
-{
-	t_vect	v_normal;
-	t_vect	v_light;
-	double	scal;
-	double	res;
+/* static double	lambertienne_reflection_sp(t_sp *obj, t_l *light, t_vect *point) */
+/* { */
+/* 	t_vect	v_normal; */
+/* 	t_vect	v_light; */
+/* 	double	scal; */
+/* 	double	res; */
+/*  */
+/* 	v_normal = ft_normalize(substraction(*point, obj->center)); */
+/* 	v_light = ft_normalize(substraction(light->pos, *point)); */
+/* 	scal = scalaire(v_normal, v_light); */
+/* 	if (scal < 0) */
+/* 		scal = 0; */
+/* 	res = COEFF_REFCT * scal * light->bright; */
+/* 	return (res); */
+/* } */
 
-	v_normal = ft_normalize(substraction(*point, obj->center));
-	v_light = ft_normalize(substraction(light->pos, *point));
-	scal = scalaire(v_normal, v_light);
-	if (scal < 0)
-		scal = 0;
-	res = COEFF_REFCT * scal * light->bright;
-	return (res);
-}
-
-static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point)
-{
-	int		res;
-	int		shadow;
-	double	lambert;
-	t_sp	*sphere;
-
-	sphere = start->struct_obj;
-	lambert = lambertienne_reflection_sp(start->struct_obj, s->light, point);
-	res = gen_color(sphere->color.color, s->amlight, lambert);
-	shadow = ft_add_shadow(s, start, point);
-	if (shadow != -1)
-		res = shadow;
-	return (res);
-}
+/* static int	get_sp_color(t_scene *s, t_maps *start, t_vect *point) */
+/* { */
+/* 	int		res; */
+/* 	int		shadow; */
+/* 	double	lambert; */
+/* 	t_sp	*sphere; */
+/*  */
+/* 	sphere = start->struct_obj; */
+/* 	lambert = lambertienne_reflection_sp(start->struct_obj, s->light, point); */
+/* 	res = gen_color(sphere->color.color, s->amlight, lambert); */
+/* 	shadow = ft_add_shadow(s, start, point); */
+/* 	if (shadow != -1) */
+/* 		res = shadow; */
+/* 	return (res); */
+/* } */
 
 int	exec_sp(t_scene *s, t_maps *curr, t_ray *r)
 {
@@ -98,7 +98,8 @@ int	exec_sp(t_scene *s, t_maps *curr, t_ray *r)
 	obj = curr->struct_obj;
 	if (ft_intersec_sp(obj, r, &solution, &t) == EXIT_SUCCESS)
 	{
-		curr->color = get_sp_color(s, curr, &solution);
+		curr->color = obj->color.color;
+		/* curr->color = get_sp_color(s, curr, &solution); */
 		cmp_dist(s, t, curr->color);
 		return (EXIT_SUCCESS);
 	}
