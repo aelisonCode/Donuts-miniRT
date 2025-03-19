@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:30:33 by mravelon          #+#    #+#             */
-/*   Updated: 2025/02/25 14:44:17 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:11:31 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,5 @@ int		verify_plane(char **str);
 int		verify_cylinder(char **str);
 void	init_x(int *i, int *obj, int *error, char **tmp);
 int		valid_format(char **str);
+int		check_zero(char *str);
 #endif
