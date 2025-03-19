@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 08:51:50 by mravelon          #+#    #+#             */
-/*   Updated: 2025/02/24 14:12:37 by aelison          ###   ########.fr       */
+/*   Updated: 2025/03/19 11:14:43 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,3 +100,27 @@ int	check_vector_rang(char *str, double min, double max)
 	ft_free_tab(tmp);
 	return (EXIT_SUCCESS);
 }
+
+int	check_zero(char *str)
+{
+	double	sum;
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	sum = 0;
+	tmp = ft_split(str, ',');
+	while (tmp[i])
+	{
+		sum += ft_atof(tmp[i]);
+		i++;
+	}
+	ft_free_tab(tmp);
+	if (sum == 0)
+	{
+		put_error("Some vector cannot be normalized !!!\n");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+

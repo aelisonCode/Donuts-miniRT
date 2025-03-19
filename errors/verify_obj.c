@@ -6,7 +6,7 @@
 /*   By: mravelon <mravelon@student.42antananarivo  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:57:36 by mravelon          #+#    #+#             */
-/*   Updated: 2025/03/18 13:17:31 by mravelon         ###   ########.fr       */
+/*   Updated: 2025/03/19 11:20:33 by mravelon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	verify_plane(char **str)
 		return (EXIT_FAILURE);
 	if (check_vector_rang(str[2], -1, 1) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	if (check_zero(str[2]) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	if (check_color(str[3]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -49,6 +51,8 @@ int	verify_cylinder(char **str)
 	if (check_vector(str[1]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_vector_rang(str[2], -1, 1) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (check_zero(str[2]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_value(str[3]) == EXIT_FAILURE)
 	{
