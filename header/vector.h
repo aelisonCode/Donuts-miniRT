@@ -30,5 +30,4 @@ t_vect	normal_sp(t_vect inter, t_sp *obj);
 t_vect	init_vect(double x, double y, double z);
 double	vect_length(t_vect to_check);
 t_vect	normal_pl(t_pl *obj);
-int		check_normalize(t_vect x);
 #endif

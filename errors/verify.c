@@ -27,7 +27,7 @@ int	verify_camera(char **str)
 		return (EXIT_FAILURE);
 	if (check_vector_rang(str[2], -1, 1) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (check_zero(str[2]) == EXIT_FAILURE)
+	if (check_normal(str[2]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_rang(str[3], 0.0, 180.0) == EXIT_FAILURE)
 		return (EXIT_FAILURE);

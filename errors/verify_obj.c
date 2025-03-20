@@ -39,7 +39,7 @@ int	verify_plane(char **str)
 		return (EXIT_FAILURE);
 	if (check_vector_rang(str[2], -1, 1) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (check_zero(str[2]) == EXIT_FAILURE)
+	if (check_normal(str[2]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_color(str[3]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
@@ -52,7 +52,7 @@ int	verify_cylinder(char **str)
 		return (EXIT_FAILURE);
 	if (check_vector_rang(str[2], -1, 1) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (check_zero(str[2]) == EXIT_FAILURE)
+	if (check_normal(str[2]) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (check_value(str[3]) == EXIT_FAILURE)
 	{

@@ -70,3 +70,26 @@ int	ft_error(int fd, char **argv, t_scene *data)
 	}
 	return (EXIT_SUCCESS);
 }
+
+int	check_normal(char *str)
+{
+	double	sum;
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	sum = 0;
+	tmp = ft_split(str, ',');
+	while (tmp[i])
+	{
+		sum += ft_atof(tmp[i]);
+		i++;
+	}
+	ft_free_tab(tmp);
+	if (sum != 1)
+	{
+		put_error("A Vector is not normalized in you're map\n");
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}

@@ -37,5 +37,5 @@ int		verify_plane(char **str);
 int		verify_cylinder(char **str);
 void	init_x(int *i, int *obj, int *error, char **tmp);
 int		valid_format(char **str);
-int		check_zero(char *str);
+int		check_normal(char *str);
 #endif

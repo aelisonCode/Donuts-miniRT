@@ -64,10 +64,3 @@ int	valid_format(char **str)
 	}
 	return (EXIT_SUCCESS);
 }
-
-int	check_normalize(t_vect x)
-{
-	if (vect_length(x) != 1)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
-}

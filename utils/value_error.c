@@ -100,27 +100,3 @@ int	check_vector_rang(char *str, double min, double max)
 	ft_free_tab(tmp);
 	return (EXIT_SUCCESS);
 }
-
-int	check_zero(char *str)
-{
-	double	sum;
-	int		i;
-	char	**tmp;
-
-	i = 0;
-	sum = 0;
-	tmp = ft_split(str, ',');
-	while (tmp[i])
-	{
-		sum += ft_atof(tmp[i]);
-		i++;
-	}
-	ft_free_tab(tmp);
-	if (sum == 0)
-	{
-		put_error("Some vector cannot be normalized !!!\n");
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
