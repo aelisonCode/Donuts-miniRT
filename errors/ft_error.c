@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/errors.h"
+#include "../header/mini_rt.h"
 
 void	missing_primary_aux(t_scene *data, int *i)
 {
@@ -73,20 +73,14 @@ int	ft_error(int fd, char **argv, t_scene *data)
 
 int	check_normal(char *str)
 {
-	double	sum;
-	int		i;
+	t_vect	v;
 	char	**tmp;
 
-	i = 0;
-	sum = 0;
 	tmp = ft_split(str, ',');
-	while (tmp[i])
-	{
-		sum += ft_atof(tmp[i]);
-		i++;
-	}
+	v = init_vect(ft_atof(tmp[0]), ft_atof(tmp[1]), ft_atof(tmp[2]));
 	ft_free_tab(tmp);
-	if (sum != 1)
+	vect_length(v);
+	if (vect_length(v) != 1)
 	{
 		put_error("A Vector is not normalized in you're map\n");
 		return (EXIT_FAILURE);

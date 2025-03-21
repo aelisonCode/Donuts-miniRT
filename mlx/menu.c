@@ -43,7 +43,8 @@ static void	show_mod(t_scene *s, t_vect msg_pos, int incr, int color)
 	else if (ft_get_event_state(s->event, blue) == TRUE)
 		write_line(s->mlx, "Color Blue selected", msg_pos, color);
 	else if (ft_get_event_state(s->event, bright) == TRUE)
-		write_line(s->mlx, "Intensity of light selected", msg_pos, color);
+		write_line(s->mlx, "Intensity of light/ambient selected", msg_pos,
+			color);
 	else if (ft_get_event_state(s->event, fov) == TRUE)
 		write_line(s->mlx, "Camera fov selected", msg_pos, color);
 }

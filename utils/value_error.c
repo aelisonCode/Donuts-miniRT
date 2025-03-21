@@ -66,7 +66,7 @@ int	check_vector(char *str)
 	tmp = ft_split(str, ',');
 	if (tab_length(tmp) != 3)
 	{
-		put_error("Miss some argument to some vector");
+		put_error("Your vector must have 3 values(x, y, z)\n");
 		ft_free_tab(tmp);
 		return (EXIT_FAILURE);
 	}
@@ -83,7 +83,7 @@ int	check_vector_rang(char *str, double min, double max)
 	tmp = ft_split(str, ',');
 	if (tab_length(tmp) != 3)
 	{
-		put_error("Miss some argument to some vector");
+		put_error("Your vector must have 3 values(x, y, z)\n");
 		ft_free_tab(tmp);
 		return (EXIT_FAILURE);
 	}

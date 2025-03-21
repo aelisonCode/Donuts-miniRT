@@ -12,7 +12,6 @@
 
 #include "../header/utils.h"
 #include "../header/errors.h"
-#include "../header/vector.h"
 
 static int	valid_format_aux(char *str, int *i)
 {
@@ -47,7 +46,7 @@ int	is_valid_format(char *str)
 			i++;
 	}
 	if (status == EXIT_FAILURE)
-		put_error("Invalide argument !!! DIGIT ONLY PLS!");
+		put_error("Invalide argument !!! DIGIT ONLY PLS!\n");
 	return (status);
 }
 
