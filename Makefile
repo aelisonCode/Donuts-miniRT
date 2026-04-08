@@ -93,7 +93,7 @@ MINILBX = ${MINILBX_PATH}/libmlx_Linux.a
 
 LINKING = -L$(MINILBX_PATH) -lmlx -lXext -lX11 -lm -O3
 
-all: $(OBJ_DIR) $(NAME)
+all: minilibx $(OBJ_DIR) $(NAME)
 
 minilibx: $(MINILBX_PATH)
 
@@ -123,11 +123,9 @@ $(LIB):
 	@echo "Archive [$@] create !"
 
 $(MINILBX_PATH):
-	@echo "Downloading sources...."
-	@wget $(MINILBX_URL)
-	#@tar -xzvf $(MINILIBX_TAR)
-	#@rm -rf $(MINILIBX_TAR)
-	@echo "Donwloading done !"
+	@echo "Cloning sources...."
+	@git clone $(MINILBX_URL)
+	@echo "Clone complete !"
 
 $(MINILBX):
 	@echo "Creating Minilibx archive [$@]"
