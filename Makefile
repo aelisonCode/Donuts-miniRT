@@ -83,7 +83,7 @@ LIB_PATH = ./libft
 
 LIB = $(LIB_PATH)/libft.a
 
-MINILBX_URL = https://cdn.intra.42.fr/document/document/32081/minilibx-linux.tgz
+MINILBX_URL = https://github.com/42paris/minilibx-linux
 
 MINILIBX_TAR = minilibx-linux.tgz
 
@@ -125,8 +125,8 @@ $(LIB):
 $(MINILBX_PATH):
 	@echo "Downloading sources...."
 	@wget $(MINILBX_URL)
-	@tar -xzvf $(MINILIBX_TAR)
-	@rm -rf $(MINILIBX_TAR)
+	#@tar -xzvf $(MINILIBX_TAR)
+	#@rm -rf $(MINILIBX_TAR)
 	@echo "Donwloading done !"
 
 $(MINILBX):
